@@ -19,6 +19,7 @@ package net.cpollet.sportacker.units;
 import net.cpollet.sportacker.quantities.Quantity;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * @author Christophe Pollet
@@ -26,10 +27,20 @@ import java.math.BigDecimal;
 public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	private String name;
 	private BigDecimal conversionFactor;
+	private int scale;
 
 	public AbstractUnit(String name, String conversionFactor) {
+		this(name, conversionFactor, 4);
+	}
+
+	public AbstractUnit(String name, String conversionFactor, int scale) {
 		this.name = name;
 		this.conversionFactor = new BigDecimal(conversionFactor);
+		this.scale = scale;
+	}
+
+	protected static String inverse(String number) {
+		return BigDecimal.ONE.divide(new BigDecimal(number), MathContext.DECIMAL64).toString();
 	}
 
 	@Override
@@ -40,6 +51,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	@Override
 	public BigDecimal getFactorToReferenceUnit() {
 		return conversionFactor;
+	}
+
+	@Override
+	public int getScale() {
+		return scale;
 	}
 
 	@Override

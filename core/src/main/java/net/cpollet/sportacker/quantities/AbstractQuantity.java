@@ -19,6 +19,7 @@ package net.cpollet.sportacker.quantities;
 import net.cpollet.sportacker.units.Unit;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * @author Christophe Pollet
@@ -42,12 +43,15 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	}
 
 	private BigDecimal getFactor(Unit<Q> unit) {
-		return getUnit().getFactorToReferenceUnit().divide(unit.getFactorToReferenceUnit());
+		return getUnit().getFactorToReferenceUnit().divide(unit.getFactorToReferenceUnit(), MathContext.DECIMAL64);
 	}
 
 	@Override
-	public BigDecimal getValue() {
-		return value;
+	public BigDecimal getValue() { return value; }
+
+	@Override
+	public BigDecimal getScaledValue() {
+		return value.setScale(unit.getScale(), BigDecimal.ROUND_HALF_UP);
 	}
 
 	@Override

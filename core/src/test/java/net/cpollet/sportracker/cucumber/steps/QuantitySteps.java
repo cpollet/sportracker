@@ -24,9 +24,11 @@ import net.cpollet.sportacker.quantities.DurationQuantity;
 import net.cpollet.sportacker.quantities.EnergyQuantity;
 import net.cpollet.sportacker.quantities.LengthQuantity;
 import net.cpollet.sportacker.quantities.Quantity;
+import net.cpollet.sportacker.quantities.SpeedQuantity;
 import net.cpollet.sportacker.units.DurationUnit;
 import net.cpollet.sportacker.units.EnergyUnit;
 import net.cpollet.sportacker.units.LengthUnit;
+import net.cpollet.sportacker.units.SpeedUnit;
 import net.cpollet.sportacker.units.Unit;
 
 import java.lang.reflect.InvocationTargetException;
@@ -40,11 +42,11 @@ import static org.fest.assertions.Assertions.assertThat;
  * @author Christophe Pollet
  */
 public class QuantitySteps {
-	private Class<? extends Quantity> quantityClass;
-	private Quantity quantity;
-	private Unit unit;
-	private Quantity targetQuantity;
-	private Unit targetUnit;
+	private Class<? extends Quantity> initialQuantityClass;
+	private Quantity initialQuantity;
+	private Unit initialUnit;
+	private Quantity resultQuantity;
+	private Unit resultUnit;
 
 	private Map<String, Class<? extends Quantity>> quantityClasses;
 	private Map<String, Unit> unitInstances;
@@ -55,6 +57,7 @@ public class QuantitySteps {
 		quantityClasses.put("length", LengthQuantity.class);
 		quantityClasses.put("energy", EnergyQuantity.class);
 		quantityClasses.put("duration", DurationQuantity.class);
+		quantityClasses.put("speed", SpeedQuantity.class);
 
 		unitInstances = new HashMap<>();
 		insertUnit(LengthUnit.cm);
@@ -68,57 +71,93 @@ public class QuantitySteps {
 		insertUnit(DurationUnit.s);
 		insertUnit(DurationUnit.min);
 		insertUnit(DurationUnit.h);
+
+		insertUnit(SpeedUnit.ms);
+		insertUnit(SpeedUnit.kmh);
 	}
 
 	private void insertUnit(Unit unit) {
 		unitInstances.put(unit.getName(), unit);
 	}
 
-	@Given("^a (.+) quantity of (\\d+) (.+)$")
+	@Given("^a (.+) quantity of (\\d+|\\d*(?:.\\d+)) (.+)$")
 	public void createQuantity(String quantityName, BigDecimal value, String unitName) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-		quantityClass = quantityClasses.get(quantityName);
-		unit = unitInstances.get(unitName);
+		initialQuantityClass = quantityClasses.get(quantityName);
+		initialUnit = unitInstances.get(unitName);
 
-		quantity = quantityClass //
+		initialQuantity = initialQuantityClass //
 				.getDeclaredConstructor(BigDecimal.class, Unit.class) //
-				.newInstance(value, unit);
+				.newInstance(value, initialUnit);
 	}
 
 	@When("^the quantity is converted to (.+)$")
 	public void convertQuantityTo(String unitName) throws Throwable {
-		targetUnit = unitInstances.get(unitName);
-		targetQuantity = quantity.convertTo(targetUnit);
+		resultUnit = unitInstances.get(unitName);
+		resultQuantity = initialQuantity.convertTo(resultUnit);
 	}
 
 	@Then("^the resulting value is (\\d+|\\d*(?:.\\d+))$")
 	public void assertResultingValueIs(BigDecimal result) throws Throwable {
-		assertThat(targetQuantity.getUnit()).isEqualTo(targetUnit);
-		assertThat(targetQuantity.getValue().compareTo(result)).isEqualTo(0);
+		assertThat(resultQuantity.getUnit()).isEqualTo(resultUnit);
+		assertThat(resultQuantity.getScaledValue().compareTo(result)) //
+				.overridingErrorMessage("got " + resultQuantity.getScaledValue() + " but expecting " + result) //
+				.isEqualTo(0);
 	}
 
 	@When("^adding (\\d+|\\d*(?:.\\d+)) (.+)$")
 	public void addingValue(BigDecimal value, String unitName) throws Throwable {
-		Quantity addedQuantity = quantityClass //
+		Quantity addedQuantity = initialQuantityClass //
 				.getDeclaredConstructor(BigDecimal.class, Unit.class) //
 				.newInstance(value, unitInstances.get(unitName));
 
-		targetQuantity = quantity.add(addedQuantity);
+		resultQuantity = initialQuantity.add(addedQuantity);
 	}
 
 	@When("^subtracting (\\d+|\\d*(?:.\\d+)) (.+)$")
 	public void subtractingValue(BigDecimal value, String unitName) throws Throwable {
-		Quantity addedQuantity = quantityClass //
+		Quantity addedQuantity = initialQuantityClass //
 				.getDeclaredConstructor(BigDecimal.class, Unit.class) //
 				.newInstance(value, unitInstances.get(unitName));
 
-		targetQuantity = quantity.subtract(addedQuantity);
+		resultQuantity = initialQuantity.subtract(addedQuantity);
 	}
 
 	@Then("^the resulting quantity is (\\d+|\\d*(?:.\\d+)) in original unit$")
 	public void assertResultingQuantity(BigDecimal result) throws Throwable {
-		assertThat(targetQuantity.getUnit()).isEqualTo(unit);
-		assertThat(targetQuantity.getValue().compareTo(result)).isEqualTo(0);
+		assertThat(resultQuantity.getUnit()).isEqualTo(initialUnit);
+		assertThat(resultQuantity.getScaledValue().compareTo(result)) //
+				.overridingErrorMessage("got " + resultQuantity.getScaledValue() + " but expecting " + result) //
+				.isEqualTo(0);
 	}
 
 
+	@When("^the quantity is divided by a (.+) of (\\d+|\\d*(?:.\\d+)) (.+)$")
+	public void divideQuantityByAnotherOne(String quantityName, BigDecimal value, String unitName) throws Throwable {
+		Class divisorQuantityClass = quantityClasses.get(quantityName);
+		Unit divisorUnit = unitInstances.get(unitName);
+
+		Quantity divisorQuantity = (Quantity) divisorQuantityClass //
+				.getDeclaredConstructor(BigDecimal.class, Unit.class) //
+				.newInstance(value, divisorUnit);
+
+		resultQuantity = ((LengthQuantity) this.initialQuantity).divide(divisorQuantity);
+	}
+
+	@Then("^the resulting quantity is a (.+) of (\\d+|\\d*(?:.\\d+)) (.+)$")
+	public void assertResultingQuantity(String quantityName, BigDecimal value, String unitName) throws Throwable {
+		Class expectedQuantityClass = quantityClasses.get(quantityName);
+
+		assertThat(resultQuantity).isInstanceOf(expectedQuantityClass);
+		assertThat(resultQuantity.getUnit().getName()).isEqualTo(unitName);
+		assertThat(resultQuantity.getScaledValue().compareTo(value))
+				.overridingErrorMessage("got " + resultQuantity.getScaledValue() + " but expecting " + value)
+				.isEqualTo(0);
+	}
+
+	@When("^scaled$")
+	public void scaleQuantity() throws Throwable {
+		resultQuantity = initialQuantityClass //
+				.getConstructor(BigDecimal.class, Unit.class) //
+				.newInstance(initialQuantity.getScaledValue(), initialUnit);
+	}
 }

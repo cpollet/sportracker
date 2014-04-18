@@ -29,4 +29,6 @@ public interface Unit<Q extends Quantity<Q>> {
 	String getName();
 
 	BigDecimal getFactorToReferenceUnit();
+
+	int getScale();
 }

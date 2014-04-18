@@ -33,10 +33,10 @@ public class DailyEnergyNeedCalculatorSteps {
 		harrisBenedictCalculator = new HarrisBenedict();
 	}
 
-	@Given("^A ([A-Z]+) person$")
+	@Given("^A ([a-z]+) person$")
 	public void createPerson(String gender) {
 		person = new Person();
-		person.setGender(Person.Gender.valueOf(gender));
+		person.setGender(Person.Gender.valueOf(gender.toUpperCase()));
 	}
 
 	@Given("^the person is (\\d+) years old$")
@@ -45,7 +45,7 @@ public class DailyEnergyNeedCalculatorSteps {
 		person.setBirthdate(now.minusYears(age).toDate());
 	}
 
-	@Given("^the person weight (\\d+|\\d*(?:.\\d+)) kilograms$")
+	@Given("^the person weights (\\d+|\\d*(?:.\\d+)) kilograms$")
 	public void setWeight(double weight) {
 		person.setWeight(weight);
 	}
@@ -55,9 +55,9 @@ public class DailyEnergyNeedCalculatorSteps {
 		person.setHeight(new LengthQuantity(height, LengthUnit.m));
 	}
 
-	@Given("^the activity level is ([A-Z]+)$")
+	@Given("^the person's activity level is ([a-z]+)$")
 	public void setActivityLevel(String activityLevel) {
-		this.activityLevel = DailyEnergyNeedCalculator.ActivityLevel.valueOf(activityLevel);
+		this.activityLevel = DailyEnergyNeedCalculator.ActivityLevel.valueOf(activityLevel.toUpperCase());
 	}
 
 	@When("^the daily used energy is computed$")

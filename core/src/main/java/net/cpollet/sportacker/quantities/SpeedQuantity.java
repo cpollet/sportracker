@@ -16,6 +16,8 @@
 
 package net.cpollet.sportacker.quantities;
 
+import net.cpollet.sportacker.units.Speed;
+import net.cpollet.sportacker.units.SpeedUnit;
 import net.cpollet.sportacker.units.Unit;
 
 import java.math.BigDecimal;
@@ -23,30 +25,28 @@ import java.math.BigDecimal;
 /**
  * @author Christophe Pollet
  */
-public interface Quantity<Q extends Quantity<Q>> extends Cloneable {
-	BigDecimal getValue();
+public class SpeedQuantity extends AbstractQuantity<Speed> implements Quantity<Speed> {
+	public static final SpeedUnit REFERENCE = SpeedUnit.REFERENCE;
 
-	BigDecimal getScaledValue();
+	public SpeedQuantity(BigDecimal value) {
+		super(value, REFERENCE);
+	}
 
-	void setValue(BigDecimal value);
+	public SpeedQuantity(BigDecimal value, Unit<Speed> unit) {
+		super(value, unit);
+	}
 
-	Unit<Q> getUnit();
+	@Override
+	public Quantity<Speed> convertTo(Unit<Speed> unit) {
+		if (getUnit().equals(unit)) {
+			return this;
+		}
 
-	Quantity<Q> convertTo(Unit<Q> unit);
+		return new SpeedQuantity(convert(unit), unit);
+	}
 
-	Quantity<Q> convertToReferenceUnit();
-
-	Unit<Q> getReferenceUnit();
-
-	int compareTo(Quantity<Q> other);
-
-	Quantity<Q> add(Quantity<Q> quantity);
-
-	Quantity<Q> subtract(Quantity<Q> quantity);
-
-	Quantity<Q> multiply(BigDecimal factor);
-
-	Quantity<Q> divide(BigDecimal divisor);
-
-	Object clone() throws CloneNotSupportedException;
+	@Override
+	public Unit<Speed> getReferenceUnit() {
+		return REFERENCE;
+	}
 }

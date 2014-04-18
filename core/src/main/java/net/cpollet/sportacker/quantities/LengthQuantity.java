@@ -16,11 +16,14 @@
 
 package net.cpollet.sportacker.quantities;
 
+import net.cpollet.sportacker.units.Duration;
 import net.cpollet.sportacker.units.Length;
 import net.cpollet.sportacker.units.LengthUnit;
+import net.cpollet.sportacker.units.Speed;
 import net.cpollet.sportacker.units.Unit;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  * @author Christophe Pollet
@@ -48,5 +51,12 @@ public class LengthQuantity extends AbstractQuantity<Length> implements Quantity
 	@Override
 	public Unit<Length> getReferenceUnit() {
 		return REFERENCE;
+	}
+
+	public Quantity<Speed> divide(Quantity<Duration> duration) {
+		Quantity<Length> refLength = convertToReferenceUnit();
+		Quantity<Duration> refDuration = duration.convertToReferenceUnit();
+
+		return new SpeedQuantity(refLength.getValue().divide(refDuration.getValue(), MathContext.DECIMAL64));
 	}
 }

@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.cucumber.runners;
-
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+package net.cpollet.sportacker.units;
 
 /**
  * @author Christophe Pollet
  */
-@RunWith(Cucumber.class)
-@CucumberOptions(
-		format = { "html:target/cucumber-report/TestQuantities", "pretty" }, //
-		features = { //
-				"classpath:cucumber/quantities.feature", //
-				"classpath:cucumber/quantities-length.feature"},
-		glue = {"net.cpollet.sportracker.cucumber.steps"})
-public class TestQuantities {
-	// nothing
+public class SpeedUnit extends AbstractUnit<Speed> implements Unit<Speed> {
+	public static SpeedUnit ms = new SpeedUnit("m/s", "1");
+	public static SpeedUnit kmh = new SpeedUnit("km/h", inverse("3.6"));
+
+	public static SpeedUnit REFERENCE = ms;
+
+	public SpeedUnit(String name, String conversionFactor) {
+		super(name, conversionFactor);
+	}
+
+	@Override
+	public Unit<Speed> getSystemUnit() {
+		return REFERENCE;
+	}
 }

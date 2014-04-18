@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.cucumber.runners;
+package net.cpollet.sportacker.units;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import net.cpollet.sportacker.quantities.Quantity;
 
 /**
  * @author Christophe Pollet
  */
-@RunWith(Cucumber.class)
-@CucumberOptions(
-		format = { "html:target/cucumber-report/TestQuantities", "pretty" }, //
-		features = { //
-				"classpath:cucumber/quantities.feature", //
-				"classpath:cucumber/quantities-length.feature"},
-		glue = {"net.cpollet.sportracker.cucumber.steps"})
-public class TestQuantities {
-	// nothing
+public interface Speed extends Quantity<Speed> {
 }
