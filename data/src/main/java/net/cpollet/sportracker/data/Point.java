@@ -19,6 +19,8 @@ package net.cpollet.sportracker.data;
 import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
+import net.cpollet.sportracker.quantities.TemperatureQuantity;
+import net.cpollet.sportracker.units.SpeedUnit;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -35,6 +37,7 @@ public class Point {
 	private LengthQuantity altitude;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
+	private TemperatureQuantity temperature;
 
 	public DateTime getTimestamp() {
 		return timestamp;
@@ -92,16 +95,25 @@ public class Point {
 		this.latitude = latitude;
 	}
 
+	public TemperatureQuantity getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(TemperatureQuantity temperature) {
+		this.temperature = temperature;
+	}
+
 	@Override
 	public String toString() {
 		return "Point{" +
 				"timestamp=" + timestamp +
-				", speed=" + speed +
+				", speed=" + speed.in(SpeedUnit.kmh).scale(1) +
 				", cadence=" + cadence +
 				", heartRate=" + heartRate +
 				", altitude=" + altitude +
 				", longitude=" + longitude +
 				", latitude=" + latitude +
+				", temperature=" + temperature +
 				'}';
 	}
 }

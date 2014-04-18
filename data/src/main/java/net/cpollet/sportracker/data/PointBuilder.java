@@ -19,6 +19,7 @@ package net.cpollet.sportracker.data;
 import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
+import net.cpollet.sportracker.quantities.TemperatureQuantity;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import org.joda.time.DateTime;
 
@@ -36,6 +37,7 @@ public class PointBuilder {
 	private LengthQuantity altitude;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
+	private TemperatureQuantity temperature;
 
 	private PointBuilder() {
 	}
@@ -79,6 +81,11 @@ public class PointBuilder {
 		return this;
 	}
 
+	public PointBuilder withTemperature(TemperatureQuantity temperature) {
+		this.temperature = temperature;
+		return this;
+	}
+
 	public Point build() {
 		Point point = new Point();
 		point.setTimestamp(timestamp);
@@ -88,6 +95,7 @@ public class PointBuilder {
 		point.setAltitude(altitude);
 		point.setLongitude(longitude);
 		point.setLatitude(latitude);
+		point.setTemperature(temperature);
 		return point;
 	}
 }

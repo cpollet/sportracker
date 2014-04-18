@@ -23,9 +23,12 @@ import net.cpollet.sportracker.data.PointBuilder;
 import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
+import net.cpollet.sportracker.quantities.TemperatureQuantity;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
+import net.cpollet.sportracker.units.Temperature;
+import net.cpollet.sportracker.units.TemperatureUnit;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -52,6 +55,7 @@ public class Listener implements RecordMesgListener {
 				.withLongitude(BigDecimal.valueOf(recordMesg.getPositionLong())) //
 				.withCadence(new FrequencyQuantity(BigDecimal.valueOf(recordMesg.getCadence()), FrequencyUnit.fpm)) //
 				.withHeartRate(new FrequencyQuantity(BigDecimal.valueOf(recordMesg.getHeartRate()))) //
+				.withTemperature(new TemperatureQuantity(BigDecimal.valueOf(recordMesg.getTemperature()), TemperatureUnit.C)) //
 				.build();
 
 		points.add(point);
