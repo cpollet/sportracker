@@ -17,6 +17,7 @@
 package net.cpollet.sportacker;
 
 import net.cpollet.sportacker.quantities.LengthQuantity;
+import net.cpollet.sportacker.quantities.MassQuantity;
 
 import java.util.Date;
 
@@ -26,7 +27,7 @@ import java.util.Date;
 public class Person {
 	private Gender gender;
 	private Date birthdate;
-	private Double weight;
+	private MassQuantity weight;
 	private LengthQuantity height;
 
 	public enum Gender {
@@ -49,11 +50,11 @@ public class Person {
 		this.birthdate = birthdate;
 	}
 
-	public Double getWeight() {
+	public MassQuantity getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Double weight) {
+	public void setWeight(MassQuantity weight) {
 		this.weight = weight;
 	}
 

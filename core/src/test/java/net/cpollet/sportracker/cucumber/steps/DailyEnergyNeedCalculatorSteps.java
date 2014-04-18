@@ -9,8 +9,10 @@ import net.cpollet.sportacker.HarrisBenedict;
 import net.cpollet.sportacker.Person;
 import net.cpollet.sportacker.quantities.EnergyQuantity;
 import net.cpollet.sportacker.quantities.LengthQuantity;
+import net.cpollet.sportacker.quantities.MassQuantity;
 import net.cpollet.sportacker.units.EnergyUnit;
 import net.cpollet.sportacker.units.LengthUnit;
+import net.cpollet.sportacker.units.MassUnit;
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
@@ -46,8 +48,8 @@ public class DailyEnergyNeedCalculatorSteps {
 	}
 
 	@Given("^the person weights (\\d+|\\d*(?:.\\d+)) kilograms$")
-	public void setWeight(double weight) {
-		person.setWeight(weight);
+	public void setWeight(BigDecimal weight) {
+		person.setWeight(new MassQuantity(weight, MassUnit.kg));
 	}
 
 	@Given("^the person is (\\d+|\\d*(?:.\\d{1,2})) meter tall$")

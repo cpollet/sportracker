@@ -3,6 +3,7 @@ package net.cpollet.sportacker;
 import net.cpollet.sportacker.quantities.EnergyQuantity;
 import net.cpollet.sportacker.units.EnergyUnit;
 import net.cpollet.sportacker.units.LengthUnit;
+import net.cpollet.sportacker.units.MassUnit;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
@@ -85,7 +86,7 @@ public class HarrisBenedict implements DailyEnergyNeedCalculator {
 		PersonConstants personConstants = PersonConstants.fromGender(person.getGender());
 
 		double base = personConstants.getBase() //
-				+ personConstants.getWeightFactor() * person.getWeight() //
+				+ personConstants.getWeightFactor() * person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() //
 				+ personConstants.getHeightFactor() * person.getHeight().convertTo(LengthUnit.cm).getValue().doubleValue() //
 				- personConstants.getAgeFactor() * getPersonsAge(person);
 
