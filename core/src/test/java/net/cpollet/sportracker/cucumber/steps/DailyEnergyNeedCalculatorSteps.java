@@ -23,38 +23,21 @@ import static org.fest.assertions.Assertions.assertThat;
  * @author Christophe Pollet
  */
 public class DailyEnergyNeedCalculatorSteps {
-	private Person person;
 	private DailyEnergyNeedCalculator.ActivityLevel activityLevel;
 
 	private HarrisBenedict harrisBenedictCalculator;
 
 	private EnergyQuantity result;
 
+	private CommonSteps commonSteps;
+
+	public DailyEnergyNeedCalculatorSteps(CommonSteps commonSteps) {
+		this.commonSteps = commonSteps;
+	}
+
 	@Before
 	public void setUp() {
 		harrisBenedictCalculator = new HarrisBenedict();
-	}
-
-	@Given("^A ([a-z]+) person$")
-	public void createPerson(String gender) {
-		person = new Person();
-		person.setGender(Person.Gender.valueOf(gender.toUpperCase()));
-	}
-
-	@Given("^the person is (\\d+) years old$")
-	public void setAge(int age) {
-		LocalDate now = new LocalDate();
-		person.setBirthdate(now.minusYears(age).toDate());
-	}
-
-	@Given("^the person weights (\\d+|\\d*(?:.\\d+)) kilograms$")
-	public void setWeight(BigDecimal weight) {
-		person.setWeight(new MassQuantity(weight, MassUnit.kg));
-	}
-
-	@Given("^the person is (\\d+|\\d*(?:.\\d{1,2})) meter tall$")
-	public void setHeight(BigDecimal height) {
-		person.setHeight(new LengthQuantity(height, LengthUnit.m));
 	}
 
 	@Given("^the person's activity level is ([a-z]+)$")
@@ -64,7 +47,7 @@ public class DailyEnergyNeedCalculatorSteps {
 
 	@When("^the daily used energy is computed$")
 	public void computeDailyUsedEnergy() {
-		result = harrisBenedictCalculator.compute(person, activityLevel);
+		result = harrisBenedictCalculator.compute(commonSteps.getPerson(), activityLevel);
 	}
 
 	@Then("^the daily used energy is (\\d+) kcal$")

@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		format = { "html:target/cucumber-report/TestHarrisBenedict", "pretty" }, //
-		features = {"classpath:cucumber/harris-benedict.feature"},
+		features = {"classpath:cucumber/daily-energy-need-calculator.feature"},
 		glue = {"net.cpollet.sportracker.cucumber.steps"})
 public class TestHarrisBenedict {
 	// nothing
