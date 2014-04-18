@@ -16,11 +16,11 @@
 
 package net.cpollet.sportracker.data;
 
-import net.cpollet.sportracker.quantities.FrequencyQuantity;
-import net.cpollet.sportracker.quantities.LengthQuantity;
-import net.cpollet.sportracker.quantities.SpeedQuantity;
-import net.cpollet.sportracker.quantities.TemperatureQuantity;
-import net.cpollet.sportracker.units.FrequencyUnit;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Frequency;
+import net.cpollet.sportracker.units.Length;
+import net.cpollet.sportracker.units.Speed;
+import net.cpollet.sportracker.units.Temperature;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -30,14 +30,14 @@ import java.math.BigDecimal;
  */
 public class PointBuilder {
 	private DateTime timestamp;
-	private SpeedQuantity speed;
+	private Quantity<Speed> speed;
 	// private PowerQuantity power;
-	private FrequencyQuantity cadence;
-	private FrequencyQuantity heartRate;
-	private LengthQuantity altitude;
+	private Quantity<Frequency> cadence;
+	private Quantity<Frequency> heartRate;
+	private Quantity<Length> altitude;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
-	private TemperatureQuantity temperature;
+	private Quantity<Temperature> temperature;
 
 	private PointBuilder() {
 	}
@@ -51,22 +51,22 @@ public class PointBuilder {
 		return this;
 	}
 
-	public PointBuilder withSpeed(SpeedQuantity speed) {
+	public PointBuilder withSpeed(Quantity<Speed> speed) {
 		this.speed = speed;
 		return this;
 	}
 
-	public PointBuilder withCadence(FrequencyQuantity cadence) {
+	public PointBuilder withCadence(Quantity<Frequency> cadence) {
 		this.cadence = cadence;
 		return this;
 	}
 
-	public PointBuilder withHeartRate(FrequencyQuantity heartRate) {
+	public PointBuilder withHeartRate(Quantity<Frequency> heartRate) {
 		this.heartRate = heartRate;
 		return this;
 	}
 
-	public PointBuilder withAltitude(LengthQuantity altitude) {
+	public PointBuilder withAltitude(Quantity<Length> altitude) {
 		this.altitude = altitude;
 		return this;
 	}
@@ -81,7 +81,7 @@ public class PointBuilder {
 		return this;
 	}
 
-	public PointBuilder withTemperature(TemperatureQuantity temperature) {
+	public PointBuilder withTemperature(Quantity<Temperature> temperature) {
 		this.temperature = temperature;
 		return this;
 	}

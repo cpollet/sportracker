@@ -2,6 +2,8 @@ package net.cpollet.sportacker;
 
 import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Energy;
 import net.cpollet.sportracker.units.EnergyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.MassUnit;
@@ -83,17 +85,17 @@ public class HarrisBenedict implements DailyEnergyNeedCalculator {
 	}
 
 	@Override
-	public EnergyQuantity compute(Person person, ActivityLevel activityLevel) {
+	public Quantity<Energy> compute(Person person, ActivityLevel activityLevel) {
 		PersonConstants personConstants = PersonConstants.fromGender(person.getGender());
 
 		double base = personConstants.getBase() //
-				+ personConstants.getWeightFactor() * person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() //
-				+ personConstants.getHeightFactor() * person.getHeight().convertTo(LengthUnit.cm).getValue().doubleValue() //
+				+ personConstants.getWeightFactor() * person.getWeight().in(MassUnit.kg).getValue().doubleValue() //
+				+ personConstants.getHeightFactor() * person.getHeight().in(LengthUnit.cm).getValue().doubleValue() //
 				- personConstants.getAgeFactor() * getPersonsAge(person);
 
 		ActivityConstants activityConstants = ActivityConstants.fromActivity(activityLevel);
 
-		return new EnergyQuantity(new BigDecimal(Math.ceil(base * activityConstants.getFactor())), EnergyUnit.kcal);
+		return new EnergyQuantity(BigDecimal.valueOf(Math.ceil(base * activityConstants.getFactor())), EnergyUnit.kcal);
 	}
 
 	private int getPersonsAge(Person person) {

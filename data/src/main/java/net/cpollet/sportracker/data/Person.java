@@ -16,8 +16,9 @@
 
 package net.cpollet.sportracker.data;
 
-import net.cpollet.sportracker.quantities.LengthQuantity;
-import net.cpollet.sportracker.quantities.MassQuantity;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Length;
+import net.cpollet.sportracker.units.Mass;
 
 import java.util.Date;
 
@@ -27,8 +28,8 @@ import java.util.Date;
 public class Person {
 	private Gender gender;
 	private Date birthdate;
-	private MassQuantity weight;
-	private LengthQuantity height;
+	private Quantity<Mass> weight;
+	private Quantity<Length> height;
 
 	public enum Gender {
 		MALE, FEMALE
@@ -50,19 +51,19 @@ public class Person {
 		this.birthdate = birthdate;
 	}
 
-	public MassQuantity getWeight() {
+	public Quantity<Mass> getWeight() {
 		return weight;
 	}
 
-	public void setWeight(MassQuantity weight) {
+	public void setWeight(Quantity<Mass> weight) {
 		this.weight = weight;
 	}
 
-	public LengthQuantity getHeight() {
+	public Quantity<Length> getHeight() {
 		return height;
 	}
 
-	public void setHeight(LengthQuantity height) {
+	public void setHeight(Quantity<Length> height) {
 		this.height = height;
 	}
 }

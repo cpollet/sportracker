@@ -20,6 +20,7 @@ import com.garmin.fit.RecordMesg;
 import com.garmin.fit.RecordMesgListener;
 import net.cpollet.sportracker.data.Point;
 import net.cpollet.sportracker.data.PointBuilder;
+import net.cpollet.sportracker.data.Points;
 import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
@@ -39,10 +40,10 @@ import java.util.List;
  * @author Christophe Pollet
  */
 public class Listener implements RecordMesgListener {
-	private List<Point> points;
+	private Points points;
 
 	public Listener() {
-		points = new LinkedList<>();
+		points = new Points();
 	}
 
 	@Override
@@ -61,8 +62,7 @@ public class Listener implements RecordMesgListener {
 		points.add(point);
 	}
 
-
-	public List<Point> getPoints() {
+	public Points getPoints() {
 		return points;
 	}
 }

@@ -7,6 +7,8 @@ import cucumber.api.java.en.When;
 import net.cpollet.sportacker.DailyEnergyNeedCalculator;
 import net.cpollet.sportacker.HarrisBenedict;
 import net.cpollet.sportracker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Energy;
 import net.cpollet.sportracker.units.EnergyUnit;
 
 import java.math.BigDecimal;
@@ -21,7 +23,7 @@ public class DailyEnergyNeedCalculatorSteps {
 
 	private HarrisBenedict harrisBenedictCalculator;
 
-	private EnergyQuantity result;
+	private Quantity<Energy> result;
 
 	private CommonSteps commonSteps;
 

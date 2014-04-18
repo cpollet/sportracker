@@ -16,11 +16,12 @@
 
 package net.cpollet.sportracker.data;
 
-import net.cpollet.sportracker.quantities.FrequencyQuantity;
-import net.cpollet.sportracker.quantities.LengthQuantity;
-import net.cpollet.sportracker.quantities.SpeedQuantity;
-import net.cpollet.sportracker.quantities.TemperatureQuantity;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Frequency;
+import net.cpollet.sportracker.units.Length;
+import net.cpollet.sportracker.units.Speed;
 import net.cpollet.sportracker.units.SpeedUnit;
+import net.cpollet.sportracker.units.Temperature;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -30,14 +31,14 @@ import java.math.BigDecimal;
  */
 public class Point {
 	private DateTime timestamp;
-	private SpeedQuantity speed;
+	private Quantity<Speed> speed;
 	// private PowerQuantity power;
-	private FrequencyQuantity cadence;
-	private FrequencyQuantity heartRate;
-	private LengthQuantity altitude;
+	private Quantity<Frequency> cadence;
+	private Quantity<Frequency> heartRate;
+	private Quantity<Length> altitude;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
-	private TemperatureQuantity temperature;
+	private Quantity<Temperature> temperature;
 
 	public DateTime getTimestamp() {
 		return timestamp;
@@ -47,35 +48,35 @@ public class Point {
 		this.timestamp = timestamp;
 	}
 
-	public SpeedQuantity getSpeed() {
+	public Quantity<Speed> getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(SpeedQuantity speed) {
+	public void setSpeed(Quantity<Speed> speed) {
 		this.speed = speed;
 	}
 
-	public FrequencyQuantity getCadence() {
+	public Quantity<Frequency> getCadence() {
 		return cadence;
 	}
 
-	public void setCadence(FrequencyQuantity cadence) {
+	public void setCadence(Quantity<Frequency> cadence) {
 		this.cadence = cadence;
 	}
 
-	public FrequencyQuantity getHeartRate() {
+	public Quantity<Frequency> getHeartRate() {
 		return heartRate;
 	}
 
-	public void setHeartRate(FrequencyQuantity heartRate) {
+	public void setHeartRate(Quantity<Frequency> heartRate) {
 		this.heartRate = heartRate;
 	}
 
-	public LengthQuantity getAltitude() {
+	public Quantity<Length> getAltitude() {
 		return altitude;
 	}
 
-	public void setAltitude(LengthQuantity altitude) {
+	public void setAltitude(Quantity<Length> altitude) {
 		this.altitude = altitude;
 	}
 
@@ -95,11 +96,11 @@ public class Point {
 		this.latitude = latitude;
 	}
 
-	public TemperatureQuantity getTemperature() {
+	public Quantity<Temperature> getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(TemperatureQuantity temperature) {
+	public void setTemperature(Quantity<Temperature> temperature) {
 		this.temperature = temperature;
 	}
 

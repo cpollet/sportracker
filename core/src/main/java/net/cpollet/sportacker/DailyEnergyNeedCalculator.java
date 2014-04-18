@@ -17,7 +17,8 @@
 package net.cpollet.sportacker;
 
 import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Energy;
 
 /**
  * @author Christophe Pollet
@@ -27,5 +28,5 @@ public interface DailyEnergyNeedCalculator {
 		NONE, LOW, MEDIUM, HIGH, MAX
 	}
 
-	EnergyQuantity compute(Person person, ActivityLevel activityLevel);
+	Quantity<Energy> compute(Person person, ActivityLevel activityLevel);
 }
