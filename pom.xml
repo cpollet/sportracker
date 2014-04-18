@@ -8,7 +8,10 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<modules>
+		<module>quantities</module>
+		<module>data</module>
 		<module>core</module>
+		<module>fit</module>
 	</modules>
 
 	<build>

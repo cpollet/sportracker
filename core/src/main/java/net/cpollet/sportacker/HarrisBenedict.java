@@ -1,9 +1,10 @@
 package net.cpollet.sportacker;
 
-import net.cpollet.sportacker.quantities.EnergyQuantity;
-import net.cpollet.sportacker.units.EnergyUnit;
-import net.cpollet.sportacker.units.LengthUnit;
-import net.cpollet.sportacker.units.MassUnit;
+import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.units.EnergyUnit;
+import net.cpollet.sportracker.units.LengthUnit;
+import net.cpollet.sportracker.units.MassUnit;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 

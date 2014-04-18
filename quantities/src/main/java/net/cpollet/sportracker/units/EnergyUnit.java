@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker;
-
-import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.units.LengthUnit;
-import net.cpollet.sportracker.units.MassUnit;
+package net.cpollet.sportracker.units;
 
 /**
  * @author Christophe Pollet
  */
-public class BmiCalculatorImpl implements BmiCalculator {
+public class EnergyUnit extends AbstractUnit<Energy> implements Unit<Energy> {
+	public static final EnergyUnit kcal = new EnergyUnit("kcal", "4186.8");
+	public static final EnergyUnit cal = new EnergyUnit("cal", "4.1868");
+	public static final EnergyUnit J = new EnergyUnit("J", "1.0");
+
+	public static EnergyUnit REFERENCE = J;
+
+	public EnergyUnit(String name, String conversionFactor) {
+		super(name, conversionFactor);
+	}
+
 	@Override
-	public long compute(Person person) {
-		return Math.round(person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() /
-				Math.pow(person.getHeight().convertTo(LengthUnit.m).getValue().doubleValue(), 2));
+	public Unit<Energy> getSystemUnit() {
+		return null;
 	}
 }

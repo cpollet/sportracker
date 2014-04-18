@@ -14,19 +14,31 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker;
+package net.cpollet.sportracker.quantities;
 
-import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.units.LengthUnit;
+import net.cpollet.sportracker.units.Mass;
 import net.cpollet.sportracker.units.MassUnit;
+import net.cpollet.sportracker.units.Unit;
+
+import java.math.BigDecimal;
 
 /**
  * @author Christophe Pollet
  */
-public class BmiCalculatorImpl implements BmiCalculator {
+public class MassQuantity extends AbstractQuantity<Mass> implements Quantity<Mass> {
+	public static final MassUnit REFERENCE = MassUnit.REFERENCE;
+
+	public MassQuantity(BigDecimal value, Unit<Mass> unit) {
+		super(value, unit);
+	}
+
 	@Override
-	public long compute(Person person) {
-		return Math.round(person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() /
-				Math.pow(person.getHeight().convertTo(LengthUnit.m).getValue().doubleValue(), 2));
+	public Quantity<Mass> convertTo(Unit<Mass> unit) {
+		return new MassQuantity(convert(unit), unit);
+	}
+
+	@Override
+	public Unit<Mass> getReferenceUnit() {
+		return REFERENCE;
 	}
 }

@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker;
+package net.cpollet.sportracker.units;
 
-import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.units.LengthUnit;
-import net.cpollet.sportracker.units.MassUnit;
+import net.cpollet.sportracker.quantities.Quantity;
+
+import java.math.BigDecimal;
 
 /**
  * @author Christophe Pollet
  */
-public class BmiCalculatorImpl implements BmiCalculator {
-	@Override
-	public long compute(Person person) {
-		return Math.round(person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() /
-				Math.pow(person.getHeight().convertTo(LengthUnit.m).getValue().doubleValue(), 2));
-	}
+public interface Unit<Q extends Quantity<Q>> {
+	Unit<Q> getSystemUnit();
+
+	String getName();
+
+	BigDecimal getFactorToReferenceUnit();
+
+	int getScale();
 }

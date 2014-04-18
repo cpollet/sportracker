@@ -16,7 +16,8 @@
 
 package net.cpollet.sportacker;
 
-import net.cpollet.sportacker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.quantities.EnergyQuantity;
 
 /**
  * @author Christophe Pollet

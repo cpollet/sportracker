@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker;
-
-import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.units.LengthUnit;
-import net.cpollet.sportracker.units.MassUnit;
+package net.cpollet.sportracker.units;
 
 /**
  * @author Christophe Pollet
  */
-public class BmiCalculatorImpl implements BmiCalculator {
+public class LengthUnit extends AbstractUnit<Length> implements Unit<Length> {
+	public static final LengthUnit km = new LengthUnit("km", "1000");
+	public static final LengthUnit m = new LengthUnit("m", "1");
+	public static final LengthUnit cm = new LengthUnit("cm", "0.01");
+
+	public static final LengthUnit REFERENCE = m;
+
+	public LengthUnit(String name, String conversionFactor) {
+		super(name, conversionFactor);
+	}
+
 	@Override
-	public long compute(Person person) {
-		return Math.round(person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() /
-				Math.pow(person.getHeight().convertTo(LengthUnit.m).getValue().doubleValue(), 2));
+	public Unit<Length> getSystemUnit() {
+		return REFERENCE;
 	}
 }

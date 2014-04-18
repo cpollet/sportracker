@@ -6,14 +6,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.cpollet.sportacker.DailyEnergyNeedCalculator;
 import net.cpollet.sportacker.HarrisBenedict;
-import net.cpollet.sportacker.Person;
-import net.cpollet.sportacker.quantities.EnergyQuantity;
-import net.cpollet.sportacker.quantities.LengthQuantity;
-import net.cpollet.sportacker.quantities.MassQuantity;
-import net.cpollet.sportacker.units.EnergyUnit;
-import net.cpollet.sportacker.units.LengthUnit;
-import net.cpollet.sportacker.units.MassUnit;
-import org.joda.time.LocalDate;
+import net.cpollet.sportracker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.units.EnergyUnit;
 
 import java.math.BigDecimal;
 

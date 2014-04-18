@@ -16,6 +16,8 @@
 
 package net.cpollet.sportacker;
 
+import net.cpollet.sportracker.data.Person;
+
 /**
  * @author Christophe Pollet
  */

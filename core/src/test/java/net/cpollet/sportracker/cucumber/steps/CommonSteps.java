@@ -16,12 +16,13 @@
 
 package net.cpollet.sportracker.cucumber.steps;
 
+import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.quantities.LengthQuantity;
+import net.cpollet.sportracker.quantities.MassQuantity;
+import net.cpollet.sportracker.units.LengthUnit;
+import net.cpollet.sportracker.units.MassUnit;
 import cucumber.api.java.en.Given;
-import net.cpollet.sportacker.Person;
-import net.cpollet.sportacker.quantities.LengthQuantity;
-import net.cpollet.sportacker.quantities.MassQuantity;
-import net.cpollet.sportacker.units.LengthUnit;
-import net.cpollet.sportacker.units.MassUnit;
+
 import org.joda.time.LocalDate;
 
 import java.math.BigDecimal;
