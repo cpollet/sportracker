@@ -11,7 +11,7 @@
 		<module>quantities</module>
 		<module>data</module>
 		<module>core</module>
-		<module>fit</module>
+		<module>files</module>
 	</modules>
 
 	<build>
