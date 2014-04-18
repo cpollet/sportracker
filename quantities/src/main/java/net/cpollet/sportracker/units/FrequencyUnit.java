@@ -19,19 +19,18 @@ package net.cpollet.sportracker.units;
 /**
  * @author Christophe Pollet
  */
-public class EnergyUnit extends AbstractUnit<Energy> implements Unit<Energy> {
-	public static final EnergyUnit kcal = new EnergyUnit("kcal", "4186.8");
-	public static final EnergyUnit cal = new EnergyUnit("cal", "4.1868");
-	public static final EnergyUnit J = new EnergyUnit("J", "1.0");
+public class FrequencyUnit extends AbstractUnit<Frequency> implements Unit<Frequency> {
+	public static final FrequencyUnit fps = new FrequencyUnit("1/s", "1");
+	public static final FrequencyUnit fpm = new FrequencyUnit("1/min", inverse("60"));
 
-	public static EnergyUnit REFERENCE = J;
+	public static final FrequencyUnit REFERENCE = fps;
 
-	public EnergyUnit(String name, String conversionFactor) {
+	public FrequencyUnit(String name, String conversionFactor) {
 		super(name, conversionFactor);
 	}
 
 	@Override
-	public Unit<Energy> getSystemUnit() {
+	public Unit<Frequency> getSystemUnit() {
 		return REFERENCE;
 	}
 }

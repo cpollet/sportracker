@@ -16,22 +16,10 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.Quantity;
+
 /**
  * @author Christophe Pollet
  */
-public class EnergyUnit extends AbstractUnit<Energy> implements Unit<Energy> {
-	public static final EnergyUnit kcal = new EnergyUnit("kcal", "4186.8");
-	public static final EnergyUnit cal = new EnergyUnit("cal", "4.1868");
-	public static final EnergyUnit J = new EnergyUnit("J", "1.0");
-
-	public static EnergyUnit REFERENCE = J;
-
-	public EnergyUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
-	}
-
-	@Override
-	public Unit<Energy> getSystemUnit() {
-		return REFERENCE;
-	}
+public interface Frequency extends Quantity<Frequency> {
 }

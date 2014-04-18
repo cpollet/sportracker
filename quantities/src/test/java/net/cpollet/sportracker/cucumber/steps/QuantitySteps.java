@@ -18,6 +18,7 @@ package net.cpollet.sportracker.cucumber.steps;
 
 import net.cpollet.sportracker.quantities.DurationQuantity;
 import net.cpollet.sportracker.quantities.EnergyQuantity;
+import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.MassQuantity;
 import net.cpollet.sportracker.quantities.Quantity;
@@ -28,6 +29,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.cpollet.sportracker.units.DurationUnit;
 import net.cpollet.sportracker.units.EnergyUnit;
+import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.MassUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
@@ -61,6 +63,7 @@ public class QuantitySteps {
 		quantityClasses.put("duration", DurationQuantity.class);
 		quantityClasses.put("speed", SpeedQuantity.class);
 		quantityClasses.put("mass", MassQuantity.class);
+		quantityClasses.put("frequency", FrequencyQuantity.class);
 
 		unitInstances = new HashMap<>();
 		insertUnit(LengthUnit.cm);
@@ -80,6 +83,9 @@ public class QuantitySteps {
 
 		insertUnit(MassUnit.kg);
 		insertUnit(MassUnit.g);
+
+		insertUnit(FrequencyUnit.fps);
+		insertUnit(FrequencyUnit.fpm);
 	}
 
 	private void insertUnit(Unit unit) {
