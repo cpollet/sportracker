@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.data;
 
+import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
 import org.joda.time.DateTime;
@@ -29,8 +30,8 @@ public class Point {
 	private DateTime timestamp;
 	private SpeedQuantity speed;
 	// private PowerQuantity power;
-	// private ??? cadence;
-	// private ??? heartRate
+	private FrequencyQuantity cadence;
+	private FrequencyQuantity heartRate;
 	private LengthQuantity altitude;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
@@ -47,8 +48,24 @@ public class Point {
 		return speed;
 	}
 
-	public void setSpeed(SpeedQuantity instantSpeed) {
-		this.speed = instantSpeed;
+	public void setSpeed(SpeedQuantity speed) {
+		this.speed = speed;
+	}
+
+	public FrequencyQuantity getCadence() {
+		return cadence;
+	}
+
+	public void setCadence(FrequencyQuantity cadence) {
+		this.cadence = cadence;
+	}
+
+	public FrequencyQuantity getHeartRate() {
+		return heartRate;
+	}
+
+	public void setHeartRate(FrequencyQuantity heartRate) {
+		this.heartRate = heartRate;
 	}
 
 	public LengthQuantity getAltitude() {
@@ -80,6 +97,8 @@ public class Point {
 		return "Point{" +
 				"timestamp=" + timestamp +
 				", speed=" + speed +
+				", cadence=" + cadence +
+				", heartRate=" + heartRate +
 				", altitude=" + altitude +
 				", longitude=" + longitude +
 				", latitude=" + latitude +

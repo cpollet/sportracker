@@ -16,8 +16,10 @@
 
 package net.cpollet.sportracker.data;
 
+import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
+import net.cpollet.sportracker.units.FrequencyUnit;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -29,8 +31,8 @@ public class PointBuilder {
 	private DateTime timestamp;
 	private SpeedQuantity speed;
 	// private PowerQuantity power;
-	// private ??? cadence;
-	// private ??? heartRate
+	private FrequencyQuantity cadence;
+	private FrequencyQuantity heartRate;
 	private LengthQuantity altitude;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
@@ -49,6 +51,16 @@ public class PointBuilder {
 
 	public PointBuilder withSpeed(SpeedQuantity speed) {
 		this.speed = speed;
+		return this;
+	}
+
+	public PointBuilder withCadence(FrequencyQuantity cadence) {
+		this.cadence = cadence;
+		return this;
+	}
+
+	public PointBuilder withHeartRate(FrequencyQuantity heartRate) {
+		this.heartRate = heartRate;
 		return this;
 	}
 
@@ -71,6 +83,8 @@ public class PointBuilder {
 		Point point = new Point();
 		point.setTimestamp(timestamp);
 		point.setSpeed(speed);
+		point.setCadence(cadence);
+		point.setHeartRate(heartRate);
 		point.setAltitude(altitude);
 		point.setLongitude(longitude);
 		point.setLatitude(latitude);

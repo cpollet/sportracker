@@ -20,8 +20,10 @@ import com.garmin.fit.RecordMesg;
 import com.garmin.fit.RecordMesgListener;
 import net.cpollet.sportracker.data.Point;
 import net.cpollet.sportracker.data.PointBuilder;
+import net.cpollet.sportracker.quantities.FrequencyQuantity;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.SpeedQuantity;
+import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
 import org.joda.time.DateTime;
@@ -48,6 +50,8 @@ public class Listener implements RecordMesgListener {
 				.withAltitude(new LengthQuantity(BigDecimal.valueOf(recordMesg.getAltitude()), LengthUnit.m)) //
 				.withLatitude(BigDecimal.valueOf(recordMesg.getPositionLat())) //
 				.withLongitude(BigDecimal.valueOf(recordMesg.getPositionLong())) //
+				.withCadence(new FrequencyQuantity(BigDecimal.valueOf(recordMesg.getCadence()), FrequencyUnit.fpm)) //
+				.withHeartRate(new FrequencyQuantity(BigDecimal.valueOf(recordMesg.getHeartRate()))) //
 				.build();
 
 		points.add(point);
