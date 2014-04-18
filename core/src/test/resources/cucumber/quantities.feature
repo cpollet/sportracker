@@ -17,6 +17,8 @@ Feature: General Quantities
     | duration | 1.555555 | s    | 1.5556       |
     | speed    | 1.555555 | m/s  | 1.5556       |
     | speed    | 1.555555 | km/h | 1.5556       |
+    | mass     | 1.555555 | kg   | 1.5556       |
+    | mass     | 1.555555 | g    | 1.5556       |
 
   Scenario Outline: converting units
     Given a <quantity> quantity of <input_value> <input_unit>
@@ -36,6 +38,8 @@ Feature: General Quantities
     | duration | 1           | h          | 60           | min         |
     | speed    | 1           | m/s        | 3.6          | km/h        |
     | speed    | 7.2         | km/h       | 2            | m/s         |
+    | mass     | 1           | kg         | 1000         | g           |
+    | mass     | 1500        | g          | 1.5          | kg          |
 
   Scenario Outline: add quantities
     Given a <quantity> quantity of <input_value> <input_unit>

@@ -23,11 +23,13 @@ import cucumber.api.java.en.When;
 import net.cpollet.sportacker.quantities.DurationQuantity;
 import net.cpollet.sportacker.quantities.EnergyQuantity;
 import net.cpollet.sportacker.quantities.LengthQuantity;
+import net.cpollet.sportacker.quantities.MassQuantity;
 import net.cpollet.sportacker.quantities.Quantity;
 import net.cpollet.sportacker.quantities.SpeedQuantity;
 import net.cpollet.sportacker.units.DurationUnit;
 import net.cpollet.sportacker.units.EnergyUnit;
 import net.cpollet.sportacker.units.LengthUnit;
+import net.cpollet.sportacker.units.MassUnit;
 import net.cpollet.sportacker.units.SpeedUnit;
 import net.cpollet.sportacker.units.Unit;
 
@@ -58,6 +60,7 @@ public class QuantitySteps {
 		quantityClasses.put("energy", EnergyQuantity.class);
 		quantityClasses.put("duration", DurationQuantity.class);
 		quantityClasses.put("speed", SpeedQuantity.class);
+		quantityClasses.put("mass", MassQuantity.class);
 
 		unitInstances = new HashMap<>();
 		insertUnit(LengthUnit.cm);
@@ -74,6 +77,9 @@ public class QuantitySteps {
 
 		insertUnit(SpeedUnit.ms);
 		insertUnit(SpeedUnit.kmh);
+
+		insertUnit(MassUnit.kg);
+		insertUnit(MassUnit.g);
 	}
 
 	private void insertUnit(Unit unit) {
