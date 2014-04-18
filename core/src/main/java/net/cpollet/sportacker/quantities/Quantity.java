@@ -34,6 +34,8 @@ public interface Quantity<Q extends Quantity<Q>> extends Cloneable {
 
 	Quantity<Q> convertTo(Unit<Q> unit);
 
+	Quantity<Q> in(Unit<Q> unit);
+
 	Quantity<Q> convertToReferenceUnit();
 
 	Unit<Q> getReferenceUnit();

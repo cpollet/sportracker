@@ -65,6 +65,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	}
 
 	@Override
+	public Quantity<Q> in(Unit<Q> unit) {
+		return convertTo(unit);
+	}
+
+	@Override
 	public Quantity<Q> convertToReferenceUnit() {
 		return convertTo(getReferenceUnit());
 	}
@@ -107,7 +112,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
 	@Override
 	public Quantity<Q> divide(BigDecimal divisor) {
-		return this;
+		return multiply(new BigDecimal("1").divide(divisor, MathContext.DECIMAL64));
 	}
 
 	@Override
