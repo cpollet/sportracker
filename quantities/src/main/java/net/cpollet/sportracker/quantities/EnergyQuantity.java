@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.quantities;
 
+import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.Energy;
 import net.cpollet.sportracker.units.EnergyUnit;
 import net.cpollet.sportracker.units.Unit;
@@ -43,6 +44,11 @@ public class EnergyQuantity extends AbstractQuantity<Energy> implements Quantity
 		}
 
 		return new EnergyQuantity(convert(unit), unit);
+	}
+
+	@Override
+	public Quantity<Energy> scale(int scale) {
+		return new EnergyQuantity(getScaledValue(scale), getUnit());
 	}
 
 	@Override

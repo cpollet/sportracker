@@ -28,6 +28,12 @@ public interface Quantity<Q extends Quantity<Q>> extends Cloneable {
 
 	BigDecimal getScaledValue();
 
+	BigDecimal getScaledValue(int scale);
+
+	Quantity<Q> scale();
+
+	Quantity<Q> scale(int scale);
+
 	void setValue(BigDecimal value);
 
 	Unit<Q> getUnit();

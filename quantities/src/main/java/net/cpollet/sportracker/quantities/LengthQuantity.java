@@ -49,6 +49,11 @@ public class LengthQuantity extends AbstractQuantity<Length> implements Quantity
 	}
 
 	@Override
+	public Quantity<Length> scale(int scale) {
+		return new LengthQuantity(getScaledValue(scale), getUnit());
+	}
+
+	@Override
 	public Unit<Length> getReferenceUnit() {
 		return REFERENCE;
 	}

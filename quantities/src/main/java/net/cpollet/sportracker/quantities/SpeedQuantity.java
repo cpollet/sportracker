@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.quantities;
 
+import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.Speed;
 import net.cpollet.sportracker.units.SpeedUnit;
 import net.cpollet.sportracker.units.Unit;
@@ -43,6 +44,11 @@ public class SpeedQuantity extends AbstractQuantity<Speed> implements Quantity<S
 		}
 
 		return new SpeedQuantity(convert(unit), unit);
+	}
+
+	@Override
+	public Quantity<Speed> scale(int scale) {
+		return new SpeedQuantity(getScaledValue(scale), getUnit());
 	}
 
 	@Override

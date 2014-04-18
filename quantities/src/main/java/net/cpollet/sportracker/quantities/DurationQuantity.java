@@ -42,6 +42,11 @@ public class DurationQuantity extends AbstractQuantity<Duration> implements Quan
 	}
 
 	@Override
+	public Quantity<Duration> scale(int scale) {
+		return new DurationQuantity(getScaledValue(scale), getUnit());
+	}
+
+	@Override
 	public Unit<Duration> getReferenceUnit() {
 		return REFERENCE;
 	}

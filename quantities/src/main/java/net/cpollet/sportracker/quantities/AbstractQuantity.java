@@ -50,8 +50,18 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	public BigDecimal getValue() { return value; }
 
 	@Override
+	public BigDecimal getScaledValue(int scale) {
+		return value.setScale(scale, BigDecimal.ROUND_HALF_UP);
+	}
+
+	@Override
 	public BigDecimal getScaledValue() {
-		return value.setScale(unit.getScale(), BigDecimal.ROUND_HALF_UP);
+		return getScaledValue(unit.getScale());
+	}
+
+	@Override
+	public Quantity<Q> scale() {
+		return scale(unit.getScale());
 	}
 
 	@Override

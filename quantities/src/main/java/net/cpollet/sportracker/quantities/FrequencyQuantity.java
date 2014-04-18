@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.quantities;
 
+import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.Frequency;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.Unit;
@@ -26,7 +27,7 @@ import java.math.BigDecimal;
  * @author Christophe Pollet
  */
 public class FrequencyQuantity extends AbstractQuantity<Frequency> implements Quantity<Frequency> {
-	public static final FrequencyUnit REFERENCE = FrequencyUnit.fps;
+	public static final FrequencyUnit REFERENCE = FrequencyUnit.REFERENCE;
 
 	public FrequencyQuantity(BigDecimal value) {
 		this(value, REFERENCE);
@@ -43,6 +44,11 @@ public class FrequencyQuantity extends AbstractQuantity<Frequency> implements Qu
 		}
 
 		return new FrequencyQuantity(convert(unit), unit);
+	}
+
+	@Override
+	public Quantity<Frequency> scale(int scale) {
+		return new FrequencyQuantity(getScaledValue(scale), getUnit());
 	}
 
 	@Override
