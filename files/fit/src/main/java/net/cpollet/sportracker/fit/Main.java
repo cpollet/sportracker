@@ -20,7 +20,7 @@ import com.garmin.fit.Decode;
 import com.garmin.fit.FitRuntimeException;
 import com.garmin.fit.MesgBroadcaster;
 import com.garmin.fit.RecordMesgListener;
-import net.cpollet.sportracker.data.Point;
+import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.units.SpeedUnit;
 
 import java.io.FileInputStream;
@@ -47,11 +47,11 @@ public class Main {
 			try {
 				mesgBroadcaster.run(in);
 
-				for (Point point : listener.getPoints()) {
-					System.out.println(point);
+				for (TrackPoint trackPoint : listener.getTrack()) {
+					System.out.println(trackPoint);
 				}
 
-				System.out.println("Average speed: " + listener.getPoints().getAverageSpeed().in(SpeedUnit.kmh).scale(1));
+				System.out.println("Average speed: " + listener.getTrack().getAverageSpeed().in(SpeedUnit.kmh).scale(1));
 			} catch (FitRuntimeException e) {
 				System.err.print("Exception decoding file: ");
 				System.err.println(e.getMessage());

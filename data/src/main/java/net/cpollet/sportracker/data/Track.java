@@ -28,42 +28,42 @@ import java.util.List;
 /**
  * @author Christophe Pollet
  */
-public class Points implements Iterable<Point> {
-	private List<Point> points;
+public class Track implements Iterable<TrackPoint> {
+	private List<TrackPoint> trackPoints;
 
-	public Points() {
-		this.points = new LinkedList<>();
+	public Track() {
+		this.trackPoints = new LinkedList<>();
 	}
 
 	public int size() {
-		return points.size();
+		return trackPoints.size();
 	}
 
 	public boolean isEmpty() {
-		return points.isEmpty();
+		return trackPoints.isEmpty();
 	}
 
 	@Override
-	public Iterator<Point> iterator() {
-		return points.iterator();
+	public Iterator<TrackPoint> iterator() {
+		return trackPoints.iterator();
 	}
 
-	public boolean add(Point point) {
-		return points.add(point);
+	public boolean add(TrackPoint trackPoint) {
+		return trackPoints.add(trackPoint);
 	}
 
-	public Point get(int index) {
-		return points.get(index);
+	public TrackPoint get(int index) {
+		return trackPoints.get(index);
 	}
 
 	public Quantity<Speed> getAverageSpeed() {
 		Quantity<Speed> totalSpeed = new SpeedQuantity(BigDecimal.valueOf(0));
 		int count = 0;
 
-		for (Point point : points) {
-			if (point.getSpeed().getValue().compareTo(BigDecimal.valueOf(0)) > 0) {
+		for (TrackPoint trackPoint : trackPoints) {
+			if (trackPoint.getSpeed().getValue().compareTo(BigDecimal.valueOf(0)) > 0) {
 				count++;
-				totalSpeed = totalSpeed.add(point.getSpeed());
+				totalSpeed = totalSpeed.add(trackPoint.getSpeed());
 			}
 		}
 

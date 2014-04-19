@@ -16,7 +16,7 @@
 
 package net.cpollet.sportracker.data.builder;
 
-import net.cpollet.sportracker.data.Point;
+import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.units.Frequency;
 import net.cpollet.sportracker.units.Length;
@@ -29,7 +29,7 @@ import java.math.BigDecimal;
 /**
  * @author Christophe Pollet
  */
-public class PointBuilder {
+public class TrackPointBuilder {
 	private DateTime timestamp;
 	private Quantity<Speed> speed;
 	// private PowerQuantity power;
@@ -40,63 +40,63 @@ public class PointBuilder {
 	private BigDecimal latitude;
 	private Quantity<Temperature> temperature;
 
-	private PointBuilder() {
+	private TrackPointBuilder() {
 	}
 
-	public static PointBuilder aPoint() {
-		return new PointBuilder();
+	public static TrackPointBuilder aTrackPoint() {
+		return new TrackPointBuilder();
 	}
 
-	public PointBuilder withTimestamp(DateTime timestamp) {
+	public TrackPointBuilder withTimestamp(DateTime timestamp) {
 		this.timestamp = timestamp;
 		return this;
 	}
 
-	public PointBuilder withSpeed(Quantity<Speed> speed) {
+	public TrackPointBuilder withSpeed(Quantity<Speed> speed) {
 		this.speed = speed;
 		return this;
 	}
 
-	public PointBuilder withCadence(Quantity<Frequency> cadence) {
+	public TrackPointBuilder withCadence(Quantity<Frequency> cadence) {
 		this.cadence = cadence;
 		return this;
 	}
 
-	public PointBuilder withHeartRate(Quantity<Frequency> heartRate) {
+	public TrackPointBuilder withHeartRate(Quantity<Frequency> heartRate) {
 		this.heartRate = heartRate;
 		return this;
 	}
 
-	public PointBuilder withAltitude(Quantity<Length> altitude) {
+	public TrackPointBuilder withAltitude(Quantity<Length> altitude) {
 		this.altitude = altitude;
 		return this;
 	}
 
-	public PointBuilder withLongitude(BigDecimal longitude) {
+	public TrackPointBuilder withLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 		return this;
 	}
 
-	public PointBuilder withLatitude(BigDecimal latitude) {
+	public TrackPointBuilder withLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 		return this;
 	}
 
-	public PointBuilder withTemperature(Quantity<Temperature> temperature) {
+	public TrackPointBuilder withTemperature(Quantity<Temperature> temperature) {
 		this.temperature = temperature;
 		return this;
 	}
 
-	public Point build() {
-		Point point = new Point();
-		point.setTimestamp(timestamp);
-		point.setSpeed(speed);
-		point.setCadence(cadence);
-		point.setHeartRate(heartRate);
-		point.setAltitude(altitude);
-		point.setLongitude(longitude);
-		point.setLatitude(latitude);
-		point.setTemperature(temperature);
-		return point;
+	public TrackPoint build() {
+		TrackPoint trackPoint = new TrackPoint();
+		trackPoint.setTimestamp(timestamp);
+		trackPoint.setSpeed(speed);
+		trackPoint.setCadence(cadence);
+		trackPoint.setHeartRate(heartRate);
+		trackPoint.setAltitude(altitude);
+		trackPoint.setLongitude(longitude);
+		trackPoint.setLatitude(latitude);
+		trackPoint.setTemperature(temperature);
+		return trackPoint;
 	}
 }

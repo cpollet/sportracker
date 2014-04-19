@@ -20,7 +20,6 @@ import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.units.Frequency;
 import net.cpollet.sportracker.units.Length;
 import net.cpollet.sportracker.units.Speed;
-import net.cpollet.sportracker.units.SpeedUnit;
 import net.cpollet.sportracker.units.Temperature;
 import org.joda.time.DateTime;
 
@@ -29,7 +28,7 @@ import java.math.BigDecimal;
 /**
  * @author Christophe Pollet
  */
-public class Point {
+public class TrackPoint {
 	private DateTime timestamp;
 	private Quantity<Speed> speed;
 	// private PowerQuantity power;
@@ -106,9 +105,9 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "Point{" +
+		return "TrackPoint{" +
 				"timestamp=" + timestamp +
-				", speed=" + speed.in(SpeedUnit.kmh).scale(1) +
+				", speed=" + speed +
 				", cadence=" + cadence +
 				", heartRate=" + heartRate +
 				", altitude=" + altitude +

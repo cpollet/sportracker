@@ -18,9 +18,9 @@ package net.cpollet.sportracker.fit;
 
 import com.garmin.fit.RecordMesg;
 import com.garmin.fit.RecordMesgListener;
-import net.cpollet.sportracker.data.Point;
-import net.cpollet.sportracker.data.Points;
-import net.cpollet.sportracker.data.builder.PointBuilder;
+import net.cpollet.sportracker.data.TrackPoint;
+import net.cpollet.sportracker.data.Track;
+import net.cpollet.sportracker.data.builder.TrackPointBuilder;
 import net.cpollet.sportracker.quantities.QuantityFactory;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
@@ -34,15 +34,15 @@ import java.math.BigDecimal;
  * @author Christophe Pollet
  */
 public class Listener implements RecordMesgListener {
-	private Points points;
+	private Track track;
 
 	public Listener() {
-		points = new Points();
+		track = new Track();
 	}
 
 	@Override
 	public void onMesg(RecordMesg recordMesg) {
-		Point point = PointBuilder.aPoint() //
+		TrackPoint trackPoint = TrackPointBuilder.aTrackPoint() //
 				.withTimestamp(new DateTime(recordMesg.getTimestamp().getDate())) //
 				.withSpeed(QuantityFactory.SPEED.create(recordMesg.getSpeed(), SpeedUnit.ms)) //
 				.withAltitude(QuantityFactory.LENGTH.create(recordMesg.getAltitude(), LengthUnit.m)) //
@@ -53,10 +53,10 @@ public class Listener implements RecordMesgListener {
 				.withLongitude(BigDecimal.valueOf(recordMesg.getPositionLong())) //
 				.build();
 
-		points.add(point);
+		track.add(trackPoint);
 	}
 
-	public Points getPoints() {
-		return points;
+	public Track getTrack() {
+		return track;
 	}
 }
