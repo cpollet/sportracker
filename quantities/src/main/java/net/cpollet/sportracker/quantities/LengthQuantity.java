@@ -16,20 +16,28 @@
 
 package net.cpollet.sportracker.quantities;
 
-import net.cpollet.sportracker.units.Duration;
+import net.cpollet.sportracker.units.DurationUnit;
 import net.cpollet.sportracker.units.Length;
 import net.cpollet.sportracker.units.LengthUnit;
-import net.cpollet.sportracker.units.Speed;
 import net.cpollet.sportracker.units.Unit;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Christophe Pollet
  */
 public class LengthQuantity extends AbstractQuantity<Length> implements Quantity<Length> {
 	public static final LengthUnit REFERENCE = LengthUnit.REFERENCE;
+
+	public static final Map<Class, Unit> DIVISORS;
+	static {
+		Map<Class, Unit> divisors = new HashMap<>();
+		divisors.put(DurationUnit.class, SpeedQuantity.REFERENCE);
+		DIVISORS = Collections.unmodifiableMap(divisors);
+	}
 
 	public LengthQuantity(BigDecimal value) {
 		super(value, REFERENCE);
@@ -40,28 +48,12 @@ public class LengthQuantity extends AbstractQuantity<Length> implements Quantity
 	}
 
 	@Override
-	public Quantity<Length> convertTo(Unit<Length> unit) {
-		if (getUnit().equals(unit)) {
-			return this;
-		}
-
-		return new LengthQuantity(convert(unit), unit);
-	}
-
-	@Override
-	public Quantity<Length> scale(int scale) {
-		return new LengthQuantity(getScaledValue(scale), getUnit());
-	}
-
-	@Override
 	public Unit<Length> getReferenceUnit() {
 		return REFERENCE;
 	}
 
-	public Quantity<Speed> divide(Quantity<Duration> duration) {
-		Quantity<Length> refLength = convertToReferenceUnit();
-		Quantity<Duration> refDuration = duration.convertToReferenceUnit();
-
-		return new SpeedQuantity(refLength.getValue().divide(refDuration.getValue(), MathContext.DECIMAL64));
+	@Override
+	protected Map<Class, Unit> getDivisors() {
+		return DIVISORS;
 	}
 }

@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.FrequencyQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -26,7 +28,7 @@ public class FrequencyUnit extends AbstractUnit<Frequency> implements Unit<Frequ
 	public static final FrequencyUnit REFERENCE = fps;
 
 	public FrequencyUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(FrequencyQuantity.class, name, conversionFactor);
 	}
 
 	@Override

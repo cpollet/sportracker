@@ -43,6 +43,7 @@ Feature: General Quantities
     | speed     | 7.2         | km/h       | 2            | m/s         |
     | mass      | 1           | kg         | 1000         | g           |
     | mass      | 1500        | g          | 1.5          | kg          |
+#    | mass      | 1500        | g          | 1.5          | s           |
     | frequency | 1           | 1/s        | 60           | 1/min       |
     | frequency | 60          | 1/min      | 1            | 1/s         |
 

@@ -19,22 +19,16 @@ package net.cpollet.sportracker.fit;
 import com.garmin.fit.RecordMesg;
 import com.garmin.fit.RecordMesgListener;
 import net.cpollet.sportracker.data.Point;
-import net.cpollet.sportracker.data.PointBuilder;
 import net.cpollet.sportracker.data.Points;
-import net.cpollet.sportracker.quantities.FrequencyQuantity;
-import net.cpollet.sportracker.quantities.LengthQuantity;
-import net.cpollet.sportracker.quantities.SpeedQuantity;
-import net.cpollet.sportracker.quantities.TemperatureQuantity;
+import net.cpollet.sportracker.data.builder.PointBuilder;
+import net.cpollet.sportracker.quantities.QuantityFactory;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
-import net.cpollet.sportracker.units.Temperature;
 import net.cpollet.sportracker.units.TemperatureUnit;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Christophe Pollet
@@ -50,13 +44,13 @@ public class Listener implements RecordMesgListener {
 	public void onMesg(RecordMesg recordMesg) {
 		Point point = PointBuilder.aPoint() //
 				.withTimestamp(new DateTime(recordMesg.getTimestamp().getDate())) //
-				.withSpeed(new SpeedQuantity(BigDecimal.valueOf(recordMesg.getSpeed()), SpeedUnit.ms)) //
-				.withAltitude(new LengthQuantity(BigDecimal.valueOf(recordMesg.getAltitude()), LengthUnit.m)) //
+				.withSpeed(QuantityFactory.SPEED.create(recordMesg.getSpeed(), SpeedUnit.ms)) //
+				.withAltitude(QuantityFactory.LENGTH.create(recordMesg.getAltitude(), LengthUnit.m)) //
+				.withCadence(QuantityFactory.FREQUENCY.create(recordMesg.getCadence(), FrequencyUnit.fpm)) //
+				.withHeartRate(QuantityFactory.FREQUENCY.create(recordMesg.getHeartRate(), FrequencyUnit.fps)) //
+				.withTemperature(QuantityFactory.TEMPERATURE.create(recordMesg.getTemperature(), TemperatureUnit.C)) //
 				.withLatitude(BigDecimal.valueOf(recordMesg.getPositionLat())) //
 				.withLongitude(BigDecimal.valueOf(recordMesg.getPositionLong())) //
-				.withCadence(new FrequencyQuantity(BigDecimal.valueOf(recordMesg.getCadence()), FrequencyUnit.fpm)) //
-				.withHeartRate(new FrequencyQuantity(BigDecimal.valueOf(recordMesg.getHeartRate()))) //
-				.withTemperature(new TemperatureQuantity(BigDecimal.valueOf(recordMesg.getTemperature()), TemperatureUnit.C)) //
 				.build();
 
 		points.add(point);

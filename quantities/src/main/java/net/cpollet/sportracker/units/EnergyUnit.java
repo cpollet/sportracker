@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.EnergyQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -27,7 +29,7 @@ public class EnergyUnit extends AbstractUnit<Energy> implements Unit<Energy> {
 	public static EnergyUnit REFERENCE = J;
 
 	public EnergyUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(EnergyQuantity.class, name, conversionFactor);
 	}
 
 	@Override

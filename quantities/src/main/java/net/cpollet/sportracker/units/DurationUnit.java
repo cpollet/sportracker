@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.DurationQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -27,7 +29,7 @@ public class DurationUnit extends AbstractUnit<Duration> implements Unit<Duratio
 	public static DurationUnit REFERENCE = s;
 
 	public DurationUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(DurationQuantity.class, name, conversionFactor);
 	}
 
 	@Override

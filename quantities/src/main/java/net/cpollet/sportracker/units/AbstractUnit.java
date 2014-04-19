@@ -28,15 +28,17 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	private String name;
 	private BigDecimal conversionFactor;
 	private int scale;
+	private Class<Quantity<Q>> quantityClass;
 
-	public AbstractUnit(String name, String conversionFactor) {
-		this(name, conversionFactor, 4);
+	public AbstractUnit(Class quantityClass, String name, String conversionFactor) {
+		this(quantityClass, name, conversionFactor, 4);
 	}
 
-	public AbstractUnit(String name, String conversionFactor, int scale) {
+	public AbstractUnit(Class<Quantity<Q>> quantityClass, String name, String conversionFactor, int scale) {
 		this.name = name;
 		this.conversionFactor = new BigDecimal(conversionFactor);
 		this.scale = scale;
+		this.quantityClass = quantityClass;
 	}
 
 	protected static String inverse(String number) {
@@ -56,6 +58,11 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 	@Override
 	public int getScale() {
 		return scale;
+	}
+
+	@Override
+	public Class<Quantity<Q>> getQuantityClass() {
+		return quantityClass;
 	}
 
 	@Override
@@ -84,5 +91,10 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		int result = name.hashCode();
 		result = 31 * result + conversionFactor.hashCode();
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + name + "]";
 	}
 }

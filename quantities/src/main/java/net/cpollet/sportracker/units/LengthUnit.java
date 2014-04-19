@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.LengthQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -27,7 +29,7 @@ public class LengthUnit extends AbstractUnit<Length> implements Unit<Length> {
 	public static final LengthUnit REFERENCE = m;
 
 	public LengthUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(LengthQuantity.class, name, conversionFactor);
 	}
 
 	@Override

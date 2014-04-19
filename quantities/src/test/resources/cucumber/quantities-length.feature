@@ -7,3 +7,4 @@ Feature: Length Quantities
     | quantity | value | unit | divisor_quantity | divisor_value | divisor_unit | result_quantity | result_value | result_unit |
     | length   | 1     | m    | duration         | 1             | s            | speed           | 1            | m/s         |
     | length   | 20    | km   | duration         | 2             | h            | speed           | 2.7778       | m/s         |
+#    | length   | 20    | km   | duration         | 2             | g            | mass            | 2.7778       | m/g         |

@@ -16,7 +16,6 @@
 
 package net.cpollet.sportracker.quantities;
 
-import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.Temperature;
 import net.cpollet.sportracker.units.TemperatureUnit;
 import net.cpollet.sportracker.units.Unit;
@@ -31,20 +30,6 @@ public class TemperatureQuantity extends AbstractQuantity<Temperature> implement
 
 	public TemperatureQuantity(BigDecimal value, Unit<Temperature> unit) {
 		super(value, unit);
-	}
-
-	@Override
-	public Quantity<Temperature> convertTo(Unit<Temperature> unit) {
-		if (getUnit() == unit) {
-			return this;
-		}
-
-		return new TemperatureQuantity(convert(unit), unit);
-	}
-
-	@Override
-	public Quantity<Temperature> scale(int scale) {
-		return new TemperatureQuantity(getScaledValue(scale), getUnit());
 	}
 
 	@Override

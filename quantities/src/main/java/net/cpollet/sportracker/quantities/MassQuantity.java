@@ -33,16 +33,6 @@ public class MassQuantity extends AbstractQuantity<Mass> implements Quantity<Mas
 	}
 
 	@Override
-	public Quantity<Mass> convertTo(Unit<Mass> unit) {
-		return new MassQuantity(convert(unit), unit);
-	}
-
-	@Override
-	public Quantity<Mass> scale(int scale) {
-		return new MassQuantity(getScaledValue(scale), getUnit());
-	}
-
-	@Override
 	public Unit<Mass> getReferenceUnit() {
 		return REFERENCE;
 	}

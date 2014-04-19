@@ -16,7 +16,6 @@
 
 package net.cpollet.sportracker.quantities;
 
-import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.Energy;
 import net.cpollet.sportracker.units.EnergyUnit;
 import net.cpollet.sportracker.units.Unit;
@@ -35,20 +34,6 @@ public class EnergyQuantity extends AbstractQuantity<Energy> implements Quantity
 
 	public EnergyQuantity(BigDecimal value, Unit<Energy> unit) {
 		super(value, unit);
-	}
-
-	@Override
-	public Quantity<Energy> convertTo(Unit<Energy> unit) {
-		if (getUnit().equals(unit)) {
-			return this;
-		}
-
-		return new EnergyQuantity(convert(unit), unit);
-	}
-
-	@Override
-	public Quantity<Energy> scale(int scale) {
-		return new EnergyQuantity(getScaledValue(scale), getUnit());
 	}
 
 	@Override

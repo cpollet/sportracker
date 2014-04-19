@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.MassQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -26,7 +28,7 @@ public class MassUnit extends AbstractUnit<Mass> implements Unit<Mass> {
 	public static final MassUnit REFERENCE = kg;
 
 	public MassUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(MassQuantity.class, name, conversionFactor);
 	}
 
 	@Override

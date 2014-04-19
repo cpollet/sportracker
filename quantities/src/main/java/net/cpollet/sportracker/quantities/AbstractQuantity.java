@@ -20,6 +20,9 @@ import net.cpollet.sportracker.units.Unit;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Christophe Pollet
@@ -31,15 +34,48 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	private Unit<Q> unit;
 
 	public AbstractQuantity(BigDecimal value, Unit<Q> unit) {
-		assert value != null;
-		assert unit != null;
+		assert null != value;
+		assert null != unit;
 
 		this.value = value;
 		this.unit = unit;
 	}
 
+	@Override
+	public Quantity<Q> convertTo(Unit<Q> unit) {
+		if (getUnit().equals(unit)) {
+			return this;
+		}
+
+		return QuantityFactory.get(unit.getClass()).create(convert(unit), unit);
+	}
+
 	protected BigDecimal convert(Unit<Q> unit) {
+		if (!unit.getClass().isInstance(getUnit())) {
+			throw new IllegalArgumentException("Cannot convert quantity from " + getUnit() + " to " + unit + "");
+		}
+
 		return getValue().multiply(getFactor(unit));
+	}
+
+	protected void assertDivisionPossible(Unit divisorUnit) {
+		for (Class possibleDivisorUnitClass : getPossibleDivisorUnitClasses()) {
+			if (!possibleDivisorUnitClass.isInstance(divisorUnit)) {
+				throw new IllegalArgumentException("Unable to divide quantity of " + getUnit() + " by a quantity of " + divisorUnit);
+			}
+		}
+	}
+
+	protected Map<Class, Unit> getDivisors() {
+		return Collections.emptyMap();
+	}
+
+	protected Set<Class> getPossibleDivisorUnitClasses() {
+		return getDivisors().keySet();
+	}
+
+	protected Unit getQuotientUnit(Quantity divisor) {
+		return getDivisors().get(divisor.getUnit().getClass());
 	}
 
 	private BigDecimal getFactor(Unit<Q> unit) {
@@ -47,7 +83,9 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	}
 
 	@Override
-	public BigDecimal getValue() { return value; }
+	public BigDecimal getValue() {
+		return value;
+	}
 
 	@Override
 	public BigDecimal getScaledValue(int scale) {
@@ -62,6 +100,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	@Override
 	public Quantity<Q> scale() {
 		return scale(unit.getScale());
+	}
+
+	@Override
+	public Quantity<Q> scale(int scale) {
+		return QuantityFactory.get(unit.getClass()).create(getScaledValue(scale), unit);
 	}
 
 	@Override
@@ -132,6 +175,19 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 		result.setValue(result.getValue().multiply(factor));
 
 		return result;
+	}
+
+	@Override
+	public Quantity divide(Quantity divisor) {
+		assertDivisionPossible(divisor.getUnit());
+
+		Quantity dividendInReferenceUnit = convertToReferenceUnit();
+		Quantity divisorInReferenceUnit = divisor.convertToReferenceUnit();
+
+		BigDecimal quotient = dividendInReferenceUnit.getValue().divide(divisorInReferenceUnit.getValue(), MathContext.DECIMAL64);
+
+		Unit quotientUnit = getQuotientUnit(divisor);
+		return QuantityFactory.get(quotientUnit.getClass()).create(quotient, quotientUnit);
 	}
 
 	@Override

@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.TemperatureQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -25,7 +27,7 @@ public class TemperatureUnit extends AbstractUnit<Temperature> implements Unit<T
 	public static final TemperatureUnit REFERENCE = C;
 
 	public TemperatureUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(TemperatureQuantity.class, name, conversionFactor);
 	}
 
 	@Override

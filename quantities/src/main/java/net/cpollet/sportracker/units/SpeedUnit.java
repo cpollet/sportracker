@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.units;
 
+import net.cpollet.sportracker.quantities.SpeedQuantity;
+
 /**
  * @author Christophe Pollet
  */
@@ -26,7 +28,7 @@ public class SpeedUnit extends AbstractUnit<Speed> implements Unit<Speed> {
 	public static SpeedUnit REFERENCE = ms;
 
 	public SpeedUnit(String name, String conversionFactor) {
-		super(name, conversionFactor);
+		super(SpeedQuantity.class, name, conversionFactor);
 	}
 
 	@Override

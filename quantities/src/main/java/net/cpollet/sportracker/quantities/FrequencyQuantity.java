@@ -16,7 +16,6 @@
 
 package net.cpollet.sportracker.quantities;
 
-import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.Frequency;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.Unit;
@@ -35,20 +34,6 @@ public class FrequencyQuantity extends AbstractQuantity<Frequency> implements Qu
 
 	public FrequencyQuantity(BigDecimal value, Unit<Frequency> unit) {
 		super(value, unit);
-	}
-
-	@Override
-	public Quantity<Frequency> convertTo(Unit<Frequency> unit) {
-		if (getUnit() == unit) {
-			return this;
-		}
-
-		return new FrequencyQuantity(convert(unit), unit);
-	}
-
-	@Override
-	public Quantity<Frequency> scale(int scale) {
-		return new FrequencyQuantity(getScaledValue(scale), getUnit());
 	}
 
 	@Override

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.data;
+package net.cpollet.sportracker.data.builder;
 
+import net.cpollet.sportracker.data.Point;
 import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.units.Frequency;
 import net.cpollet.sportracker.units.Length;

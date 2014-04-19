@@ -31,4 +31,6 @@ public interface Unit<Q extends Quantity<Q>> {
 	BigDecimal getFactorToReferenceUnit();
 
 	int getScale();
+
+	Class<Quantity<Q>> getQuantityClass();
 }
