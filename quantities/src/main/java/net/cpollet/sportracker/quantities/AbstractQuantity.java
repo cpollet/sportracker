@@ -129,6 +129,14 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 
 	@Override
 	public int compareTo(Quantity<Q> other) {
+		if (ExtremeQuantity.MIN == other) {
+			return 1;
+		}
+
+		if (ExtremeQuantity.MAX == other) {
+			return -1;
+		}
+
 		Quantity<Q> referenceThis = this.convertToReferenceUnit();
 		Quantity<Q> referenceOther = other.convertToReferenceUnit();
 
@@ -181,7 +189,7 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	public Quantity divide(Quantity divisor) {
 		assertDivisionPossible(divisor.getUnit());
 
-		Quantity dividendInReferenceUnit = convertToReferenceUnit();
+		Quantity<Q> dividendInReferenceUnit = convertToReferenceUnit();
 		Quantity divisorInReferenceUnit = divisor.convertToReferenceUnit();
 
 		BigDecimal quotient = dividendInReferenceUnit.getValue().divide(divisorInReferenceUnit.getValue(), MathContext.DECIMAL64);
@@ -193,6 +201,11 @@ public abstract class AbstractQuantity<Q extends Quantity<Q>> implements Quantit
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
+	}
+
+	@Override
+	public boolean isZero() {
+		return 0 == getValue().compareTo(BigDecimal.ZERO);
 	}
 
 	@Override

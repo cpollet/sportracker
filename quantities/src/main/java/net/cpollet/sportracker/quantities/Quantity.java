@@ -59,4 +59,6 @@ public interface Quantity<Q extends Quantity<Q>> extends Cloneable {
 	Quantity divide(Quantity quantity);
 
 	Object clone() throws CloneNotSupportedException;
+
+	boolean isZero();
 }

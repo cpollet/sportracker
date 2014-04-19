@@ -11,7 +11,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>net.cpollet.sportracker</groupId>
-			<artifactId>sportracker-data</artifactId>
+			<artifactId>sportracker-core</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 

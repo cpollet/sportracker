@@ -14,40 +14,25 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.data;
+package net.cpollet.sportacker.aggregator;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Length;
+import net.cpollet.sportracker.units.Speed;
 
 /**
  * @author Christophe Pollet
  */
-public class Track implements Iterable<TrackPoint> {
-	private List<TrackPoint> trackPoints;
+public interface TrackPointAggregator {
+	Quantity<Speed> getAverageSpeed();
 
-	public Track() {
-		this.trackPoints = new LinkedList<>();
-	}
+	Quantity<Speed> getMaxSpeed();
 
-	public int size() {
-		return trackPoints.size();
-	}
+	Quantity<Speed> getMinSpeed();
 
-	public boolean isEmpty() {
-		return trackPoints.isEmpty();
-	}
+	Quantity<Length> getAverageAltitude();
 
-	@Override
-	public Iterator<TrackPoint> iterator() {
-		return trackPoints.iterator();
-	}
+	Quantity<Length> getMinAltitude();
 
-	public boolean add(TrackPoint trackPoint) {
-		return trackPoints.add(trackPoint);
-	}
-
-	public TrackPoint get(int index) {
-		return trackPoints.get(index);
-	}
+	Quantity<Length> getMaxAltitude();
 }

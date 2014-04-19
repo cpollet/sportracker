@@ -97,4 +97,8 @@ public class QuantityFactory<Q extends Quantity<Q>> {
 	public Quantity<Q> create(Byte value, Unit<Q> unit) {
 		return create(new BigDecimal(value), unit);
 	}
+
+	public Quantity<Q> create(Integer value, Unit<Q> unit) {
+		return create(new BigDecimal(value), unit);
+	}
 }

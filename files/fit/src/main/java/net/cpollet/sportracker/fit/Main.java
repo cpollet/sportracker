@@ -20,7 +20,10 @@ import com.garmin.fit.Decode;
 import com.garmin.fit.FitRuntimeException;
 import com.garmin.fit.MesgBroadcaster;
 import com.garmin.fit.RecordMesgListener;
+import net.cpollet.sportacker.aggregator.TrackPointAggregator;
+import net.cpollet.sportacker.aggregator.TrackPointAggregatorImpl;
 import net.cpollet.sportracker.data.TrackPoint;
+import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
 
 import java.io.FileInputStream;
@@ -51,7 +54,15 @@ public class Main {
 					System.out.println(trackPoint);
 				}
 
-				System.out.println("Average speed: " + listener.getTrack().getAverageSpeed().in(SpeedUnit.kmh).scale(1));
+				TrackPointAggregator aggregator = new TrackPointAggregatorImpl(listener.getTrack());
+
+				System.out.println("Min speed: " + aggregator.getMinSpeed().in(SpeedUnit.kmh).scale(1));
+				System.out.println("Max speed: " + aggregator.getMaxSpeed().in(SpeedUnit.kmh).scale(1));
+				System.out.println("Avg speed: " + aggregator.getAverageSpeed().in(SpeedUnit.kmh).scale(1));
+
+				System.out.println("Min alt:   " + aggregator.getMinAltitude().in(LengthUnit.m).scale(1));
+				System.out.println("Max alt:   " + aggregator.getMaxAltitude().in(LengthUnit.m).scale(1));
+				System.out.println("Avg alt:   " + aggregator.getAverageAltitude().in(LengthUnit.m).scale(1));
 			} catch (FitRuntimeException e) {
 				System.err.print("Exception decoding file: ");
 				System.err.println(e.getMessage());
