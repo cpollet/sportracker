@@ -1,0 +1,8 @@
+http://projects.spring.io/spring-boot/
+http://spring.io/guides
+http://www.webjars.org/
+http://angular-ui.github.io
+http://angular-ui.github.io/bootstrap
+http://getbootstrap.com/
+http://angular-google-maps.org
+http://alexandros.resin.io/angular-d3-svg/

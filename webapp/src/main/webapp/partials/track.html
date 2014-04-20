@@ -1,0 +1,51 @@
+<div class="container">
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="filePath" class="col-sm-2 control-label">Search:</label>
+
+			<div class="col-sm-8">
+				<input id="filePath" type="text" ng-model="filePath" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-8">
+				<button ng-click="updateRoute()" class="btn btn-default">Fetch</button>
+			</div>
+		</div>
+
+	</form>
+
+	<h1>{{track.title}}</h1>
+	<tabset>
+		<tab heading="Data">
+			<table class="table table-striped table-hover table-responsive">
+				<thead>
+					<tr>
+						<th>Timestamp</th>
+						<th>Latitude</th>
+						<th>Longitude</th>
+						<th>Speed [m/s]</th>
+						<th>Altitude [m]</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="point in track.trackPoints">
+						<td>{{point.timestamp}}</td>
+						<td>{{point.latitude}}</td>
+						<td>{{point.longitude}}</td>
+						<td>{{point.speed}}</td>
+						<td>{{point.altitude}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</tab>
+		<tab heading="Graph">
+			Not implemented yet
+		</tab>
+		<tab heading="Map" select="updateMap()">
+			<div class="reset-box-sizing">
+				<google-map center="map.center" zoom="map.zoom" events="map.events" options="map.options" draggable="true"></google-map>
+			</div>
+		</tab>
+	</tabset>
+</div>

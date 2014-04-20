@@ -12,6 +12,7 @@
 		<module>data</module>
 		<module>core</module>
 		<module>files</module>
+		<module>webapp</module>
 	</modules>
 
 	<build>

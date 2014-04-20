@@ -1,0 +1,49 @@
+<div class="container">
+	<h1>Create an account
+		<small>it's free!</small>
+	</h1>
+	<div class="panel panel-default">
+		<div class="panel-body">
+	<form name="signupForm" class="form-horizontal">
+		<p>Creating an account is easy and free. Simply fill in the following form and submit it!</p>
+
+		<div class="alert alert-danger" ng-show="signupForm.$invalid">
+			<b>The form contains the following errors</b>
+			<ul>
+				<li ng-show="signupForm.password2.$error.match">
+					Passwords don't match.
+				</li>
+			</ul>
+		</div>
+
+		<div class="form-group">
+			<label for="username" class="col-sm-4 control-label">Username</label>
+
+			<div class="col-sm-4">
+				<input id="username" type="text" class="form-control" ng-model="username">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="password1" class="col-sm-4 control-label">Password</label>
+
+			<div class="col-sm-4">
+				<input id="password1" name="password1" type="password" class="form-control" ng-model="password1">
+			</div>
+		</div>
+		<div class="form-group" ng-class="{'has-error' : signupForm.password2.$invalid && !signupForm.password2.$pristine}">
+			<label for="password2" class="col-sm-4 control-label">Password (verification)</label>
+
+			<div class="col-sm-4">
+				<input id="password2" name="password2" type="password" class="form-control" ng-model="password2" st-match="password1">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-4 col-sm-4 text-right">
+				<a href="#/login" class="btn">I already have an account</a>
+				<button ng-click="signup()" class="btn btn-primary" ng-disabled="signupForm.$invalid">Signup!</button>
+			</div>
+		</div>
+	</form>
+			</div>
+		</div>
+</div>
