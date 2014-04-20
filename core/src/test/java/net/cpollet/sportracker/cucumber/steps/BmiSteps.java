@@ -16,13 +16,11 @@
 
 package net.cpollet.sportracker.cucumber.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import net.cpollet.sportacker.BmiCalculator;
-import net.cpollet.sportacker.BmiCalculatorImpl;
-import net.cpollet.sportacker.DailyEnergyNeedCalculator;
+import net.cpollet.sportracker.BmiCalculator;
+import net.cpollet.sportracker.BmiCalculatorImpl;
 
 import static org.fest.assertions.Assertions.assertThat;
 

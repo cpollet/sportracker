@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker.aggregator;
+package net.cpollet.sportracker.aggregator;
 
 import net.cpollet.sportracker.data.Track;
 import net.cpollet.sportracker.data.TrackPoint;

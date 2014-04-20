@@ -14,25 +14,19 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker.aggregator;
+package net.cpollet.sportracker;
 
-import net.cpollet.sportracker.quantities.Quantity;
-import net.cpollet.sportracker.units.Length;
-import net.cpollet.sportracker.units.Speed;
+import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.units.LengthUnit;
+import net.cpollet.sportracker.units.MassUnit;
 
 /**
  * @author Christophe Pollet
  */
-public interface TrackPointAggregator {
-	Quantity<Speed> getAverageSpeed();
-
-	Quantity<Speed> getMaxSpeed();
-
-	Quantity<Speed> getMinSpeed();
-
-	Quantity<Length> getAverageAltitude();
-
-	Quantity<Length> getMinAltitude();
-
-	Quantity<Length> getMaxAltitude();
+public class BmiCalculatorImpl implements BmiCalculator {
+	@Override
+	public long compute(Person person) {
+		return Math.round(person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() /
+				Math.pow(person.getHeight().convertTo(LengthUnit.m).getValue().doubleValue(), 2));
+	}
 }

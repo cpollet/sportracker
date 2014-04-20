@@ -1,4 +1,4 @@
-package net.cpollet.sportacker;
+package net.cpollet.sportracker;
 
 import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.quantities.EnergyQuantity;

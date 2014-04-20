@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportacker;
+package net.cpollet.sportracker.aggregator;
 
-import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Length;
+import net.cpollet.sportracker.units.Speed;
 
 /**
  * @author Christophe Pollet
  */
-public interface BmiCalculator {
-	long compute(Person person);
+public interface TrackPointAggregator {
+	Quantity<Speed> getAverageSpeed();
+
+	Quantity<Speed> getMaxSpeed();
+
+	Quantity<Speed> getMinSpeed();
+
+	Quantity<Length> getAverageAltitude();
+
+	Quantity<Length> getMinAltitude();
+
+	Quantity<Length> getMaxAltitude();
 }
