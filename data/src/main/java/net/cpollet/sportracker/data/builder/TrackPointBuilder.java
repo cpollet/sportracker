@@ -18,6 +18,7 @@ package net.cpollet.sportracker.data.builder;
 
 import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.quantities.Quantity;
+import net.cpollet.sportracker.units.Angle;
 import net.cpollet.sportracker.units.Frequency;
 import net.cpollet.sportracker.units.Length;
 import net.cpollet.sportracker.units.Speed;
@@ -36,8 +37,8 @@ public class TrackPointBuilder {
 	private Quantity<Frequency> cadence;
 	private Quantity<Frequency> heartRate;
 	private Quantity<Length> altitude;
-	private BigDecimal longitude;
-	private BigDecimal latitude;
+	private Quantity<Angle> longitude;
+	private Quantity<Angle> latitude;
 	private Quantity<Temperature> temperature;
 
 	private TrackPointBuilder() {
@@ -72,12 +73,12 @@ public class TrackPointBuilder {
 		return this;
 	}
 
-	public TrackPointBuilder withLongitude(BigDecimal longitude) {
+	public TrackPointBuilder withLongitude(Quantity<Angle> longitude) {
 		this.longitude = longitude;
 		return this;
 	}
 
-	public TrackPointBuilder withLatitude(BigDecimal latitude) {
+	public TrackPointBuilder withLatitude(Quantity<Angle> latitude) {
 		this.latitude = latitude;
 		return this;
 	}

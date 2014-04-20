@@ -20,12 +20,13 @@ import com.garmin.fit.Decode;
 import com.garmin.fit.FitRuntimeException;
 import com.garmin.fit.MesgBroadcaster;
 import com.garmin.fit.RecordMesgListener;
-import net.cpollet.sportacker.aggregator.TrackPointAggregator;
-import net.cpollet.sportacker.aggregator.TrackPointAggregatorImpl;
+import net.cpollet.sportracker.aggregator.TrackPointAggregator;
+import net.cpollet.sportracker.aggregator.TrackPointAggregatorImpl;
 import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 

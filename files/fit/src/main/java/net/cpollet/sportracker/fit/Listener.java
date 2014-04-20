@@ -21,7 +21,9 @@ import com.garmin.fit.RecordMesgListener;
 import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.data.Track;
 import net.cpollet.sportracker.data.builder.TrackPointBuilder;
+import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.quantities.QuantityFactory;
+import net.cpollet.sportracker.units.AngleUnit;
 import net.cpollet.sportracker.units.FrequencyUnit;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
@@ -49,8 +51,8 @@ public class Listener implements RecordMesgListener {
 				.withCadence(QuantityFactory.FREQUENCY.create(recordMesg.getCadence(), FrequencyUnit.fpm)) //
 				.withHeartRate(QuantityFactory.FREQUENCY.create(recordMesg.getHeartRate(), FrequencyUnit.fps)) //
 				.withTemperature(QuantityFactory.TEMPERATURE.create(recordMesg.getTemperature(), TemperatureUnit.C)) //
-				.withLatitude(BigDecimal.valueOf(recordMesg.getPositionLat())) //
-				.withLongitude(BigDecimal.valueOf(recordMesg.getPositionLong())) //
+				.withLatitude(QuantityFactory.ANGLE.create(recordMesg.getPositionLat(), AngleUnit.semicircle)) //
+				.withLongitude(QuantityFactory.ANGLE.create(recordMesg.getPositionLong(), AngleUnit.semicircle)) //
 				.build();
 
 		track.add(trackPoint);
