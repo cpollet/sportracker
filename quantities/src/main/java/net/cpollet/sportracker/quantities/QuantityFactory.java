@@ -16,6 +16,8 @@
 
 package net.cpollet.sportracker.quantities;
 
+import net.cpollet.sportracker.units.Angle;
+import net.cpollet.sportracker.units.AngleUnit;
 import net.cpollet.sportracker.units.Duration;
 import net.cpollet.sportracker.units.DurationUnit;
 import net.cpollet.sportracker.units.Energy;
@@ -49,6 +51,7 @@ public class QuantityFactory<Q extends Quantity<Q>> {
 	public static final QuantityFactory<Mass> MASS = new QuantityFactory<>();
 	public static final QuantityFactory<Speed> SPEED = new QuantityFactory<>();
 	public static final QuantityFactory<Temperature> TEMPERATURE = new QuantityFactory<>();
+	public static final QuantityFactory<Angle> ANGLE = new QuantityFactory<>();
 
 	private static final Map<Class, QuantityFactory> factories;
 
@@ -61,6 +64,7 @@ public class QuantityFactory<Q extends Quantity<Q>> {
 		factoriesMap.put(MassUnit.class, MASS);
 		factoriesMap.put(SpeedUnit.class, SPEED);
 		factoriesMap.put(TemperatureUnit.class, TEMPERATURE);
+		factoriesMap.put(AngleUnit.class, ANGLE);
 		factories = Collections.unmodifiableMap(factoriesMap);
 	}
 

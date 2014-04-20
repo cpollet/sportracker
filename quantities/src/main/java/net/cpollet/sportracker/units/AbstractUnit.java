@@ -34,7 +34,7 @@ public abstract class AbstractUnit<Q extends Quantity<Q>> implements Unit<Q> {
 		this(quantityClass, name, conversionFactor, 4);
 	}
 
-	public AbstractUnit(Class<Quantity<Q>> quantityClass, String name, String conversionFactor, int scale) {
+	public AbstractUnit(Class quantityClass, String name, String conversionFactor, int scale) {
 		this.name = name;
 		this.conversionFactor = new BigDecimal(conversionFactor);
 		this.scale = scale;

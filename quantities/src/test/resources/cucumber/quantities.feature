@@ -5,23 +5,25 @@ Feature: General Quantities
     When scaled
     Then the resulting quantity is <output_value> in original unit
   Examples:
-    | quantity    | value    | unit  | output_value |
-    | length      | 1.555555 | km    | 1.5556       |
-    | length      | 1.555555 | m     | 1.5556       |
-    | length      | 1.555555 | cm    | 1.5556       |
-    | energy      | 1.555555 | kcal  | 1.5556       |
-    | energy      | 1.555555 | cal   | 1.5556       |
-    | energy      | 1.555555 | J     | 1.5556       |
-    | duration    | 1.555555 | h     | 1.5556       |
-    | duration    | 1.555555 | min   | 1.5556       |
-    | duration    | 1.555555 | s     | 1.5556       |
-    | speed       | 1.555555 | m/s   | 1.5556       |
-    | speed       | 1.555555 | km/h  | 1.5556       |
-    | mass        | 1.555555 | kg    | 1.5556       |
-    | mass        | 1.555555 | g     | 1.5556       |
-    | frequency   | 1.555555 | 1/s   | 1.5556       |
-    | frequency   | 1.555555 | 1/min | 1.5556       |
-    | temperature | 1.555555 | °C    | 1.5556       |
+    | quantity    | value         | unit       | output_value |
+    | length      | 1.555555      | km         | 1.5556       |
+    | length      | 1.555555      | m          | 1.5556       |
+    | length      | 1.555555      | cm         | 1.5556       |
+    | energy      | 1.555555      | kcal       | 1.5556       |
+    | energy      | 1.555555      | cal        | 1.5556       |
+    | energy      | 1.555555      | J          | 1.5556       |
+    | duration    | 1.555555      | h          | 1.5556       |
+    | duration    | 1.555555      | min        | 1.5556       |
+    | duration    | 1.555555      | s          | 1.5556       |
+    | speed       | 1.555555      | m/s        | 1.5556       |
+    | speed       | 1.555555      | km/h       | 1.5556       |
+    | mass        | 1.555555      | kg         | 1.5556       |
+    | mass        | 1.555555      | g          | 1.5556       |
+    | frequency   | 1.555555      | 1/s        | 1.5556       |
+    | frequency   | 1.555555      | 1/min      | 1.5556       |
+    | temperature | 1.555555      | °C         | 1.5556       |
+    | angle       | 1.55555555555 | deg        | 1.5555555556 |
+    | angle       | 1.555555      | semicircle | 2            |
 
   Scenario Outline: converting units
     Given a <quantity> quantity of <input_value> <input_unit>
@@ -46,6 +48,8 @@ Feature: General Quantities
 #    | mass      | 1500        | g          | 1.5          | s           |
     | frequency | 1           | 1/s        | 60           | 1/min       |
     | frequency | 60          | 1/min      | 1            | 1/s         |
+    | angle     | 100000000   | semicircle | 8.38190317   | deg         |
+    | angle     | 8.38190317  | deg        | 100000000    | semicircle  |
 
   Scenario Outline: add quantities
     Given a <quantity> quantity of <input_value> <input_unit>
