@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-var stApp = angular.module('stApp', ['stControllers', 'stServices', 'stDirectives', 'ngRoute', 'ui.bootstrap', 'google-maps']);
+var stApp = angular.module('stApp', [
+	'stControllers', 'stServices', 'stDirectives',
+	'ngRoute',
+	'ui.bootstrap', 'google-maps'
+]);
 
-stApp.config(['$routeProvider',
-	function ($routeProvider) {
+stApp.config(['$routeProvider', '$httpProvider',
+	function ($routeProvider, $httpProvider) {
 		$routeProvider.
 			when('/home', {
 				templateUrl: 'partials/home.html'
@@ -30,12 +34,18 @@ stApp.config(['$routeProvider',
 				templateUrl: 'partials/signup.html',
 				controller: 'AuthenticationCtrl'
 			}).
+			when('/signup_success', {
+				templateUrl: 'partials/signup_success.html'
+			}).
 			when('/about', {
 				templateUrl: 'partials/about.html'
 			}).
 			when('/track', {
 				templateUrl: 'partials/track.html',
-				controller: 'TrackCtrl'
+				controller: 'TrackCtrl',
+				access: {
+					requiresLogin: true
+				}
 			}).
 			otherwise({
 				redirectTo: '/home'
@@ -43,6 +53,27 @@ stApp.config(['$routeProvider',
 	}
 ]);
 
+stApp.run(['$rootScope', '$location', '$log', 'Authentication',
+	function ($rootScope, $location, $log, Authentication) {
+
+		$rootScope.$watch(function() {return Authentication.isLogged() }, function(newValue) {
+			$rootScope.isLogged = newValue;
+		});
+		$rootScope.$watch(function() {return Authentication.getUsername() }, function(newValue) {
+			$rootScope.username = newValue;
+		});
+		$rootScope.logout = Authentication.logout;
+
+		$rootScope.$on('$routeChangeStart', function (event, next) {
+			// FIXME: this does not prevent the template to be loaded
+			if (next.access && next.access.requiresLogin && !Authentication.isLogged()) {
+				$location.url("/login");
+				event.preventDefault();
+			}
+		});
+	}
+]);
+
 var stControllers = angular.module('stControllers', []);
-var stServices    = angular.module('stServices', []);
-var stDirectives  = angular.module('stDirectives', []);
+var stServices = angular.module('stServices', ['ngResource']);
+var stDirectives = angular.module('stDirectives', []);

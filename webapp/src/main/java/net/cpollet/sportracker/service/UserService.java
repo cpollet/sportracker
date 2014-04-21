@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-stDirectives.directive('stMatch', ['$log', function ($log) {
-	return {
-		require: 'ngModel',
-		link: function (scope, elem, attrs, ctrl) {
-			var me = attrs.ngModel;
-			var matchTo = attrs.stMatch;
+package net.cpollet.sportracker.service;
 
-			scope.$watch(matchTo, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
+import net.cpollet.sportracker.web.data.User;
 
-			scope.$watch(me, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
-		}
-	};
-}]);
+/**
+ * @author Christophe Pollet
+ */
+public interface UserService {
+	void create(User user);
+}

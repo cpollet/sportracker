@@ -14,13 +14,33 @@
  * limitations under the License.
  */
 
-stServices.factory('stAuthentication', [
-	function () {
-		var stAuthentication = {
-			isLogged: false,
-			userId: 0
+stServices.factory('Authentication', ['$location',
+	function ($location) {
+		var _isLogged = false;
+		var _username = null;
+
+		var Authentication = {
+			isLogged: function() {
+				return _isLogged;
+			},
+
+			login: function(username) {
+				_isLogged = true;
+				_username = username;
+				$location.path("/");
+			},
+
+			logout: function() {
+				_isLogged = false;
+				_username = null;
+				$location.path("/");
+			},
+
+			getUsername: function() {
+				return _username;
+			}
 		};
 
-		return stAuthentication;
+		return Authentication;
 	}
 ]);

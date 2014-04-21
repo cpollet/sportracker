@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-stDirectives.directive('stMatch', ['$log', function ($log) {
-	return {
-		require: 'ngModel',
-		link: function (scope, elem, attrs, ctrl) {
-			var me = attrs.ngModel;
-			var matchTo = attrs.stMatch;
+package net.cpollet.sportracker.spring;
 
-			scope.$watch(matchTo, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
-			scope.$watch(me, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
-		}
-	};
-}]);
+/**
+ * @author Christophe Pollet
+ */
+@Configuration
+@ImportResource("/spring/spring-root-context.xml")
+public class XmlImportingConfiguration {
+}

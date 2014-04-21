@@ -20,7 +20,6 @@ import net.cpollet.sportracker.data.Track;
 import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.fit.Parser;
 import net.cpollet.sportracker.fit.ParserImpl;
-import net.cpollet.sportracker.units.Angle;
 import net.cpollet.sportracker.units.AngleUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

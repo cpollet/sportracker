@@ -6,3 +6,5 @@ http://angular-ui.github.io/bootstrap
 http://getbootstrap.com/
 http://angular-google-maps.org
 http://alexandros.resin.io/angular-d3-svg/
+
+http://www.restapitutorial.com/httpstatuscodes.html

@@ -14,20 +14,11 @@
  * limitations under the License.
  */
 
-stDirectives.directive('stMatch', ['$log', function ($log) {
-	return {
-		require: 'ngModel',
-		link: function (scope, elem, attrs, ctrl) {
-			var me = attrs.ngModel;
-			var matchTo = attrs.stMatch;
-
-			scope.$watch(matchTo, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
-
-			scope.$watch(me, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
-		}
-	};
-}]);
+stServices.factory('User', ['$resource',
+	function ($resource) {
+		return $resource('/user', {}, {
+			// query: { method: 'GET', isArray: true },
+			create: { method: 'POST' }
+		})
+	}
+])

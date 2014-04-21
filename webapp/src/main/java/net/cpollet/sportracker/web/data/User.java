@@ -14,20 +14,37 @@
  * limitations under the License.
  */
 
-stDirectives.directive('stMatch', ['$log', function ($log) {
-	return {
-		require: 'ngModel',
-		link: function (scope, elem, attrs, ctrl) {
-			var me = attrs.ngModel;
-			var matchTo = attrs.stMatch;
+package net.cpollet.sportracker.web.data;
 
-			scope.$watch(matchTo, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
+/**
+ * @author Christophe Pollet
+ */
+public class User {
+	private String username;
+	private String password1;
+	private String password2;
 
-			scope.$watch(me, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
-			});
-		}
-	};
-}]);
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword1() {
+		return password1;
+	}
+
+	public void setPassword1(String password1) {
+		this.password1 = password1;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+}
