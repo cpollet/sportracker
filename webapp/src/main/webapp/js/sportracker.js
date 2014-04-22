@@ -32,7 +32,7 @@ stApp.config(['$routeProvider', '$httpProvider',
 			}).
 			when('/signup', {
 				templateUrl: 'partials/signup.html',
-				controller: 'AuthenticationCtrl'
+				controller: 'UserCtrl'
 			}).
 			when('/signup_success', {
 				templateUrl: 'partials/signup_success.html'
@@ -56,12 +56,22 @@ stApp.config(['$routeProvider', '$httpProvider',
 stApp.run(['$rootScope', '$location', '$log', 'Authentication',
 	function ($rootScope, $location, $log, Authentication) {
 
-		$rootScope.$watch(function() {return Authentication.isLogged() }, function(newValue) {
-			$rootScope.isLogged = newValue;
-		});
-		$rootScope.$watch(function() {return Authentication.getUsername() }, function(newValue) {
-			$rootScope.username = newValue;
-		});
+		$rootScope.$watch(
+			function () {
+				return Authentication.isLogged();
+			},
+			function (newValue) {
+				$rootScope.isLogged = newValue;
+			}
+		);
+		$rootScope.$watch(
+			function () {
+				return Authentication.getUsername()
+			},
+			function (newValue) {
+				$rootScope.username = newValue;
+			}
+		);
 		$rootScope.logout = Authentication.logout;
 
 		$rootScope.$on('$routeChangeStart', function (event, next) {

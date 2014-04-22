@@ -21,12 +21,19 @@ stDirectives.directive('stMatch', ['$log', function ($log) {
 			var me = attrs.ngModel;
 			var matchTo = attrs.stMatch;
 
+			function doesMatch(val1, val2) {
+				return val1 === val2;
+				// ctrl.$setValidity('dontMatch', match);
+			}
+
 			scope.$watch(matchTo, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
+				var match = doesMatch(scope[me], scope[matchTo]);
+				ctrl.$setValidity('dontMatch', match);
 			});
 
 			scope.$watch(me, function (value) {
-				ctrl.$setValidity('dontMatch', scope[me] === scope[matchTo]);
+				var match = doesMatch(scope[me], scope[matchTo]);
+				ctrl.$setValidity('dontMatch', match);
 			});
 		}
 	};

@@ -14,10 +14,23 @@
  * limitations under the License.
  */
 
-stControllers.controller('AuthenticationCtrl', ['$scope', '$http', '$log', '$location', 'User', 'Authentication',
-	function ($scope, $http, $log, $location, User, Authentication) {
-		$scope.login = function() {
-			Authentication.login($scope.username);
+
+stControllers.controller('UserCtrl', ['$scope', '$http', '$log', '$location', 'User',
+	function ($scope, $http, $log, $location, User) {
+		$scope.signup = function() {
+			User.create({}, {
+					username: $scope.username,
+					password1: $scope.password1,
+					password2: $scope.password2
+				},
+				function(value, responseHeaders) {
+					$location.path("/signup_success");
+				},
+				function(value, responseHeaders) {
+					if (value.data.errorStatus == 'UsernameNotAvailable') {
+						$scope.signupForm.username.$setValidity("notAvailable", false);
+					}
+				});
 		};
 	}
 ]);
