@@ -16,8 +16,17 @@
 
 stControllers.controller('AuthenticationCtrl', ['$scope', '$http', '$log', '$location', 'User', 'Authentication',
 	function ($scope, $http, $log, $location, User, Authentication) {
-		$scope.login = function() {
-			Authentication.login($scope.username);
+		$scope.login = function () {
+			Authentication.login($scope.username, $scope.password).then(
+				function (result) {
+					if (result == 'OK') {
+						$location.path("/track");
+					} else {
+						$scope.password = '';
+						$scope.invalidCredentials = true;
+					}
+				}
+			);
 		};
 	}
 ]);

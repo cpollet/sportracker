@@ -17,20 +17,21 @@
 
 stControllers.controller('UserCtrl', ['$scope', '$http', '$log', '$location', 'User',
 	function ($scope, $http, $log, $location, User) {
-		$scope.signup = function() {
+		$scope.signup = function () {
 			User.create({}, {
 					username: $scope.username,
 					password1: $scope.password1,
 					password2: $scope.password2
 				},
-				function(value, responseHeaders) {
+				function (value, responseHeaders) {
 					$location.path("/signup_success");
 				},
-				function(value, responseHeaders) {
+				function (value, responseHeaders) {
 					if (value.data.errorStatus == 'UsernameNotAvailable') {
 						$scope.signupForm.username.$setValidity("notAvailable", false);
 					}
-				});
+				}
+			);
 		};
 	}
 ]);

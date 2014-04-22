@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
-
-import net.cpollet.sportracker.data.User;
+package net.cpollet.sportracker.web.data;
 
 /**
  * @author Christophe Pollet
  */
-public interface UserService {
-	void create(User user);
+public class SessionId {
+	private String sessionId;
 
-	boolean areCredentialsValid(String username, String password);
+	public SessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
 }

@@ -14,15 +14,28 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
-
-import net.cpollet.sportracker.data.User;
+package net.cpollet.sportracker.web.exception;
 
 /**
  * @author Christophe Pollet
  */
-public interface UserService {
-	void create(User user);
+public class InvalidCredentialsException extends RuntimeException {
+	public InvalidCredentialsException() {
+	}
 
-	boolean areCredentialsValid(String username, String password);
+	public InvalidCredentialsException(String message) {
+		super(message);
+	}
+
+	public InvalidCredentialsException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public InvalidCredentialsException(Throwable cause) {
+		super(cause);
+	}
+
+	public InvalidCredentialsException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

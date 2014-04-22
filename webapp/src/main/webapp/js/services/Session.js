@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
-
-import net.cpollet.sportracker.data.User;
-
-/**
- * @author Christophe Pollet
- */
-public interface UserService {
-	void create(User user);
-
-	boolean areCredentialsValid(String username, String password);
-}
+stServices.factory('Session', ['$resource',
+	function ($resource) {
+		return $resource('/session', {}, {
+			// query: { method: 'GET', isArray: true },
+			create: { method: 'POST' }
+		});
+	}
+]);

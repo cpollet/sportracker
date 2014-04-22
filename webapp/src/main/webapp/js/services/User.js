@@ -19,6 +19,6 @@ stServices.factory('User', ['$resource',
 		return $resource('/user', {}, {
 			// query: { method: 'GET', isArray: true },
 			create: { method: 'POST' }
-		})
+		});
 	}
-])
+]);

@@ -18,10 +18,12 @@ package net.cpollet.sportracker.web.controller;
 
 import net.cpollet.sportracker.service.UserService;
 import net.cpollet.sportracker.service.UsernameNotAvailableException;
+import net.cpollet.sportracker.web.data.Credentials;
 import net.cpollet.sportracker.web.data.RestResponse;
 import net.cpollet.sportracker.web.data.RestResponseBuilder;
+import net.cpollet.sportracker.web.data.SessionId;
 import net.cpollet.sportracker.web.data.User;
-import org.dozer.Mapper;
+import net.cpollet.sportracker.web.exception.InvalidCredentialsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,44 +37,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * @author Christophe Pollet
  */
 @Controller
-public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+public class SessionController {
+	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
 
-	private final static String MESSAGE_USERNAME_NOT_AVAILABLE = "UsernameNotAvailable";
-
-	@SuppressWarnings("SpringJavaAutowiringInspection")
-	@Autowired
-	private Mapper dozer;
+	private static final String MESSAGE_INVALID_CREDENTIALS = "InvalidCredentials";
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/session", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public RestResponse create(@RequestBody(required = true) User user) {
-		logger.info("Adding new user: {}", user.getUsername());
+	public RestResponse create(@RequestBody(required = true) Credentials credentials) {
+		logger.info("Attempt login: {}", credentials.getUsername());
 
-		userService.create(dozer.map(user, net.cpollet.sportracker.data.User.class));
+		if (!userService.areCredentialsValid(credentials.getUsername(), credentials.getPassword())) {
+			throw new InvalidCredentialsException("Invalid username and/or password");
+		}
 
 		return RestResponseBuilder.aRestResponse() //
 				.withHttpStatus(HttpStatus.CREATED.value()) //
-				.withObject(user) //
+				.withObject(new SessionId(UUID.randomUUID().toString()))
 				.build();
 	}
 
-	@ExceptionHandler({UsernameNotAvailableException.class})
-	@ResponseStatus(value = HttpStatus.CONFLICT)
+	@ExceptionHandler({InvalidCredentialsException.class})
+	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
 	@ResponseBody
 	public RestResponse usernameError(HttpServletRequest req, Exception exception) {
 		return RestResponseBuilder.aRestResponse() //
-				.withHttpStatus(HttpStatus.CONFLICT.value()) //
-				.withErrorStatus(MESSAGE_USERNAME_NOT_AVAILABLE) //
+				.withHttpStatus(HttpStatus.UNAUTHORIZED.value()) //
+				.withErrorStatus(MESSAGE_INVALID_CREDENTIALS) //
 				.withErrorDescription(exception.getMessage()) //
 				.build();
 	}

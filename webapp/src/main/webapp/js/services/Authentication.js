@@ -14,30 +14,52 @@
  * limitations under the License.
  */
 
-stServices.factory('Authentication', ['$location',
-	function ($location) {
+stServices.factory('Authentication', ['$location', '$log', '$q', 'Session',
+	function ($location, $log, $q, Session) {
 		var _isLogged = false;
+		var _sessionId = null;
 		var _username = null;
 
 		var Authentication = {
-			isLogged: function() {
+			isLogged: function () {
 				return _isLogged;
 			},
 
-			login: function(username) {
-				_isLogged = true;
-				_username = username;
-				$location.path("/");
+			getUsername: function () {
+				return _username;
 			},
 
-			logout: function() {
+			login: function (username, password) {
+				var result = $q.defer();
+
+				Session.create({}, {
+						username: username,
+						password: password
+					},
+					function (value, responseHeaders) {
+						_isLogged = true;
+						_username = username;
+						_sessionId = value.object.sessionId;
+
+						$log.info("Your sessionID is " + _sessionId);
+
+						result.resolve("OK");
+					},
+					function (value, responseHeaders) {
+						$log.info(value);
+
+						result.resolve(value.data.errorStatus);
+					}
+				);
+
+				return result.promise;
+			},
+
+			logout: function () {
 				_isLogged = false;
 				_username = null;
+				_sessionId = null;
 				$location.path("/");
-			},
-
-			getUsername: function() {
-				return _username;
 			}
 		};
 

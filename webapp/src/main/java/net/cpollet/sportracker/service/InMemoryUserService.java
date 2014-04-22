@@ -16,7 +16,7 @@
 
 package net.cpollet.sportracker.service;
 
-import net.cpollet.sportracker.web.data.User;
+import net.cpollet.sportracker.data.User;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * @author Christophe Pollet
  */
-public class DefaultUserService implements UserService , InitializingBean {
+public class InMemoryUserService implements UserService , InitializingBean {
 	private Map<String, User> users;
 
 	@Override
@@ -35,6 +35,15 @@ public class DefaultUserService implements UserService , InitializingBean {
 		}
 
 		users.put(user.getUsername(), user);
+	}
+
+	@Override
+	public boolean areCredentialsValid(String username, String password) {
+		if (!users.containsKey(username)) {
+			return false;
+		}
+
+		return (users.get(username).getPassword().equals(password));
 	}
 
 	@Override
