@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		format = { "html:target/cucumber-report/BmiCalculatorImpl", "pretty" }, //
+		format = { "html:target/cucumber-report/DefaultBmiCalculator", "pretty" }, //
 		features = {"classpath:cucumber/bmi.feature"},
 		glue = {"net.cpollet.sportracker.cucumber.steps"})
 public class TestBmiCalculatorImpl {

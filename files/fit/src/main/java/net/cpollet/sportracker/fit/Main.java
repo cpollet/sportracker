@@ -20,13 +20,12 @@ import com.garmin.fit.Decode;
 import com.garmin.fit.FitRuntimeException;
 import com.garmin.fit.MesgBroadcaster;
 import com.garmin.fit.RecordMesgListener;
+import net.cpollet.sportracker.aggregator.DefaultTrackPointAggregator;
 import net.cpollet.sportracker.aggregator.TrackPointAggregator;
-import net.cpollet.sportracker.aggregator.TrackPointAggregatorImpl;
 import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.SpeedUnit;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -55,7 +54,7 @@ public class Main {
 					System.out.println(trackPoint);
 				}
 
-				TrackPointAggregator aggregator = new TrackPointAggregatorImpl(listener.getTrack());
+				TrackPointAggregator aggregator = new DefaultTrackPointAggregator(listener.getTrack());
 
 				System.out.println("Min speed: " + aggregator.getMinSpeed().in(SpeedUnit.kmh).scale(1));
 				System.out.println("Max speed: " + aggregator.getMaxSpeed().in(SpeedUnit.kmh).scale(1));

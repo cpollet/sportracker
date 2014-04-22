@@ -5,7 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.cpollet.sportracker.DailyEnergyNeedCalculator;
-import net.cpollet.sportracker.HarrisBenedict;
+import net.cpollet.sportracker.HarrisBenedictCalculator;
 import net.cpollet.sportracker.quantities.EnergyQuantity;
 import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.units.Energy;
@@ -21,7 +21,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class DailyEnergyNeedCalculatorSteps {
 	private DailyEnergyNeedCalculator.ActivityLevel activityLevel;
 
-	private HarrisBenedict harrisBenedictCalculator;
+	private HarrisBenedictCalculator harrisBenedictCalculator;
 
 	private Quantity<Energy> result;
 
@@ -33,7 +33,7 @@ public class DailyEnergyNeedCalculatorSteps {
 
 	@Before
 	public void setUp() {
-		harrisBenedictCalculator = new HarrisBenedict();
+		harrisBenedictCalculator = new HarrisBenedictCalculator();
 	}
 
 	@Given("^the person's activity level is ([a-z]+)$")

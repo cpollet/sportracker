@@ -3,6 +3,6 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="st.userService" class="net.cpollet.sportracker.service.UserServiceImpl"/>
+	<bean id="st.userService" class="net.cpollet.sportracker.service.DefaultUserService"/>
 
 </beans>

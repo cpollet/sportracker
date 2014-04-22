@@ -14,31 +14,19 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker;
 
-import net.cpollet.sportracker.web.data.User;
-import org.springframework.beans.factory.InitializingBean;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.units.LengthUnit;
+import net.cpollet.sportracker.units.MassUnit;
 
 /**
  * @author Christophe Pollet
  */
-public class UserServiceImpl implements UserService , InitializingBean {
-	private Map<String, User> users;
-
+public class DefaultBmiCalculator implements BmiCalculator {
 	@Override
-	public void create(User user) {
-		if (users.containsKey(user.getUsername())) {
-			throw new UsernameNotAvailableException("Username already used");
-		}
-
-		users.put(user.getUsername(), user);
-	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		users = new HashMap<>();
+	public long compute(Person person) {
+		return Math.round(person.getWeight().convertTo(MassUnit.kg).getValue().doubleValue() /
+				Math.pow(person.getHeight().convertTo(LengthUnit.m).getValue().doubleValue(), 2));
 	}
 }

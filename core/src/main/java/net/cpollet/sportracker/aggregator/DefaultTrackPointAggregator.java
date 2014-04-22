@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * @author Christophe Pollet
  */
-public class TrackPointAggregatorImpl implements TrackPointAggregator {
+public class DefaultTrackPointAggregator implements TrackPointAggregator {
 	private Quantity<Speed> minSpeed;
 	private Quantity<Speed> maxSpeed;
 	private Quantity<Speed> averageSpeed;
@@ -41,11 +41,11 @@ public class TrackPointAggregatorImpl implements TrackPointAggregator {
 	private Quantity<Length> maxAltitude;
 	private Quantity<Length> averageAltitude;
 
-	public TrackPointAggregatorImpl(Track track) {
+	public DefaultTrackPointAggregator(Track track) {
 		aggregate(track);
 	}
 
-	public TrackPointAggregatorImpl(List<TrackPoint> trackPointList) {
+	public DefaultTrackPointAggregator(List<TrackPoint> trackPointList) {
 		aggregate(trackPointList);
 	}
 

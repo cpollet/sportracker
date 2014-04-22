@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * @author Christophe Pollet
  * @see http://www.mon-imc.com/calories.html
  */
-public class HarrisBenedict implements DailyEnergyNeedCalculator {
+public class HarrisBenedictCalculator implements DailyEnergyNeedCalculator {
 	private enum PersonConstants {
 		MALE(655, 9.6, 1.8, 4.7),
 		FEMALE(66, 13.7, 5.0, 6.76);

@@ -20,7 +20,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import net.cpollet.sportracker.BmiCalculator;
-import net.cpollet.sportracker.BmiCalculatorImpl;
+import net.cpollet.sportracker.DefaultBmiCalculator;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -40,7 +40,7 @@ public class BmiSteps {
 
 	@Before
 	public void setUp() {
-		bmiCalculator = new BmiCalculatorImpl();
+		bmiCalculator = new DefaultBmiCalculator();
 	}
 
 	@Given("^the BMI is computed$")
