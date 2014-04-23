@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-stServices.factory('Authentication', ['$location', '$log', '$q', 'Session',
-	function ($location, $log, $q, Session) {
+(function() {
+'use strict';
+stServices.factory('Authentication', ['$location', '$log', '$q', 'Session', 'localStorageService',
+	function ($location, $log, $q, Session, localStorageService) {
 		var _isLogged = false;
-		var _sessionId = null;
+		var _token = null;
 		var _username = null;
 
 		var Authentication = {
@@ -39,9 +40,11 @@ stServices.factory('Authentication', ['$location', '$log', '$q', 'Session',
 					function (value, responseHeaders) {
 						_isLogged = true;
 						_username = username;
-						_sessionId = value.object.sessionId;
 
-						$log.info("Your sessionID is " + _sessionId);
+						localStorageService.add('auth', {
+							username: _username,
+							token: value.object.token
+						});
 
 						result.resolve("OK");
 					},
@@ -55,10 +58,38 @@ stServices.factory('Authentication', ['$location', '$log', '$q', 'Session',
 				return result.promise;
 			},
 
+			restore: function() {
+				var result = $q.defer();
+				var auth = localStorageService.get('auth');
+
+				if (auth === null) {
+					result.resolve(false);
+					return result.promise;
+				}
+
+				Session.query({
+					username: auth.username,
+					token: auth.token
+				},
+				function(value, responseHeaders) {
+					_isLogged = true;
+					_username = auth.username;
+					result.resolve(true);
+				},
+				function(value, responseHeaders) {
+					Authentication.logout();
+					result.resolve(false);
+				});
+
+				return result.promise;
+			},
+
 			logout: function () {
 				_isLogged = false;
 				_username = null;
-				_sessionId = null;
+
+				localStorageService.remove('auth');
+
 				$location.path("/");
 			}
 		};
@@ -66,3 +97,4 @@ stServices.factory('Authentication', ['$location', '$log', '$q', 'Session',
 		return Authentication;
 	}
 ]);
+})();

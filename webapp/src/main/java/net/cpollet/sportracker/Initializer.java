@@ -14,41 +14,36 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker;
 
 import net.cpollet.sportracker.data.User;
-import net.cpollet.sportracker.exception.UsernameNotAvailableException;
+import net.cpollet.sportracker.service.TokenService;
+import net.cpollet.sportracker.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Christophe Pollet
  */
-public class InMemoryUserService implements UserService , InitializingBean {
-	private Map<String, User> users;
+public class Initializer implements InitializingBean {
+	private TokenService tokenService;
+	private UserService userService;
 
-	@Override
-	public void create(User user) {
-		if (users.containsKey(user.getUsername())) {
-			throw new UsernameNotAvailableException("Username already used");
-		}
-
-		users.put(user.getUsername(), user);
+	public void setTokenService(TokenService tokenService) {
+		this.tokenService = tokenService;
 	}
 
-	@Override
-	public boolean areCredentialsValid(String username, String password) {
-		if (!users.containsKey(username)) {
-			return false;
-		}
-
-		return (users.get(username).getPassword().equals(password));
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		users = new HashMap<>();
+		User user = new User();
+
+		user.setUsername("cpollet");
+		user.setPassword("password");
+
+		userService.create(user);
 	}
 }

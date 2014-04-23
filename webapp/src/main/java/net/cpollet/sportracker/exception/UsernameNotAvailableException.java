@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker.exception;
 
 /**
  * @author Christophe Pollet

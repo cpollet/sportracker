@@ -19,18 +19,18 @@ package net.cpollet.sportracker.web.data;
 /**
  * @author Christophe Pollet
  */
-public class SessionId {
-	private String sessionId;
+public class Token {
+	private String token;
 
-	public SessionId(String sessionId) {
-		this.sessionId = sessionId;
+	public Token(String token) {
+		this.token = token;
 	}
 
-	public String getSessionId() {
-		return sessionId;
+	public String getToken() {
+		return token;
 	}
 
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

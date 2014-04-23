@@ -17,7 +17,7 @@
 package net.cpollet.sportracker.web.controller;
 
 import net.cpollet.sportracker.service.UserService;
-import net.cpollet.sportracker.service.UsernameNotAvailableException;
+import net.cpollet.sportracker.exception.UsernameNotAvailableException;
 import net.cpollet.sportracker.web.data.RestResponse;
 import net.cpollet.sportracker.web.data.RestResponseBuilder;
 import net.cpollet.sportracker.web.data.User;

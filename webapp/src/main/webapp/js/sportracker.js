@@ -17,7 +17,8 @@
 var stApp = angular.module('stApp', [
 	'stControllers', 'stServices', 'stDirectives',
 	'ngRoute',
-	'ui.bootstrap', 'google-maps'
+	'ui.bootstrap', 'google-maps',
+	'LocalStorageModule'
 ]);
 
 stApp.config(['$routeProvider', '$httpProvider',
@@ -53,9 +54,8 @@ stApp.config(['$routeProvider', '$httpProvider',
 	}
 ]);
 
-stApp.run(['$rootScope', '$location', '$log', 'Authentication',
-	function ($rootScope, $location, $log, Authentication) {
-
+stApp.run(['$rootScope', '$location', '$log', 'Authentication', 'localStorageService',
+	function ($rootScope, $location, $log, Authentication, localStorageService) {
 		$rootScope.$watch(
 			function () {
 				return Authentication.isLogged();
@@ -81,6 +81,15 @@ stApp.run(['$rootScope', '$location', '$log', 'Authentication',
 				event.preventDefault();
 			}
 		});
+
+		localStorageService.prefix = 'st';
+		Authentication.restore().then(
+			function (result) {
+				if (result) {
+					$location.path("/track");
+				}
+			}
+		);
 	}
 ]);
 

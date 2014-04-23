@@ -16,39 +16,32 @@
 
 package net.cpollet.sportracker.service;
 
-import net.cpollet.sportracker.data.User;
-import net.cpollet.sportracker.exception.UsernameNotAvailableException;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Christophe Pollet
  */
-public class InMemoryUserService implements UserService , InitializingBean {
-	private Map<String, User> users;
+public class InMemoryTokenService implements TokenService, InitializingBean {
+	private Map<String, String> tokens;
 
 	@Override
-	public void create(User user) {
-		if (users.containsKey(user.getUsername())) {
-			throw new UsernameNotAvailableException("Username already used");
-		}
-
-		users.put(user.getUsername(), user);
+	public boolean isValid(String userid, String token) {
+		return tokens.containsKey(userid) && tokens.get(userid).equals(token);
 	}
 
 	@Override
-	public boolean areCredentialsValid(String username, String password) {
-		if (!users.containsKey(username)) {
-			return false;
-		}
-
-		return (users.get(username).getPassword().equals(password));
+	public String createToken(String userid) {
+		String token = UUID.randomUUID().toString();
+		tokens.put(userid, token);
+		return token;
 	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		users = new HashMap<>();
+		tokens = new HashMap<>();
 	}
 }

@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-stServices.factory('Session', ['$resource',
-	function ($resource) {
-		return $resource('/token', {}, {
-			query: { method: 'GET' },
-			create: { method: 'POST' }
-		});
-	}
-]);
+package net.cpollet.sportracker.service;
+
+/**
+ * @author Christophe Pollet
+ */
+public interface TokenService {
+	boolean isValid(String userid, String token);
+
+	String createToken(String userid);
+}
