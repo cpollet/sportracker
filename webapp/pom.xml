@@ -119,7 +119,7 @@
 				<directory>src/main/resources</directory>
 			</resource>
 			<resource>
-				<directory>src/main/public</directory>
+				<directory>src/main/webapp</directory>
 				<targetPath>public</targetPath>
 			</resource>
 		</resources>
