@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-stServices.factory('Session', ['$resource',
+stServices.factory('Token', ['$resource',
 	function ($resource) {
 		return $resource('/token', {}, {
 			query: { method: 'GET' },

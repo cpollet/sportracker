@@ -38,14 +38,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
 
 /**
  * @author Christophe Pollet
  */
 @Controller
-public class SessionController {
-	private static final Logger logger = LoggerFactory.getLogger(SessionController.class);
+public class TokenController {
+	private static final Logger logger = LoggerFactory.getLogger(TokenController.class);
 
 	private static final String MESSAGE_INVALID_CREDENTIALS = "InvalidCredentials";
 	private static final String MESSAGE_INVALID_TOKEN = "InvalidToken";

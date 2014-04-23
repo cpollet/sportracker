@@ -15,8 +15,8 @@
  */
 (function() {
 'use strict';
-stServices.factory('Authentication', ['$location', '$log', '$q', 'Session', 'localStorageService',
-	function ($location, $log, $q, Session, localStorageService) {
+stServices.factory('Authentication', ['$location', '$log', '$q', 'Token', 'localStorageService',
+	function ($location, $log, $q, Token, localStorageService) {
 		var _isLogged = false;
 		var _token = null;
 		var _username = null;
@@ -33,7 +33,7 @@ stServices.factory('Authentication', ['$location', '$log', '$q', 'Session', 'loc
 			login: function (username, password) {
 				var result = $q.defer();
 
-				Session.create({}, {
+				Token.create({}, {
 						username: username,
 						password: password
 					},
@@ -67,7 +67,7 @@ stServices.factory('Authentication', ['$location', '$log', '$q', 'Session', 'loc
 					return result.promise;
 				}
 
-				Session.query({
+				Token.query({
 					username: auth.username,
 					token: auth.token
 				},
