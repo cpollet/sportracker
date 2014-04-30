@@ -27,16 +27,20 @@ stApp.config(['$routeProvider', '$httpProvider',
 			when('/home', {
 				templateUrl: 'partials/home.html'
 			}).
-			when('/login', {
-				templateUrl: 'partials/login.html',
-				controller: 'AuthenticationCtrl'
-			}).
 			when('/signup', {
 				templateUrl: 'partials/signup.html',
 				controller: 'UserCtrl'
 			}).
 			when('/signup_success', {
 				templateUrl: 'partials/signup_success.html'
+			}).
+			when('/login', {
+				templateUrl: 'partials/login.html',
+				controller: 'AuthenticationCtrl'
+			}).
+			when('/profile', {
+				templateUrl: 'partials/profile.html',
+				controller: 'ProfileCtrl'
 			}).
 			when('/about', {
 				templateUrl: 'partials/about.html'
@@ -85,9 +89,9 @@ stApp.run(['$rootScope', '$location', '$log', 'Authentication', 'localStorageSer
 		localStorageService.prefix = 'st';
 		Authentication.restore().then(
 			function (result) {
-				if (result) {
-					$location.path("/track");
-				}
+//				if (result) {
+//					$location.path("/track");
+//				}
 			}
 		);
 	}

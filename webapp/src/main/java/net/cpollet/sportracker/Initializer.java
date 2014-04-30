@@ -20,7 +20,6 @@ import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.service.TokenService;
 import net.cpollet.sportracker.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Christophe Pollet

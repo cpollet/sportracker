@@ -26,6 +26,8 @@ import java.util.Date;
  * @author Christophe Pollet
  */
 public class Person {
+	private String firstName;
+	private String lastName;
 	private Gender gender;
 	private Date birthdate;
 	private Quantity<Mass> weight;
@@ -33,6 +35,22 @@ public class Person {
 
 	public enum Gender {
 		MALE, FEMALE
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public Gender getGender() {
