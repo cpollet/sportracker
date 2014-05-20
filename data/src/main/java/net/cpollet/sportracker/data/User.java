@@ -20,8 +20,11 @@ package net.cpollet.sportracker.data;
  * @author Christophe Pollet
  */
 public class User {
+	public static final int version = 1;
+
 	private String username;
 	private String password;
+	private Person person;
 
 	public String getUsername() {
 		return username;
@@ -37,5 +40,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", person=" + person +
+				'}';
 	}
 }

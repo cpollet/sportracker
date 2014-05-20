@@ -32,6 +32,7 @@ public class Person {
 	private Date birthdate;
 	private Quantity<Mass> weight;
 	private Quantity<Length> height;
+	public EvolvingQuantity<Quantity<Mass>> evolvingMass;
 
 	public enum Gender {
 		MALE, FEMALE
@@ -83,5 +84,17 @@ public class Person {
 
 	public void setHeight(Quantity<Length> height) {
 		this.height = height;
+	}
+
+	@Override
+	public String toString() {
+		return "Person{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", gender=" + gender +
+				", birthdate=" + birthdate +
+				", weight=" + weight +
+				", height=" + height +
+				'}';
 	}
 }
