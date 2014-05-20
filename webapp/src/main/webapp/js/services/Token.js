@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-stServices.factory('Token', ['$resource',
-	function ($resource) {
-		return $resource('/token', {}, {
-			query: { method: 'GET' },
-			create: { method: 'POST' }
-		});
-	}
-]);
+(function () {
+	'use strict';
+	stServices.factory('Token', ['$resource',
+		function ($resource) {
+			return $resource('/api/v1/token', {}, {
+				query: { method: 'GET' },
+				create: { method: 'POST' }
+			});
+		}
+	]);
+})();

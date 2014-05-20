@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-stServices.factory('User', ['$resource',
-	function ($resource) {
-		return $resource('/user', {}, {
-			// query: { method: 'GET', isArray: true },
-			create: { method: 'POST' }
-		});
-	}
-]);
+(function () {
+	'use strict';
+	stServices.factory('User', ['$resource',
+		function ($resource) {
+			return $resource('/api/v1/user', {}, {
+				// query: { method: 'GET', isArray: true },
+				create: { method: 'POST' }
+			});
+		}
+	]);
+})();

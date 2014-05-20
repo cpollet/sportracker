@@ -30,14 +30,19 @@ public class InMemoryTokenService implements TokenService, InitializingBean {
 
 	@Override
 	public boolean isValid(String userid, String token) {
-		return tokens.containsKey(userid) && tokens.get(userid).equals(token);
+		return tokens.containsKey(token) && tokens.get(token).equals(userid);
 	}
 
 	@Override
 	public String createToken(String userid) {
 		String token = UUID.randomUUID().toString();
-		tokens.put(userid, token);
+		tokens.put(token, userid);
 		return token;
+	}
+
+	@Override
+	public String getUserid(String token) {
+		return tokens.get(token);
 	}
 
 	@Override

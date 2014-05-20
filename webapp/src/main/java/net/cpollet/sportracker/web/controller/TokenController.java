@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +48,6 @@ public class TokenController {
 	private static final Logger logger = LoggerFactory.getLogger(TokenController.class);
 
 	private static final String MESSAGE_INVALID_CREDENTIALS = "InvalidCredentials";
-	private static final String MESSAGE_INVALID_TOKEN = "InvalidToken";
 
 	@Autowired
 	private UserService userService;
@@ -55,7 +55,7 @@ public class TokenController {
 	@Autowired
 	private TokenService tokenService;
 
-	@RequestMapping(value = "/token", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/v1/token", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public RestResponse create(@RequestBody(required = true) Credentials credentials) {
@@ -74,17 +74,17 @@ public class TokenController {
 	}
 
 	@ExceptionHandler({InvalidCredentialsException.class})
-	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+	@ResponseStatus(value = HttpStatus.FORBIDDEN)
 	@ResponseBody
 	public RestResponse usernameError(HttpServletRequest request, Exception exception) {
 		return RestResponseBuilder.aRestResponse() //
-				.withHttpStatus(HttpStatus.UNAUTHORIZED.value()) //
+				.withHttpStatus(HttpStatus.FORBIDDEN.value()) //
 				.withErrorStatus(MESSAGE_INVALID_CREDENTIALS) //
 				.withErrorDescription(exception.getMessage()) //
 				.build();
 	}
 
-	@RequestMapping(value = "/token", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/v1/token", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public RestResponse validate(@RequestParam(required = true) String username, @RequestParam(required = true) String token) {
@@ -95,16 +95,5 @@ public class TokenController {
 		}
 
 		return RestResponseBuilder.aRestResponse().build();
-	}
-
-	@ExceptionHandler({InvalidTokenException.class})
-	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-	@ResponseBody
-	public RestResponse tokenError(HttpServletRequest request, Exception exception) {
-		return RestResponseBuilder.aRestResponse() //
-				.withHttpStatus(HttpStatus.UNAUTHORIZED.value()) //
-				.withErrorStatus(MESSAGE_INVALID_TOKEN) //
-				.withErrorDescription(exception.getMessage()) //
-				.build();
 	}
 }

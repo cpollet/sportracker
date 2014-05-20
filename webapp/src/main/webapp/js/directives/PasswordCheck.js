@@ -13,28 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+(function () {
+	'use strict';
+	stDirectives.directive('stMatch', ['$log', function ($log) {
+		return {
+			require: 'ngModel',
+			link: function (scope, elem, attrs, ctrl) {
+				var me = attrs.ngModel;
+				var matchTo = attrs.stMatch;
 
-stDirectives.directive('stMatch', ['$log', function ($log) {
-	return {
-		require: 'ngModel',
-		link: function (scope, elem, attrs, ctrl) {
-			var me = attrs.ngModel;
-			var matchTo = attrs.stMatch;
+				function doesMatch(val1, val2) {
+					return val1 === val2;
+					// ctrl.$setValidity('dontMatch', match);
+				}
 
-			function doesMatch(val1, val2) {
-				return val1 === val2;
-				// ctrl.$setValidity('dontMatch', match);
+				scope.$watch(matchTo, function (value) {
+					var match = doesMatch(scope[me], scope[matchTo]);
+					ctrl.$setValidity('dontMatch', match);
+				});
+
+				scope.$watch(me, function (value) {
+					var match = doesMatch(scope[me], scope[matchTo]);
+					ctrl.$setValidity('dontMatch', match);
+				});
 			}
-
-			scope.$watch(matchTo, function (value) {
-				var match = doesMatch(scope[me], scope[matchTo]);
-				ctrl.$setValidity('dontMatch', match);
-			});
-
-			scope.$watch(me, function (value) {
-				var match = doesMatch(scope[me], scope[matchTo]);
-				ctrl.$setValidity('dontMatch', match);
-			});
-		}
-	};
-}]);
+		};
+	}]);
+})();

@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-stControllers.controller('AuthenticationCtrl', ['$scope', '$http', '$log', '$location', 'User', 'Authentication',
-	function ($scope, $http, $log, $location, User, Authentication) {
-		$scope.login = function () {
-			Authentication.login($scope.username, $scope.password).then(
-				function (result) {
-					if (result == 'OK') {
-						$location.path("/track");
-					} else {
-						$scope.password = '';
-						$scope.invalidCredentials = true;
+(function () {
+	'use strict';
+	stControllers.controller('AuthenticationCtrl', ['$scope', '$http', '$log', '$location', 'User', 'Authentication',
+		function ($scope, $http, $log, $location, User, Authentication) {
+			$scope.login = function () {
+				Authentication.login($scope.username, $scope.password).then(
+					function (result) {
+						if (result == 'OK') {
+							$location.path("/track");
+						} else {
+							$scope.password = '';
+							$scope.invalidCredentials = true;
+						}
 					}
-				}
-			);
-		};
-	}
-]);
+				);
+			};
+		}
+	]);
+})();

@@ -23,4 +23,6 @@ public interface TokenService {
 	boolean isValid(String userid, String token);
 
 	String createToken(String userid);
+
+	String getUserid(String token);
 }

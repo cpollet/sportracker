@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.spring;
+package net.cpollet.sportracker.spring.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;

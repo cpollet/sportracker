@@ -21,8 +21,8 @@ var stApp = angular.module('stApp', [
 	'LocalStorageModule'
 ]);
 
-stApp.config(['$routeProvider', '$httpProvider',
-	function ($routeProvider, $httpProvider) {
+stApp.config(['$routeProvider',
+	function ($routeProvider) {
 		$routeProvider.
 			when('/home', {
 				templateUrl: 'partials/home.html'

@@ -23,6 +23,7 @@ import net.cpollet.sportracker.fit.ParserImpl;
 import net.cpollet.sportracker.units.AngleUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,7 +41,7 @@ import java.util.List;
 public class TrackController {
 	Logger logger = LoggerFactory.getLogger(TrackController.class);
 
-	@RequestMapping(value = "/track", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/v1/track", method = RequestMethod.GET)
 	@ResponseBody
 	public net.cpollet.sportracker.web.data.Track track(@RequestParam(value="filePath", required=true) String filePath) {
 		Parser parser = new ParserImpl();
@@ -57,7 +58,6 @@ public class TrackController {
 
 			trackPoints.add(webTrackPoint);
 		}
-
 
 		net.cpollet.sportracker.web.data.Track webTrack = new net.cpollet.sportracker.web.data.Track("Some random ride", trackPoints);
 
