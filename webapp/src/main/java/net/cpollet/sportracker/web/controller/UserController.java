@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * @author Christophe Pollet
@@ -55,7 +57,7 @@ public class UserController {
 	@RequestMapping(value = "/api/v1/user", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public RestResponse create(@RequestBody(required = true) User user) {
+	public RestResponse create(@RequestBody(required = true) @Valid User user) {
 		logger.info("Adding new user: {}", user.getUsername());
 
 		userService.create(dozer.map(user, net.cpollet.sportracker.data.User.class));

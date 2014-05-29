@@ -16,12 +16,26 @@
 
 package net.cpollet.sportracker.web.data;
 
+import net.cpollet.sportracker.web.validator.PasswordsMatchConstraint;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * @author Christophe Pollet
  */
+@PasswordsMatchConstraint
 public class User {
+	@NotNull(message = "")
+	@Size(min = 3, max = 20, message = "min={min}&max={max}")
 	private String username;
+
+	@NotNull(message = "")
+	@Size(min = 6, message = "min={min}")
 	private String password1;
+
+	@NotNull(message = "")
+	@Size(min = 6, message = "min={min}")
 	private String password2;
 
 	public String getUsername() {
