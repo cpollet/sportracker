@@ -20,6 +20,7 @@ import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.service.TokenService;
 import net.cpollet.sportracker.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
  * @author Christophe Pollet
@@ -41,7 +42,7 @@ public class Initializer implements InitializingBean {
 		User user = new User();
 
 		user.setUsername("cpollet");
-		user.setPassword("password");
+		user.setPassword(BCrypt.hashpw("password", BCrypt.gensalt()));
 
 		userService.create(user);
 	}

@@ -7,8 +7,8 @@
 	<mapping>
 		<class-a>net.cpollet.sportracker.web.data.User</class-a>
 		<class-b>net.cpollet.sportracker.data.User</class-b>
-		<field>
-			<a>password1</a>
+		<field type="one-way">
+			<a get-method="getHashedPassword">password1</a>
 			<b>password</b>
 		</field>
 	</mapping>
