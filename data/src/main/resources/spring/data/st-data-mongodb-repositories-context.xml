@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="st.abstract.collectionFactoryBean" abstract="true" class="net.cpollet.sportracker.spring.MongoDbCollectionFactoryBean">
+		<property name="db" ref="st.mongodb"/>
+	</bean>
+
+	<bean id="st.repository.users" class="net.cpollet.sportracker.repository.mongodb.MongoDbUserRepository">
+		<property name="collection">
+			<bean parent="st.abstract.collectionFactoryBean">
+				<property name="collectionName" value="users"/>
+			</bean>
+		</property>
+		<property name="conversionService" ref="st.data.conversionService"/>
+	</bean>
+
+	<!--<bean id="st.repository.persons" class="net.cpollet.sportracker.repository.mongodb.MongoDbPersonRepository">-->
+		<!--<property name="collection">-->
+			<!--<bean parent="st.abstract.collectionFactoryBean">-->
+				<!--<property name="collectionName" value="persons"/>-->
+			<!--</bean>-->
+		<!--</property>-->
+		<!--<property name="conversionService" ref="st.data.conversionService"/>-->
+	<!--</bean>-->
+
+</beans>
