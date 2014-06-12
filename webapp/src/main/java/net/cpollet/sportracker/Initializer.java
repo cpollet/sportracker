@@ -26,6 +26,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
  * @author Christophe Pollet
  */
 public class Initializer implements InitializingBean {
+	private static final String DEFAULT_USERNAME = "cpollet";
+	private static final String DEFAULT_PASSWORD = "password";
+
 	private TokenService tokenService;
 	private UserService userService;
 
@@ -39,11 +42,12 @@ public class Initializer implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		User user = new User();
+		if (!userService.areCredentialsValid(DEFAULT_USERNAME, DEFAULT_PASSWORD)) {
+			User user = new User();
 
-		user.setUsername("cpollet");
-		user.setPassword(BCrypt.hashpw("password", BCrypt.gensalt()));
-
-		userService.create(user);
+			user.setUsername(DEFAULT_USERNAME);
+			user.setPassword(BCrypt.hashpw(DEFAULT_PASSWORD, BCrypt.gensalt()));
+			userService.create(user);
+		}
 	}
 }

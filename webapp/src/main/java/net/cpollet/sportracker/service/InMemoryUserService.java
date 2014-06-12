@@ -19,7 +19,6 @@ package net.cpollet.sportracker.service;
 import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.exception.UsernameNotAvailableException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +26,7 @@ import java.util.Map;
 /**
  * @author Christophe Pollet
  */
-public class InMemoryUserService implements UserService , InitializingBean {
+public class InMemoryUserService extends BaseUserService implements UserService , InitializingBean {
 	private Map<String, User> users;
 
 	@Override
@@ -45,7 +44,7 @@ public class InMemoryUserService implements UserService , InitializingBean {
 			return false;
 		}
 
-		return BCrypt.checkpw(password, users.get(username).getPassword());
+		return passwordMatch(password, users.get(username));
 	}
 
 	@Override
