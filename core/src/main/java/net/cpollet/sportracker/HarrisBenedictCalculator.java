@@ -99,7 +99,7 @@ public class HarrisBenedictCalculator implements DailyEnergyNeedCalculator {
 	}
 
 	private int getPersonsAge(Person person) {
-		LocalDate birthDate = new LocalDate(person.getBirthdate());
+		LocalDate birthDate = new LocalDate(person.getBirthday());
 		LocalDate now = new LocalDate();
 
 		return Years.yearsBetween(birthDate, now).getYears();

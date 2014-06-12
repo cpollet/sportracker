@@ -51,7 +51,7 @@ public class CommonSteps {
 	@Given("^the person is (\\d+) years old$")
 	public void setAge(int age) {
 		LocalDate now = new LocalDate();
-		person.setBirthdate(now.minusYears(age).toDate());
+		person.setBirthday(now.minusYears(age).toDate());
 	}
 
 	@Given("^the person weights (\\d+|\\d*(?:.\\d+)) kilograms$")

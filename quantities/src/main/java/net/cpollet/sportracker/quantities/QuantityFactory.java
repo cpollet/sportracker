@@ -44,14 +44,14 @@ import java.util.Map;
  * @author Christophe Pollet
  */
 public class QuantityFactory<Q extends Quantity<Q>> {
-	public static final QuantityFactory<Duration> DURATION = new QuantityFactory<>();
-	public static final QuantityFactory<Energy> ENERGY = new QuantityFactory<>();
-	public static final QuantityFactory<Frequency> FREQUENCY = new QuantityFactory<>();
-	public static final QuantityFactory<Length> LENGTH = new QuantityFactory<>();
-	public static final QuantityFactory<Mass> MASS = new QuantityFactory<>();
-	public static final QuantityFactory<Speed> SPEED = new QuantityFactory<>();
-	public static final QuantityFactory<Temperature> TEMPERATURE = new QuantityFactory<>();
-	public static final QuantityFactory<Angle> ANGLE = new QuantityFactory<>();
+	public static final QuantityFactory<Duration> DURATION = new QuantityFactory<>(DurationUnit.REFERENCE);
+	public static final QuantityFactory<Energy> ENERGY = new QuantityFactory<>(EnergyUnit.REFERENCE);
+	public static final QuantityFactory<Frequency> FREQUENCY = new QuantityFactory<>(FrequencyUnit.REFERENCE);
+	public static final QuantityFactory<Length> LENGTH = new QuantityFactory<>(LengthUnit.REFERENCE);
+	public static final QuantityFactory<Mass> MASS = new QuantityFactory<>(MassUnit.REFERENCE);
+	public static final QuantityFactory<Speed> SPEED = new QuantityFactory<>(SpeedUnit.REFERENCE);
+	public static final QuantityFactory<Temperature> TEMPERATURE = new QuantityFactory<>(TemperatureUnit.REFERENCE);
+	public static final QuantityFactory<Angle> ANGLE = new QuantityFactory<>(AngleUnit.REFERENCE);
 
 	private static final Map<Class, QuantityFactory> factories;
 
@@ -68,7 +68,10 @@ public class QuantityFactory<Q extends Quantity<Q>> {
 		factories = Collections.unmodifiableMap(factoriesMap);
 	}
 
-	private QuantityFactory() {
+	private Unit<Q> reference;
+
+	private QuantityFactory(Unit<Q> reference) {
+		this.reference = reference;
 	}
 
 	public static QuantityFactory get(Class unitClass) {
@@ -86,23 +89,55 @@ public class QuantityFactory<Q extends Quantity<Q>> {
 		}
 	}
 
+	public Quantity<Q> create(BigDecimal value) {
+		return create(value, reference);
+	}
+
 	public Quantity<Q> create(String value, Unit<Q> unit) {
 		return create(new BigDecimal(value), unit);
+	}
+
+	public Quantity<Q> create(String value) {
+		return create(value, reference);
 	}
 
 	public Quantity<Q> create(Float value, Unit<Q> unit) {
 		return create(new BigDecimal(value), unit);
 	}
 
+	public Quantity<Q> create(Float value) {
+		return create(value, reference);
+	}
+
+	public Quantity<Q> create(Double value, Unit<Q> unit) {
+		return create(new BigDecimal(value), unit);
+	}
+
+	public Quantity<Q> create(Double value) {
+		return create(value);
+	}
+
 	public Quantity<Q> create(Short value, Unit<Q> unit) {
 		return create(new BigDecimal(value), unit);
+	}
+
+	public Quantity<Q> create(Short value) {
+		return create(value, reference);
 	}
 
 	public Quantity<Q> create(Byte value, Unit<Q> unit) {
 		return create(new BigDecimal(value), unit);
 	}
 
+	public Quantity<Q> create(Byte value) {
+		return create(value, reference);
+	}
+
 	public Quantity<Q> create(Integer value, Unit<Q> unit) {
 		return create(new BigDecimal(value), unit);
+	}
+
+	public Quantity<Q> create(Integer value) {
+		return create(value, reference);
 	}
 }
