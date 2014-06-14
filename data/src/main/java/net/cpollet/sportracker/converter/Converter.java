@@ -21,4 +21,8 @@ package net.cpollet.sportracker.converter;
  */
 public interface Converter<S, D> {
 	D convert(S object);
+
+	Class from();
+
+	Class to();
 }

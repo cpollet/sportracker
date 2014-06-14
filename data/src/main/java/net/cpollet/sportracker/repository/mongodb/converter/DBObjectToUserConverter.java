@@ -33,4 +33,14 @@ public class DBObjectToUserConverter extends BaseConverter implements Converter<
 
 		return user;
 	}
+
+	@Override
+	public Class from() {
+		return DBObject.class;
+	}
+
+	@Override
+	public Class to() {
+		return User.class;
+	}
 }

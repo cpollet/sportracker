@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:utils="http://www.springframework.org/schema/util"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<bean id="st.converter.ObjectToMap" class="net.cpollet.sportracker.converter.ObjectToMapConverter"/>
 	<bean id="st.converter.ObjectToString" class="net.cpollet.sportracker.converter.ObjectToStringConverter"/>
@@ -21,60 +21,7 @@
 		<property name="conversionService" ref="st.data.conversionService"/>
 	</bean>
 
-	<utils:map id="st.data.convertersMap">
-		<entry value-ref="st.converter.ObjectToMap">
-			<key>
-				<bean class="net.cpollet.sportracker.converter.DefaultConverterRepository$ConverterSignature">
-					<constructor-arg index="0" value="java.lang.Object"/>
-					<constructor-arg index="1" value="java.util.Map"/>
-				</bean>
-			</key>
-		</entry>
-		<entry value-ref="st.converter.ObjectToString">
-			<key>
-				<bean class="net.cpollet.sportracker.converter.DefaultConverterRepository$ConverterSignature">
-					<constructor-arg index="0" value="java.lang.Object"/>
-					<constructor-arg index="1" value="java.lang.String"/>
-				</bean>
-			</key>
-		</entry>
-		<entry value-ref="st.converter.QuantityToString">
-			<key>
-				<bean class="net.cpollet.sportracker.converter.DefaultConverterRepository$ConverterSignature">
-					<constructor-arg index="0" value="net.cpollet.sportracker.quantities.Quantity"/>
-					<constructor-arg index="1" value="java.lang.String"/>
-				</bean>
-			</key>
-		</entry>
-		<entry value-ref="st.converter.EvolvingQuantityToList">
-			<key>
-				<bean class="net.cpollet.sportracker.converter.DefaultConverterRepository$ConverterSignature">
-					<constructor-arg index="0" value="net.cpollet.sportracker.data.EvolvingQuantity"/>
-					<constructor-arg index="1" value="java.util.List"/>
-				</bean>
-			</key>
-		</entry>
-		<entry value-ref="st.converter.UserToDBObject">
-			<key>
-				<bean class="net.cpollet.sportracker.converter.DefaultConverterRepository$ConverterSignature">
-					<constructor-arg index="0" value="net.cpollet.sportracker.data.User"/>
-					<constructor-arg index="1" value="com.mongodb.DBObject"/>
-				</bean>
-			</key>
-		</entry>
-		<entry value-ref="st.converter.DBObjectToUser">
-			<key>
-				<bean class="net.cpollet.sportracker.converter.DefaultConverterRepository$ConverterSignature">
-					<constructor-arg index="0" value="com.mongodb.DBObject"/>
-					<constructor-arg index="1" value="net.cpollet.sportracker.data.User"/>
-				</bean>
-			</key>
-		</entry>
-	</utils:map>
-
-	<bean id="st.data.converterRepository" class="net.cpollet.sportracker.converter.DefaultConverterRepository">
-		<property name="converters" ref="st.data.convertersMap"/>
-	</bean>
+	<bean id="st.data.converterRepository" class="net.cpollet.sportracker.spring.ConverterRepositoryFactoryBean"/>
 
 	<bean id="st.data.conversionService" class="net.cpollet.sportracker.converter.DefaultConversionService">
 		<property name="converterRepository" ref="st.data.converterRepository"/>

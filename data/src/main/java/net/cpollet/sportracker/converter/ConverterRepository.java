@@ -22,5 +22,7 @@ package net.cpollet.sportracker.converter;
 public interface ConverterRepository {
 	<S, D> Converter<S, D> get(Class<S> source, Class<D> destination);
 
+	<S, D> void add(Class<S> source, Class<D> destination, Converter<S, D> converter);
+
 	boolean hasConverter(Class source, Class destination);
 }

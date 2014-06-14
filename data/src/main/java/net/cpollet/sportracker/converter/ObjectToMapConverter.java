@@ -46,4 +46,14 @@ public class ObjectToMapConverter implements Converter<Object, Map<String, Objec
 			throw new RuntimeException(e);
 		}
 	}
+
+	@Override
+	public Class from() {
+		return Object.class;
+	}
+
+	@Override
+	public Class to() {
+		return Map.class;
+	}
 }

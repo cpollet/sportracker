@@ -24,4 +24,14 @@ public class ObjectToStringConverter implements Converter<Object, String> {
 	public String convert(Object object) {
 		return object.toString();
 	}
+
+	@Override
+	public Class from() {
+		return Object.class;
+	}
+
+	@Override
+	public Class to() {
+		return String.class;
+	}
 }

@@ -27,4 +27,14 @@ public class QuantityToStringConverter implements Converter<Quantity, String> {
 	public String convert(Quantity object) {
 		return object.convertToReferenceUnit().getValue().toString();
 	}
+
+	@Override
+	public Class from() {
+		return Quantity.class;
+	}
+
+	@Override
+	public Class to() {
+		return String.class;
+	}
 }

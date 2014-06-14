@@ -58,6 +58,16 @@ public class EvolvingQuantityToListConverter  implements Converter<EvolvingQuant
 		return (List<EvolvingQuantity.StampedQuantity>) object.getQuantities();
 	}
 
+	@Override
+	public Class from() {
+		return EvolvingQuantity.class;
+	}
+
+	@Override
+	public Class to() {
+		return List.class;
+	}
+
 	public void setConversionService(ConversionService conversionService) {
 		this.conversionService = conversionService;
 	}

@@ -37,6 +37,12 @@ public class DefaultConverterRepository implements ConverterRepository {
 	}
 
 	@Override
+	public <S, D> void add(Class<S> source, Class<D> destination, Converter<S, D> converter) {
+		converters.put(new ConverterSignature(source, destination), converter);
+	}
+
+
+	@Override
 	public boolean hasConverter(Class source, Class destination) {
 		return converters.get(new ConverterSignature(source, destination)) != null;
 	}
@@ -45,7 +51,7 @@ public class DefaultConverterRepository implements ConverterRepository {
 		this.converters = converters;
 	}
 
-	public static class ConverterSignature {
+	private static class ConverterSignature {
 		private Class from;
 		private Class to;
 
