@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.converter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -23,6 +24,11 @@ import java.util.Map;
  */
 public class DefaultConverterRepository implements ConverterRepository {
 	private Map<ConverterSignature, Converter> converters;
+
+
+	public DefaultConverterRepository() {
+		this.converters = new HashMap<>();
+	}
 
 	@Override
 	public <S, D> Converter<S, D> get(Class<S> source, Class<D> destination) {
@@ -45,10 +51,6 @@ public class DefaultConverterRepository implements ConverterRepository {
 	@Override
 	public boolean hasConverter(Class source, Class destination) {
 		return converters.get(new ConverterSignature(source, destination)) != null;
-	}
-
-	public void setConverters(Map<ConverterSignature, Converter> converters) {
-		this.converters = converters;
 	}
 
 	private static class ConverterSignature {
