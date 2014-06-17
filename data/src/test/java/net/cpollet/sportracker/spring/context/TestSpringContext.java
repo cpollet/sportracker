@@ -19,6 +19,7 @@ package net.cpollet.sportracker.spring.context;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.BeanIsAbstractException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -32,7 +33,11 @@ public class TestSpringContext {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring/st-data-context.xml");
 
 		for (String s : context.getBeanDefinitionNames()) {
-			context.getBean(s);
+			try {
+				context.getBean(s);
+			} catch (BeanIsAbstractException e) {
+				// skip it
+			}
 		}
 	}
 }
