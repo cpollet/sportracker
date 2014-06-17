@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.exception;
+package net.cpollet.sportracker.service;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * @author Christophe Pollet
  */
-public class UsernameNotAvailableException extends RuntimeException {
-	public UsernameNotAvailableException() {
+public class BCryptService implements HashingService {
+	@Override
+	public String hash(String plain) {
+		return BCrypt.hashpw(plain, BCrypt.gensalt());
 	}
 
-	public UsernameNotAvailableException(String message) {
-		super(message);
-	}
-
-	public UsernameNotAvailableException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public UsernameNotAvailableException(Throwable cause) {
-		super(cause);
-	}
-
-	public UsernameNotAvailableException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+	@Override
+	public boolean verify(String hashed, String plain) {
+		return BCrypt.checkpw(plain, hashed);
 	}
 }

@@ -17,7 +17,6 @@
 package net.cpollet.sportracker.web.data;
 
 import net.cpollet.sportracker.web.validator.PasswordsMatchConstraint;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -61,9 +60,5 @@ public class User {
 
 	public void setPassword2(String password2) {
 		this.password2 = password2;
-	}
-
-	public String getHashedPassword() {
-		return BCrypt.hashpw(password1, BCrypt.gensalt());
 	}
 }

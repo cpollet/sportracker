@@ -16,8 +16,9 @@
 
 package net.cpollet.sportracker.web.controller;
 
+import net.cpollet.sportracker.service.HashingService;
 import net.cpollet.sportracker.service.UserService;
-import net.cpollet.sportracker.exception.UsernameNotAvailableException;
+import net.cpollet.sportracker.service.exception.UsernameNotAvailableException;
 import net.cpollet.sportracker.web.data.RestResponse;
 import net.cpollet.sportracker.web.data.RestResponseBuilder;
 import net.cpollet.sportracker.web.data.User;
@@ -52,6 +53,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private HashingService hashingService;
 
 	@RequestMapping(value = "/api/v1/user", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)

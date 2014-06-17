@@ -17,7 +17,7 @@
 package net.cpollet.sportracker.service;
 
 import net.cpollet.sportracker.data.User;
-import net.cpollet.sportracker.exception.UsernameNotAvailableException;
+import net.cpollet.sportracker.service.exception.UsernameNotAvailableException;
 import org.springframework.beans.factory.InitializingBean;
 
 import java.util.HashMap;

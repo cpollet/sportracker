@@ -16,14 +16,11 @@
 
 package net.cpollet.sportracker.service;
 
-import net.cpollet.sportracker.data.User;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 /**
  * @author Christophe Pollet
  */
-public abstract class BaseUserService implements UserService {
-	protected boolean passwordMatch(String password, User user) {
-		return BCrypt.checkpw(password, user.getPassword());
-	}
+public interface HashingService {
+	public String hash(String plain);
+
+	public boolean verify(String plain, String hashed);
 }

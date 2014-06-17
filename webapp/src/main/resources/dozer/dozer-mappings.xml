@@ -4,11 +4,11 @@
 		  xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
 
-	<mapping>
+	<mapping type="one-way">
 		<class-a>net.cpollet.sportracker.web.data.User</class-a>
 		<class-b>net.cpollet.sportracker.data.User</class-b>
-		<field type="one-way">
-			<a get-method="getHashedPassword">password1</a>
+		<field custom-converter-id="hashingConverter">
+			<a>password1</a>
 			<b>password</b>
 		</field>
 	</mapping>

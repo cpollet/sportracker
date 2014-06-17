@@ -3,12 +3,8 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<import resource="classpath:/spring/st-data-context.xml"/>
+	<import resource="classpath:/spring/spring-services-context.xml"/>
 
-	<!--<bean id="st.userService" class="net.cpollet.sportracker.service.InMemoryUserService"/>-->
-	<bean id="st.userService" class="net.cpollet.sportracker.service.MongoDbUserService">
-		<property name="userRepository" ref="st.repository.users"/>
-	</bean>
 	<bean id="st.tokenService" class="net.cpollet.sportracker.service.InMemoryTokenService"/>
 
 	<bean class="net.cpollet.sportracker.Initializer">
@@ -17,6 +13,15 @@
 	</bean>
 
 	<bean id="st.dozerFactory" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+		<property name="customConvertersWithId">
+			<map>
+				<entry key="hashingConverter">
+					<bean class="net.cpollet.sportracker.dozer.HashingDozerConverter">
+						<property name="hashingService" ref="sf.service.hashing"/>
+					</bean>
+				</entry>
+			</map>
+		</property>
 		<property name="mappingFiles" value="classpath*:/dozer/*.xml"/>
 	</bean>
 </beans>
