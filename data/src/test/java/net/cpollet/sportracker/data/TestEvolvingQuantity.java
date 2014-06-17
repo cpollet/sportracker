@@ -16,12 +16,10 @@
 
 package net.cpollet.sportracker.data;
 
-import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.quantities.QuantityFactory;
 import net.cpollet.sportracker.test.support.DateUtils;
 import net.cpollet.sportracker.units.Length;
-import org.fest.assertions.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
