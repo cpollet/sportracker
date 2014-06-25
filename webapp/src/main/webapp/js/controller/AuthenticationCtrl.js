@@ -21,7 +21,7 @@
 				Authentication.login($scope.username, $scope.password).then(
 					function (result) {
 						if (result == 'OK') {
-							$location.path("/track");
+							$location.path("/profile");
 						} else {
 							$scope.password = '';
 							$scope.invalidCredentials = true;
