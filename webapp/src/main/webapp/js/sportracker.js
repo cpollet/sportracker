@@ -15,14 +15,14 @@
  */
 
 var stApp = angular.module('stApp', [
-	'stControllers', 'stServices', 'stDirectives',
+	'stControllers', 'stServices', 'stDirectives', 'stModules',
 	'ngRoute',
 	'ui.bootstrap', 'google-maps',
 	'LocalStorageModule'
 ]);
 
-stApp.config(['$routeProvider',
-	function ($routeProvider) {
+stApp.config(['$routeProvider', '$httpProvider',
+	function ($routeProvider, $httpProvider) {
 		$routeProvider.
 			when('/home', {
 				templateUrl: 'partials/home.html'
@@ -55,6 +55,8 @@ stApp.config(['$routeProvider',
 			otherwise({
 				redirectTo: '/home'
 			});
+
+		$httpProvider.interceptors.push('stHttpInterceptor');
 	}
 ]);
 
@@ -89,9 +91,9 @@ stApp.run(['$rootScope', '$location', '$log', 'Authentication', 'localStorageSer
 		localStorageService.prefix = 'st';
 		Authentication.restore().then(
 			function (result) {
-//				if (result) {
-//					$location.path("/track");
-//				}
+				if (result) {
+					$location.path("/profile");
+				}
 			}
 		);
 	}
@@ -100,3 +102,4 @@ stApp.run(['$rootScope', '$location', '$log', 'Authentication', 'localStorageSer
 var stControllers = angular.module('stControllers', []);
 var stServices = angular.module('stServices', ['ngResource']);
 var stDirectives = angular.module('stDirectives', []);
+var stModules = angular.module('stModules', []);

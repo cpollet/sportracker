@@ -15,8 +15,8 @@
  */
 (function () {
 	'use strict';
-	stServices.factory('Authentication', ['$location', '$log', '$q', '$http', 'Token', 'localStorageService',
-		function ($location, $log, $q, $http, Token, localStorageService) {
+	stServices.factory('Authentication', ['$location', '$log', '$q', 'Token', 'localStorageService',
+		function ($location, $log, $q, Token, localStorageService) {
 			var Authentication = {
 				isLogged: function () {
 					var auth = localStorageService.get('auth');
@@ -64,8 +64,6 @@
 								token: value.object.token
 							});
 
-							$http.defaults.headers.common['X-ST-Token'] = value.object.token;
-
 							result.resolve("OK");
 						},
 						function (value, responseHeaders) {
@@ -92,8 +90,6 @@
 							token: auth.token
 						},
 						function (value, responseHeaders) {
-							$http.defaults.headers.common['X-ST-Token'] = auth.token;
-
 							result.resolve(true);
 						},
 						function (value, responseHeaders) {
@@ -107,9 +103,6 @@
 
 				logout: function () {
 					localStorageService.remove('auth');
-
-					$http.defaults.headers.common['X-ST-Token'] = '';
-
 					$location.path("/");
 				}
 			};
