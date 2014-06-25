@@ -45,7 +45,7 @@ import javax.validation.Valid;
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	private final static String MESSAGE_USERNAME_NOT_AVAILABLE = "UsernameNotAvailable";
+	private static final String MESSAGE_USERNAME_NOT_AVAILABLE = "UsernameNotAvailable";
 
 	@SuppressWarnings("SpringJavaAutowiringInspection")
 	@Autowired

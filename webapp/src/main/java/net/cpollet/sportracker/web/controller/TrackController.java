@@ -39,7 +39,7 @@ import java.util.List;
  */
 @Controller
 public class TrackController {
-	Logger logger = LoggerFactory.getLogger(TrackController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TrackController.class);
 
 	@RequestMapping(value = "/api/v1/track", method = RequestMethod.GET)
 	@ResponseBody
