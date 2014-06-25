@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.data;
 
+import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.MassQuantity;
 import net.cpollet.sportracker.quantities.Quantity;
 import net.cpollet.sportracker.units.Length;
@@ -33,8 +34,9 @@ public class Person {
 	private String lastName;
 	private Gender gender;
 	private Date birthday;
-	private EvolvingQuantity<MassQuantity, Date> weights;
-	private Quantity<Length> height;
+	// private EvolvingQuantity<MassQuantity, Date> weights;
+	private MassQuantity weight;
+	private LengthQuantity height;
 
 	public enum Gender {
 		MALE, FEMALE
@@ -72,31 +74,33 @@ public class Person {
 		this.birthday = birthday;
 	}
 
-	public void addWeight(MassQuantity mass, Date date) {
-		if (weights == null) {
-			weights = new EvolvingQuantity<>();
-		}
+//	public void addWeight(MassQuantity mass, Date date) {
+//		if (weights == null) {
+//			weights = new EvolvingQuantity<>();
+//		}
+//
+//		weights.addQuantity(mass, date);
+//	}
 
-		weights.addQuantity(mass, date);
-	}
-
-	public EvolvingQuantity<MassQuantity, Date> getWeights() {
-		return weights;
-	}
+//	public EvolvingQuantity<MassQuantity, Date> getWeights() {
+//		return weights;
+//	}
 
 	public MassQuantity getWeight() {
-		return weights.getLastQuantity();
+		//return weights.getLastQuantity();
+		return weight;
 	}
 
-	public void setWeight(MassQuantity mass) {
-		addWeight(mass, new Date());
+	public void setWeight(MassQuantity weight) {
+		//addWeight(mass, new Date());
+		this.weight = weight;
 	}
 
 	public Quantity<Length> getHeight() {
 		return height;
 	}
 
-	public void setHeight(Quantity<Length> height) {
+	public void setHeight(LengthQuantity height) {
 		this.height = height;
 	}
 
@@ -108,7 +112,7 @@ public class Person {
 				", gender=" + gender +
 				", birthday=" + birthday +
 				", weight=" + getWeight() +
-				", height=" + height +
+				", height=" + getHeight() +
 				'}';
 	}
 }

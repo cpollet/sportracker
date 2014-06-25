@@ -16,15 +16,30 @@
 
 package net.cpollet.sportracker.data;
 
+import java.io.Serializable;
+
 /**
  * @author Christophe Pollet
  */
 public class User {
 	public static final int version = 1;
 
+	private Serializable id;
 	private String username;
 	private String password;
 	private Person person;
+
+	public static int getVersion() {
+		return version;
+	}
+
+	public Serializable getId() {
+		return id;
+	}
+
+	public void setId(Serializable id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;
