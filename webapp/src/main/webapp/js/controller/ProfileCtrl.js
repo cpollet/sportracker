@@ -15,8 +15,8 @@
  */
 (function () {
 	'use strict';
-	stControllers.controller('ProfileCtrl', ['$scope', '$log',
-		function ($scope, $log) {
+	stControllers.controller('ProfileCtrl', ['$scope', '$log', 'Person',
+		function ($scope, $log, Person) {
 			$scope.profile = {
 				ui: {
 					tab: {
@@ -37,37 +37,44 @@
 					}
 				},
 				person: {
-					heartRate: {
-						min: null,
-						max: null,
-						method: null
+					minHeartRate: {
+						unit: '1/min'
 					},
-					weight: {
-						value: null,
-						unit: 'kg'
-					},
-					height: {
-						value: null,
-						unit: 'cm'
-					},
-					birthDate: new Date(),
-					gender: null
+					maxHeartRate: {
+						unit: '1/min'
+					}
 				}
 			};
 
+			$scope.$watch("profile.person.maxHeartRateMethod", function (newValue, oldValue) {
+				computeMaxHeartRateIfNeeded();
+			});
+
+			$scope.$watch("profile.person.birthday", function (newValue, oldValue) {
+				computeMaxHeartRateIfNeeded();
+			});
+
+			$scope.save = function() {
+				Person.save($scope.profile.person);
+			};
+
+			var person = Person.get();
+			person.$promise.then(function() {
+				var personObject = person.object;
+
+				if (personObject !== null) {
+					personObject.birthday = new Date(personObject.birthday);
+
+					$scope.profile.person = personObject;
+				}
+			});
+
 			function computeMaxHeartRateIfNeeded() {
-				if ($scope.profile.person.heartRate.method == 'auto') {
-					$scope.profile.person.heartRate.max = 220 - Math.floor((new Date() - $scope.profile.person.birthDate) / (1000 * 60 * 60 * 24 * 365));
+				if ($scope.profile.person && $scope.profile.person.maxHeartRateMethod == 'AUTO') {
+					$scope.profile.person.maxHeartRate.value = 220 - Math.floor((new Date() - $scope.profile.person.birthday) / (1000 * 60 * 60 * 24 * 365));
 				}
 			}
 
-			$scope.$watch("profile.person.heartRate.method", function (newValue, oldValue) {
-				computeMaxHeartRateIfNeeded();
-			});
-
-			$scope.$watch("profile.person.birthDate", function (newValue, oldValue) {
-				computeMaxHeartRateIfNeeded();
-			});
 		}
 	]);
 })();

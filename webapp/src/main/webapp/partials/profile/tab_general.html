@@ -1,15 +1,14 @@
 <div class="form-group">
-	<label for="birthDate" class="col-sm-2 control-label">Birth date</label>
+	<label for="birthday" class="col-sm-2 control-label">Birth date</label>
 
 	<div class="col-sm-3">
 		<div class="input-group">
-			<input type="text" id="birthDate" class="form-control"
-			       ng-model="profile.person.birthDate"
+			<input type="text" userId="birthday" class="form-control"
+			       ng-model="profile.person.birthday"
 			       is-open="profile.ui.datepicker.opened == true"
 			       min="minDate"
 			       max="'2015-06-22'"
 			       datepicker-options="profile.ui.datepicker.dateOptions"
-			       ng-required="true"
 			       close-text="Close"
 			       datepicker-popup="dd-MMMM-yyyy"
 			       show-button-bar="false"/>
@@ -34,13 +33,13 @@
 	<div class="col-sm-6">
 		<div class="radio">
 			<label>
-				<input type="radio" name="gender" id="gender_male" value="male" ng-model="profile.person.gender"> Male
+				<input type="radio" name="gender" userId="gender_male" value="MALE" ng-model="profile.person.gender"> Male
 			</label>
 		</div>
 
 		<div class="radio">
 			<label>
-				<input type="radio" name="gender" id="gender_female" value="female" ng-model="profile.person.gender">
+				<input type="radio" name="gender" userId="gender_female" value="FEMALE" ng-model="profile.person.gender">
 				Female
 			</label>
 		</div>
@@ -57,7 +56,7 @@
 	<label for="weight" class="col-sm-2 control-label">Weight</label>
 
 	<div class="col-sm-3">
-		<input id="weight" name="weight" type="text" class="form-control" ng-model="profile.person.weight.value">
+		<input userId="weight" name="weight" type="number" min="0" numericbinding class="form-control" ng-model="profile.person.weight.value">
 	</div>
 	<div class="col-sm-2">
 		<select class="form-control" ng-model="profile.person.weight.unit" ng-init="profile.person.weight.unit = profile.person.weight.unit || 'kg'">
@@ -81,7 +80,7 @@
 	<label for="height" class="col-sm-2 control-label">Height</label>
 
 	<div class="col-sm-3">
-		<input id="height" name="height" type="text" class="form-control" ng-model="profile.person.height.value">
+		<input userId="height" name="height" type="number" min="0" numericbinding class="form-control" ng-model="profile.person.height.value">
 	</div>
 	<div class="col-sm-2">
 		<select class="form-control" ng-model="profile.person.height.unit" ng-init="profile.person.height.unit = profile.person.height.unit || 'cm'">
@@ -102,10 +101,10 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="heartRateMin" class="col-sm-2 control-label">Minimum HR</label>
+	<label for="minHeartRate" class="col-sm-2 control-label">Minimum HR</label>
 
 	<div class="col-sm-5">
-		<input id="heartRateMin" name="heartRateMin" type="text" class="form-control" ng-model="profile.person.heartRate.min">
+		<input userId="minHeartRate" name="heartRateMin" type="number" min="0" numericbinding class="form-control" ng-model="profile.person.minHeartRate.value">
 	</div>
 	<div class="col-sm-1">
 		<p class="form-control-static">
@@ -125,20 +124,20 @@
 	<div class="col-sm-2">
 		<div class="radio">
 			<label>
-				<input type="radio" name="maxHeartRateMethod" id="maxHeartRateMethod_Custom" value="custom" ng-model="profile.person.heartRate.method">
+				<input type="radio" name="maxHeartRateMethod" userId="maxHeartRateMethod_Custom" value="CUSTOM" ng-model="profile.person.maxHeartRateMethod">
 				Custom
 			</label>
 		</div>
 
 		<div class="radio">
 			<label>
-				<input type="radio" name="maxHeartRateMethod" id="maxHeartRateMethod_Auto" value="auto" ng-model="profile.person.heartRate.method">
+				<input type="radio" name="maxHeartRateMethod" userId="maxHeartRateMethod_Auto" value="AUTO" ng-model="profile.person.maxHeartRateMethod">
 				Auto
 			</label>
 		</div>
 	</div>
-	<div class="col-sm-3    ">
-		<input id="heartRateMax" name="heartRateMin" type="text" class="form-control" ng-model="profile.person.heartRate.max" ng-disabled="profile.person.heartRate.method == 'auto'">
+	<div class="col-sm-3">
+		<input userId="heartRateMax" name="heartRateMin" type="number" min="0" numericbinding class="form-control" ng-model="profile.person.maxHeartRate.value" ng-disabled="profile.person.maxHeartRateMethod == 'AUTO'">
 	</div>
 	<div class="col-sm-1">
 		<p class="form-control-static">
