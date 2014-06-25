@@ -63,7 +63,7 @@ public class RestAuthenticationFilter implements Filter {
 
 			String token = request.getHeader(HEADER_SECURITY_TOKEN);
 
-			logger.debug("{}: {}", new Object[]{HEADER_SECURITY_TOKEN,  token});
+			logger.debug("{} {}: {}", new Object[]{request.getRequestURI(), HEADER_SECURITY_TOKEN, token});
 
 			Authentication authentication = DefaultAuthentication.NOT_AUTHENTICATED;
 
