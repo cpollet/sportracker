@@ -16,19 +16,14 @@
 
 package net.cpollet.sportracker.service;
 
+import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.data.User;
-
-import java.io.Serializable;
 
 /**
  * @author Christophe Pollet
  */
-public interface UserService {
-	void create(User user);
+public interface PersonService {
+	public void update(Person person, User user);
 
-	boolean areCredentialsValid(String username, String password);
-
-	Serializable getIdForUsername(String username);
-
-	User get(Serializable id);
+	public Person get(User user);
 }

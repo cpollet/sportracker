@@ -14,21 +14,33 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker.service.specification.user;
 
+import com.mongodb.BasicDBObject;
 import net.cpollet.sportracker.data.User;
+import net.cpollet.sportracker.repository.Specification;
+import net.cpollet.sportracker.repository.mongodb.MongoDbSpecification;
+import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 
 /**
  * @author Christophe Pollet
  */
-public interface UserService {
-	void create(User user);
+public class MongoDbUserSpecificationById implements Specification<User>, MongoDbSpecification<User> {
+	private Serializable id;
 
-	boolean areCredentialsValid(String username, String password);
+	public MongoDbUserSpecificationById(Serializable id) {
+		this.id = id;
+	}
 
-	Serializable getIdForUsername(String username);
+	@Override
+	public BasicDBObject toMongoDbQuery() {
+		return new BasicDBObject("_id", new ObjectId(id.toString()));
+	}
 
-	User get(Serializable id);
+	@Override
+	public boolean isSatisfiedBy(User object) {
+		return id.equals(object.getId());
+	}
 }

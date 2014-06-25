@@ -21,10 +21,12 @@ import net.cpollet.sportracker.service.exception.UsernameNotAvailableException;
 import net.cpollet.sportracker.repository.UserRepository;
 import net.cpollet.sportracker.repository.exception.DuplicateKeyException;
 import net.cpollet.sportracker.repository.mongodb.MongoDbSpecification;
+import net.cpollet.sportracker.service.specification.user.MongoDbUserSpecificationById;
 import net.cpollet.sportracker.service.specification.user.MongoDbUserSpecificationByUsername;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -60,6 +62,17 @@ public class MongoDbUserService extends BaseUserService implements UserService {
 		}
 
 		return passwordMatch(password, users.get(0));
+	}
+
+	@Override
+	public Serializable getIdForUsername(String username) {
+		User user = userRepository.query(new MongoDbUserSpecificationByUsername(username)).get(0);
+		return user.getId();
+	}
+
+	@Override
+	public User get(Serializable id) {
+		return userRepository.query(new MongoDbUserSpecificationById(id)).get(0);
 	}
 
 	public void setUserRepository(UserRepository<MongoDbSpecification<User>> userRepository) {

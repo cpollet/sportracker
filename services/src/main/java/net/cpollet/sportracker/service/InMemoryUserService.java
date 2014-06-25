@@ -20,6 +20,7 @@ import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.service.exception.UsernameNotAvailableException;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,11 +41,18 @@ public class InMemoryUserService extends BaseUserService implements UserService 
 
 	@Override
 	public boolean areCredentialsValid(String username, String password) {
-		if (!users.containsKey(username)) {
-			return false;
-		}
+		return !users.containsKey(username) && passwordMatch(password, users.get(username));
+	}
 
-		return passwordMatch(password, users.get(username));
+	@Override
+	public Serializable getIdForUsername(String username) {
+		return username;
+	}
+
+	@SuppressWarnings("SuspiciousMethodCalls")
+	@Override
+	public User get(Serializable id) {
+		return users.get(id);
 	}
 
 	@Override

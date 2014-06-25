@@ -16,19 +16,29 @@
 
 package net.cpollet.sportracker.service;
 
+import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.data.User;
-
-import java.io.Serializable;
+import net.cpollet.sportracker.repository.UserRepository;
+import net.cpollet.sportracker.repository.mongodb.MongoDbSpecification;
 
 /**
  * @author Christophe Pollet
  */
-public interface UserService {
-	void create(User user);
+public class MongoDbPersonService implements PersonService {
+	private UserRepository<MongoDbSpecification<User>> userRepository;
 
-	boolean areCredentialsValid(String username, String password);
+	@Override
+	public void update(Person person, User user) {
+		user.setPerson(person);
+		userRepository.add(user);
+	}
 
-	Serializable getIdForUsername(String username);
+	@Override
+	public Person get(User user) {
+		return user.getPerson();
+	}
 
-	User get(Serializable id);
+	public void setUserRepository(UserRepository<MongoDbSpecification<User>> userRepository) {
+		this.userRepository = userRepository;
+	}
 }
