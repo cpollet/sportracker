@@ -16,36 +16,40 @@
 
 package net.cpollet.sportracker.repository.mongodb.converter;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import net.cpollet.sportracker.converter.Converter;
 import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.data.User;
-import org.bson.types.ObjectId;
+import net.cpollet.sportracker.quantities.Quantity;
+
+import java.util.Map;
 
 /**
  * @author Christophe Pollet
  */
-public class DBObjectToUserConverter extends BaseConverter implements Converter<DBObject, User> {
+public class PersonToDBObjectConverter extends BaseConverter implements Converter<Person, DBObject> {
 	@Override
-	public User convert(DBObject object) {
-		User user = new User();
+	public DBObject convert(Person object) {
+		DBObject dbObject = new BasicDBObject();
 
-		user.setUsername((String) object.get("username"));
-		user.setPassword((String) object.get("password"));
-		user.setId(((ObjectId) object.get("_id")).toHexString());
+		Map map = getConversionService().convert(object, Object.class, Map.class);
 
-		user.setPerson(getConversionService().convert((DBObject) object.get("person"), DBObject.class, Person.class));
+		map.put("gender", getConversionService().convert(object.getGender(), Enum.class, String.class));
+		map.put("weight", getConversionService().convert(object.getWeight(), Quantity.class, String.class));
+		map.put("height", getConversionService().convert(object.getHeight(), Quantity.class, String.class));
 
-		return user;
+		dbObject.putAll(map);
+
+		return dbObject;
 	}
 
 	@Override
 	public Class from() {
-		return DBObject.class;
+		return Person.class;
 	}
 
 	@Override
 	public Class to() {
-		return User.class;
+		return DBObject.class;
 	}
 }

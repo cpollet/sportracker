@@ -21,7 +21,9 @@ import com.mongodb.DBObject;
 import net.cpollet.sportracker.converter.ConversionService;
 import net.cpollet.sportracker.converter.Converter;
 import net.cpollet.sportracker.converter.ConverterRepository;
+import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.data.User;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
@@ -36,7 +38,16 @@ public class UserToDBObjectConverter extends BaseConverter implements Converter<
 		DBObject dbObject = new BasicDBObject();
 
 		Map map = getConversionService().convert(object, Object.class, Map.class);
+
 		map.remove("person");
+		if (object.getPerson() != null) {
+			map.put("person", getConversionService().convert(object.getPerson(), DBObject.class));
+		}
+
+		map.remove("id");
+		if (object.getId() != null) {
+			map.put("_id", new ObjectId(object.getId().toString()));
+		}
 
 		dbObject.putAll(map);
 

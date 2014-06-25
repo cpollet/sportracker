@@ -19,24 +19,26 @@ package net.cpollet.sportracker.repository.mongodb.converter;
 import com.mongodb.DBObject;
 import net.cpollet.sportracker.converter.Converter;
 import net.cpollet.sportracker.data.Person;
-import net.cpollet.sportracker.data.User;
-import org.bson.types.ObjectId;
+import net.cpollet.sportracker.quantities.LengthQuantity;
+import net.cpollet.sportracker.quantities.MassQuantity;
+import net.cpollet.sportracker.quantities.QuantityFactory;
+
+import java.util.Date;
 
 /**
  * @author Christophe Pollet
  */
-public class DBObjectToUserConverter extends BaseConverter implements Converter<DBObject, User> {
+public class DBObjectToPersonConverter extends BaseConverter implements Converter<DBObject, Person> {
 	@Override
-	public User convert(DBObject object) {
-		User user = new User();
+	public Person convert(DBObject object) {
+		Person person = new Person();
 
-		user.setUsername((String) object.get("username"));
-		user.setPassword((String) object.get("password"));
-		user.setId(((ObjectId) object.get("_id")).toHexString());
+		person.setGender(Person.Gender.valueOf((String)object.get("gender")));
+		person.setBirthday((Date) object.get("birthday"));
+		person.setWeight((MassQuantity) QuantityFactory.MASS.create((String) object.get("weight")));
+		person.setHeight((LengthQuantity) QuantityFactory.LENGTH.create((String) object.get("height")));
 
-		user.setPerson(getConversionService().convert((DBObject) object.get("person"), DBObject.class, Person.class));
-
-		return user;
+		return person;
 	}
 
 	@Override
@@ -46,6 +48,6 @@ public class DBObjectToUserConverter extends BaseConverter implements Converter<
 
 	@Override
 	public Class to() {
-		return User.class;
+		return Person.class;
 	}
 }

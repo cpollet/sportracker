@@ -5,6 +5,7 @@
 
 	<bean id="st.converter.ObjectToMap" class="net.cpollet.sportracker.converter.ObjectToMapConverter"/>
 	<bean id="st.converter.ObjectToString" class="net.cpollet.sportracker.converter.ObjectToStringConverter"/>
+	<bean id="st.converter.EnumToString" class="net.cpollet.sportracker.converter.EnumToStringConverter"/>
 	<bean id="st.converter.QuantityToString" class="net.cpollet.sportracker.converter.QuantityToStringConverter"/>
 
 	<bean id="st.converter.EvolvingQuantityToList"
@@ -18,6 +19,15 @@
 	</bean>
 	<bean id="st.converter.DBObjectToUser"
 		  class="net.cpollet.sportracker.repository.mongodb.converter.DBObjectToUserConverter">
+		<property name="conversionService" ref="st.data.conversionService"/>
+	</bean>
+	<bean id="st.converter.DBObjectToPerson"
+		  class="net.cpollet.sportracker.repository.mongodb.converter.DBObjectToPersonConverter">
+		<property name="conversionService" ref="st.data.conversionService"/>
+	</bean>
+
+	<bean id="st.converter.PersonToDBObject"
+		  class="net.cpollet.sportracker.repository.mongodb.converter.PersonToDBObjectConverter">
 		<property name="conversionService" ref="st.data.conversionService"/>
 	</bean>
 
