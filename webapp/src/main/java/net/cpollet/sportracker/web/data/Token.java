@@ -16,14 +16,18 @@
 
 package net.cpollet.sportracker.web.data;
 
+import java.io.Serializable;
+
 /**
  * @author Christophe Pollet
  */
 public class Token {
 	private String token;
+	private Serializable userId;
 
-	public Token(String token) {
+	public Token(String token, Serializable userId) {
 		this.token = token;
+		this.userId = userId;
 	}
 
 	public String getToken() {
@@ -32,5 +36,13 @@ public class Token {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public Serializable getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Serializable userId) {
+		this.userId = userId;
 	}
 }

@@ -38,6 +38,16 @@
 					return auth.username;
 				},
 
+				getUserId: function() {
+					var auth = localStorageService.get('auth');
+
+					if (auth === null) {
+						return null;
+					}
+
+					return auth.userId;
+				},
+
 				login: function (username, password) {
 					var result = $q.defer();
 
@@ -50,6 +60,7 @@
 							localStorageService.add('auth', {
 								isLogged: true,
 								username: username,
+								userId: value.object.userId,
 								token: value.object.token
 							});
 
@@ -88,7 +99,8 @@
 						function (value, responseHeaders) {
 							Authentication.logout();
 							result.resolve(false);
-						});
+						}
+					);
 
 					return result.promise;
 				},
