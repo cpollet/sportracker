@@ -25,7 +25,6 @@ import java.util.Map;
 public class DefaultConverterRepository implements ConverterRepository {
 	private Map<ConverterSignature, Converter> converters;
 
-
 	public DefaultConverterRepository() {
 		this.converters = new HashMap<>();
 	}

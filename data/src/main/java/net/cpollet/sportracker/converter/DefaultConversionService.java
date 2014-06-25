@@ -24,12 +24,20 @@ public class DefaultConversionService implements ConversionService {
 
 	@Override
 	public <S, D> D convert(S object, Class<D> toClass) {
+		if (object == null) {
+			return null;
+		}
+
 		Converter<S, D> converter = converterRepository.get(getSourceClass(object), toClass);
 		return converter.convert(object);
 	}
 
 	@Override
 	public <S, D> D convert(S object, Class<S> fromClass, Class<D> toClass) {
+		if (object == null) {
+			return null;
+		}
+
 		Converter<S, D> converter = converterRepository.get(fromClass, toClass);
 		return converter.convert(object);
 	}

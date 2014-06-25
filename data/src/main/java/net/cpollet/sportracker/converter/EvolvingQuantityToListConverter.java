@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * @author Christophe Pollet
  */
-public class EvolvingQuantityToListConverter  implements Converter<EvolvingQuantity, List>, InitializingBean {
+public class EvolvingQuantityToListConverter implements Converter<EvolvingQuantity, List>, InitializingBean {
 	private ConversionService conversionService;
 
 	@Override
