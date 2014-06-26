@@ -17,6 +17,7 @@
 package net.cpollet.sportracker.service;
 
 import net.cpollet.sportracker.data.User;
+import net.cpollet.sportracker.service.api.UserService;
 import net.cpollet.sportracker.service.exception.UsernameNotAvailableException;
 import net.cpollet.sportracker.repository.UserRepository;
 import net.cpollet.sportracker.repository.exception.DuplicateKeyException;

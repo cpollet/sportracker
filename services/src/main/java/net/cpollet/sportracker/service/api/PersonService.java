@@ -14,28 +14,16 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.web.data;
+package net.cpollet.sportracker.service.api;
 
-import java.util.Collections;
-import java.util.List;
+import net.cpollet.sportracker.data.Person;
+import net.cpollet.sportracker.data.User;
 
 /**
  * @author Christophe Pollet
  */
-public class Track {
-	private final String title;
-	private final List<TrackPoint> trackPoints;
+public interface PersonService {
+	public void update(Person person, User user);
 
-	public Track(String title, List<TrackPoint> trackPoints) {
-		this.title = title;
-		this.trackPoints = Collections.unmodifiableList(trackPoints);
-	}
-
-	public List<TrackPoint> getTrackPoints() {
-		return trackPoints;
-	}
-
-	public String getTitle() {
-		return title;
-	}
+	public Person get(User user);
 }

@@ -24,16 +24,15 @@ import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.quantities.LengthQuantity;
 import net.cpollet.sportracker.quantities.MassQuantity;
-import net.cpollet.sportracker.service.PersonService;
-import net.cpollet.sportracker.service.UserService;
-import net.cpollet.sportracker.units.Length;
+import net.cpollet.sportracker.service.api.PersonService;
+import net.cpollet.sportracker.service.api.UserService;
 import net.cpollet.sportracker.units.LengthUnit;
 import net.cpollet.sportracker.units.MassUnit;
 import net.cpollet.sportracker.web.data.PersonData;
-import net.cpollet.sportracker.web.data.Quantity;
-import net.cpollet.sportracker.web.data.RestResponse;
-import net.cpollet.sportracker.web.data.RestResponseBuilder;
-import net.cpollet.sportracker.web.data.builder.QuantityBuilder;
+import net.cpollet.sportracker.web.data.QuantityData;
+import net.cpollet.sportracker.web.http.RestResponse;
+import net.cpollet.sportracker.web.http.RestResponseBuilder;
+import net.cpollet.sportracker.web.data.builder.QuantityDataBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,12 +72,12 @@ public class PersonController {
 				personData.setGender(PersonData.Gender.valueOf(person.getGender().name()));
 			}
 			if (person.getWeight() != null) {
-				Quantity quantity = QuantityBuilder.aQuantity().withValue(person.getWeight().in(MassUnit.kg).getValue()).withUnit("kg").build();
-				personData.setWeight(quantity);
+				QuantityData quantityData = QuantityDataBuilder.aQuantityData().withValue(person.getWeight().in(MassUnit.kg).getValue()).withUnit("kg").build();
+				personData.setWeight(quantityData);
 			}
 			if (person.getHeight() != null) {
-				Quantity quantity = QuantityBuilder.aQuantity().withValue(person.getHeight().in(LengthUnit.cm).getValue()).withUnit("cm").build();
-				personData.setHeight(quantity);
+				QuantityData quantityData = QuantityDataBuilder.aQuantityData().withValue(person.getHeight().in(LengthUnit.cm).getValue()).withUnit("cm").build();
+				personData.setHeight(quantityData);
 			}
 		}
 

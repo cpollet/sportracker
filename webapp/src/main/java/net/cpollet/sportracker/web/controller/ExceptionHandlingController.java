@@ -17,8 +17,8 @@
 package net.cpollet.sportracker.web.controller;
 
 import com.google.common.base.Splitter;
-import net.cpollet.sportracker.web.data.RestResponse;
-import net.cpollet.sportracker.web.data.RestResponseBuilder;
+import net.cpollet.sportracker.web.http.RestResponse;
+import net.cpollet.sportracker.web.http.RestResponseBuilder;
 import net.cpollet.sportracker.web.exception.InvalidTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

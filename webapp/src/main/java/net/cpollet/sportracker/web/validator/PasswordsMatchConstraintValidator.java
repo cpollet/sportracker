@@ -16,7 +16,7 @@
 
 package net.cpollet.sportracker.web.validator;
 
-import net.cpollet.sportracker.web.data.User;
+import net.cpollet.sportracker.web.data.UserData;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -24,14 +24,14 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * @author Christophe Pollet
  */
-public class PasswordsMatchConstraintValidator implements ConstraintValidator<PasswordsMatchConstraint, User> {
+public class PasswordsMatchConstraintValidator implements ConstraintValidator<PasswordsMatchConstraint, UserData> {
 	@Override
 	public void initialize(PasswordsMatchConstraint constraintAnnotation) {
 		// nothing
 	}
 
 	@Override
-	public boolean isValid(User user, ConstraintValidatorContext context) {
-		return user.getPassword1().equals(user.getPassword2());
+	public boolean isValid(UserData userData, ConstraintValidatorContext context) {
+		return userData.getPassword1().equals(userData.getPassword2());
 	}
 }

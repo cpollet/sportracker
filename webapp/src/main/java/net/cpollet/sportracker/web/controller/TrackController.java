@@ -21,9 +21,10 @@ import net.cpollet.sportracker.data.TrackPoint;
 import net.cpollet.sportracker.fit.Parser;
 import net.cpollet.sportracker.fit.ParserImpl;
 import net.cpollet.sportracker.units.AngleUnit;
+import net.cpollet.sportracker.web.data.TrackData;
+import net.cpollet.sportracker.web.data.TrackPointData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,24 +44,24 @@ public class TrackController {
 
 	@RequestMapping(value = "/api/v1/track", method = RequestMethod.GET)
 	@ResponseBody
-	public net.cpollet.sportracker.web.data.Track track(@RequestParam(value="filePath", required=true) String filePath) {
+	public TrackData track(@RequestParam(value="filePath", required=true) String filePath) {
 		Parser parser = new ParserImpl();
 		Track track = parser.parse(new File(filePath));
 
-		List<net.cpollet.sportracker.web.data.TrackPoint> trackPoints = new LinkedList<>();
+		List<TrackPointData> trackPointDatas = new LinkedList<>();
 		for (TrackPoint trackPoint : track) {
-			net.cpollet.sportracker.web.data.TrackPoint webTrackPoint = new net.cpollet.sportracker.web.data.TrackPoint(
+			TrackPointData webTrackPointData = new TrackPointData(
 					trackPoint.getTimestamp().toDate(), //
 					trackPoint.getSpeed().getScaledValue(1).toString(), //
 					trackPoint.getAltitude().getScaledValue(0).toString(), //
 					trackPoint.getLatitude().in(AngleUnit.deg).getValue().toString(), //
 					trackPoint.getLongitude().in(AngleUnit.deg).getValue().toString());
 
-			trackPoints.add(webTrackPoint);
+			trackPointDatas.add(webTrackPointData);
 		}
 
-		net.cpollet.sportracker.web.data.Track webTrack = new net.cpollet.sportracker.web.data.Track("Some random ride", trackPoints);
+		TrackData webTrackData = new TrackData("Some random ride", trackPointDatas);
 
-		return webTrack;
+		return webTrackData;
 	}
 }

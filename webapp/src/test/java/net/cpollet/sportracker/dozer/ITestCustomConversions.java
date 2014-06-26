@@ -16,8 +16,8 @@
 
 package net.cpollet.sportracker.dozer;
 
-import net.cpollet.sportracker.service.HashingService;
-import net.cpollet.sportracker.web.data.User;
+import net.cpollet.sportracker.service.api.HashingService;
+import net.cpollet.sportracker.web.data.UserData;
 import org.dozer.Mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,16 +42,16 @@ public class ITestCustomConversions {
 	@Test
 	public void convertWebUserToModelUser() {
 		// GIVEN
-		User webUser = new User();
-		webUser.setUsername("username");
-		webUser.setPassword1("password1");
-		webUser.setPassword2("password2");
+		UserData webUserData = new UserData();
+		webUserData.setUsername("username");
+		webUserData.setPassword1("password1");
+		webUserData.setPassword2("password2");
 
 		// WHEN
-		net.cpollet.sportracker.data.User user = dozer.map(webUser, net.cpollet.sportracker.data.User.class);
+		net.cpollet.sportracker.data.User user = dozer.map(webUserData, net.cpollet.sportracker.data.User.class);
 
 		// THEN
 		assertThat(user.getUsername()).isEqualTo("username");
-		assertThat(hashingService.verify(user.getPassword(), webUser.getPassword1())).isTrue();
+		assertThat(hashingService.verify(user.getPassword(), webUserData.getPassword1())).isTrue();
 	}
 }

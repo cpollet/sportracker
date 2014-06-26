@@ -16,33 +16,33 @@
 
 package net.cpollet.sportracker.web.data;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
 /**
  * @author Christophe Pollet
  */
-public class Quantity {
-	private BigDecimal value;
-	private String unit;
+public class TokenData {
+	private String token;
+	private Serializable userId;
 
-	public BigDecimal getValue() {
-		return value;
+	public TokenData(String token, Serializable userId) {
+		this.token = token;
+		this.userId = userId;
 	}
 
-	public void setValue(BigDecimal value) {
-		this.value = value;
+	public String getToken() {
+		return token;
 	}
 
-	public String getUnit() {
-		return unit;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
-	public void setUnit(String unit) {
-		this.unit = unit;
+	public Serializable getUserId() {
+		return userId;
 	}
 
-	@Override
-	public String toString() {
-		return value + "[" + unit + "]";
+	public void setUserId(Serializable userId) {
+		this.userId = userId;
 	}
 }

@@ -14,13 +14,28 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker.web.data;
 
 /**
  * @author Christophe Pollet
  */
-public interface HashingService {
-	public String hash(String plain);
+public class CredentialsData {
+	private String username;
+	private String password;
 
-	public boolean verify(String plain, String hashed);
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

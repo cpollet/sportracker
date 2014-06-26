@@ -32,10 +32,10 @@ public class PersonData {
 
 	private Date birthday;
 	private Gender gender;
-	private Quantity weight;
-	private Quantity height;
-	private Quantity minHeartRate;
-	private Quantity maxHeartRate;
+	private QuantityData weight;
+	private QuantityData height;
+	private QuantityData minHeartRate;
+	private QuantityData maxHeartRate;
 	private HeartRateMethod maxHeartRateMethod;
 
 	public Date getBirthday() {
@@ -54,35 +54,35 @@ public class PersonData {
 		this.gender = gender;
 	}
 
-	public Quantity getWeight() {
+	public QuantityData getWeight() {
 		return weight;
 	}
 
-	public void setWeight(Quantity weight) {
+	public void setWeight(QuantityData weight) {
 		this.weight = weight;
 	}
 
-	public Quantity getHeight() {
+	public QuantityData getHeight() {
 		return height;
 	}
 
-	public void setHeight(Quantity height) {
+	public void setHeight(QuantityData height) {
 		this.height = height;
 	}
 
-	public Quantity getMinHeartRate() {
+	public QuantityData getMinHeartRate() {
 		return minHeartRate;
 	}
 
-	public void setMinHeartRate(Quantity minHeartRate) {
+	public void setMinHeartRate(QuantityData minHeartRate) {
 		this.minHeartRate = minHeartRate;
 	}
 
-	public Quantity getMaxHeartRate() {
+	public QuantityData getMaxHeartRate() {
 		return maxHeartRate;
 	}
 
-	public void setMaxHeartRate(Quantity maxHeartRate) {
+	public void setMaxHeartRate(QuantityData maxHeartRate) {
 		this.maxHeartRate = maxHeartRate;
 	}
 

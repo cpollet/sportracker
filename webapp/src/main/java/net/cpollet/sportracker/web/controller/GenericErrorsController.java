@@ -16,7 +16,7 @@
 
 package net.cpollet.sportracker.web.controller;
 
-import net.cpollet.sportracker.web.data.RestResponse;
+import net.cpollet.sportracker.web.http.RestResponse;
 import net.cpollet.sportracker.web.exception.InvalidTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

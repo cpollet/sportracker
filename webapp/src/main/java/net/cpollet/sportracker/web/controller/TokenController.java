@@ -17,11 +17,11 @@
 package net.cpollet.sportracker.web.controller;
 
 import net.cpollet.sportracker.service.TokenService;
-import net.cpollet.sportracker.service.UserService;
-import net.cpollet.sportracker.web.data.Credentials;
-import net.cpollet.sportracker.web.data.RestResponse;
-import net.cpollet.sportracker.web.data.RestResponseBuilder;
-import net.cpollet.sportracker.web.data.Token;
+import net.cpollet.sportracker.service.api.UserService;
+import net.cpollet.sportracker.web.data.CredentialsData;
+import net.cpollet.sportracker.web.data.TokenData;
+import net.cpollet.sportracker.web.http.RestResponse;
+import net.cpollet.sportracker.web.http.RestResponseBuilder;
 import net.cpollet.sportracker.web.exception.InvalidCredentialsException;
 import net.cpollet.sportracker.web.exception.InvalidTokenException;
 import org.slf4j.Logger;
@@ -58,19 +58,19 @@ public class TokenController {
 	@RequestMapping(value = "/api/v1/token", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public RestResponse create(@RequestBody(required = true) Credentials credentials) {
-		logger.info("Attempt login: {}", credentials.getUsername());
+	public RestResponse create(@RequestBody(required = true) CredentialsData credentialsData) {
+		logger.info("Attempt login: {}", credentialsData.getUsername());
 
-		if (!userService.areCredentialsValid(credentials.getUsername(), credentials.getPassword())) {
+		if (!userService.areCredentialsValid(credentialsData.getUsername(), credentialsData.getPassword())) {
 			throw new InvalidCredentialsException("Invalid username and/or password");
 		}
 
-		String token = tokenService.createToken(credentials.getUsername());
-		Serializable userId = userService.getIdForUsername(credentials.getUsername());
+		String token = tokenService.createToken(credentialsData.getUsername());
+		Serializable userId = userService.getIdForUsername(credentialsData.getUsername());
 
 		return RestResponseBuilder.aRestResponse() //
 				.withHttpStatus(HttpStatus.CREATED.value()) //
-				.withObject(new Token(token, userId))
+				.withObject(new TokenData(token, userId))
 				.build();
 	}
 
@@ -98,7 +98,7 @@ public class TokenController {
 		Serializable userId = userService.getIdForUsername(username);
 
 		return RestResponseBuilder.aRestResponse() //
-				.withObject(new Token(token, userId)) //
+				.withObject(new TokenData(token, userId)) //
 				.build();
 	}
 }

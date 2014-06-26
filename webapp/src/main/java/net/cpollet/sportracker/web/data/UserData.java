@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
  * @author Christophe Pollet
  */
 @PasswordsMatchConstraint
-public class User {
+public class UserData {
 	@NotNull(message = "")
 	@Size(min = 3, max = 20, message = "min={min}&max={max}")
 	private String username;

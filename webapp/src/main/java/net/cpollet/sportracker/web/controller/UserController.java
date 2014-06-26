@@ -16,12 +16,12 @@
 
 package net.cpollet.sportracker.web.controller;
 
-import net.cpollet.sportracker.service.HashingService;
-import net.cpollet.sportracker.service.UserService;
+import net.cpollet.sportracker.service.api.HashingService;
+import net.cpollet.sportracker.service.api.UserService;
 import net.cpollet.sportracker.service.exception.UsernameNotAvailableException;
-import net.cpollet.sportracker.web.data.RestResponse;
-import net.cpollet.sportracker.web.data.RestResponseBuilder;
-import net.cpollet.sportracker.web.data.User;
+import net.cpollet.sportracker.web.data.UserData;
+import net.cpollet.sportracker.web.http.RestResponse;
+import net.cpollet.sportracker.web.http.RestResponseBuilder;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,14 +60,14 @@ public class UserController {
 	@RequestMapping(value = "/api/v1/user", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public RestResponse create(@RequestBody(required = true) @Valid User user) {
-		logger.info("Adding new user: {}", user.getUsername());
+	public RestResponse create(@RequestBody(required = true) @Valid UserData userData) {
+		logger.info("Adding new userData: {}", userData.getUsername());
 
-		userService.create(dozer.map(user, net.cpollet.sportracker.data.User.class));
+		userService.create(dozer.map(userData, net.cpollet.sportracker.data.User.class));
 
 		return RestResponseBuilder.aRestResponse() //
 				.withHttpStatus(HttpStatus.CREATED.value()) //
-				.withObject(user) //
+				.withObject(userData) //
 				.build();
 	}
 

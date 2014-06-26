@@ -16,7 +16,7 @@
 
 package net.cpollet.sportracker.dozer;
 
-import net.cpollet.sportracker.service.HashingService;
+import net.cpollet.sportracker.service.api.HashingService;
 import org.dozer.MappingException;
 import org.junit.Before;
 import org.junit.Rule;

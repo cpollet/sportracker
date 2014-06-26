@@ -18,7 +18,7 @@ package net.cpollet.sportracker;
 
 import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.service.TokenService;
-import net.cpollet.sportracker.service.UserService;
+import net.cpollet.sportracker.service.api.UserService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 

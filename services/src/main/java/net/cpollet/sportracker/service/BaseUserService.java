@@ -17,6 +17,7 @@
 package net.cpollet.sportracker.service;
 
 import net.cpollet.sportracker.data.User;
+import net.cpollet.sportracker.service.api.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**

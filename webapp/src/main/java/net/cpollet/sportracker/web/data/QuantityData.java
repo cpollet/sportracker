@@ -14,21 +14,35 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker.web.data;
 
-import net.cpollet.sportracker.data.User;
-
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author Christophe Pollet
  */
-public interface UserService {
-	void create(User user);
+public class QuantityData {
+	private BigDecimal value;
+	private String unit;
 
-	boolean areCredentialsValid(String username, String password);
+	public BigDecimal getValue() {
+		return value;
+	}
 
-	Serializable getIdForUsername(String username);
+	public void setValue(BigDecimal value) {
+		this.value = value;
+	}
 
-	User get(Serializable id);
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	@Override
+	public String toString() {
+		return value + "[" + unit + "]";
+	}
 }

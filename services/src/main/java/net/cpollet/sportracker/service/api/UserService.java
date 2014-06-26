@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.service;
+package net.cpollet.sportracker.service.api;
 
-import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.data.User;
+
+import java.io.Serializable;
 
 /**
  * @author Christophe Pollet
  */
-public interface PersonService {
-	public void update(Person person, User user);
+public interface UserService {
+	void create(User user);
 
-	public Person get(User user);
+	boolean areCredentialsValid(String username, String password);
+
+	Serializable getIdForUsername(String username);
+
+	User get(Serializable id);
 }

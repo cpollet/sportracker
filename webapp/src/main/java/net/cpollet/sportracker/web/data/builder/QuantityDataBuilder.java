@@ -16,42 +16,42 @@
 
 package net.cpollet.sportracker.web.data.builder;
 
-import net.cpollet.sportracker.web.data.Quantity;
+import net.cpollet.sportracker.web.data.QuantityData;
 
 import java.math.BigDecimal;
 
 /**
  * @author Christophe Pollet
  */
-public class QuantityBuilder {
+public class QuantityDataBuilder {
 	private BigDecimal value;
 	private String unit;
 
-	private QuantityBuilder() {
+	private QuantityDataBuilder() {
 	}
 
-	public static QuantityBuilder aQuantity() {
-		return new QuantityBuilder();
+	public static QuantityDataBuilder aQuantityData() {
+		return new QuantityDataBuilder();
 	}
 
-	public QuantityBuilder withValue(int value) {
+	public QuantityDataBuilder withValue(int value) {
 		return withValue(new BigDecimal(value));
 	}
 
-	public QuantityBuilder withValue(BigDecimal value) {
+	public QuantityDataBuilder withValue(BigDecimal value) {
 		this.value = value;
 		return this;
 	}
 
-	public QuantityBuilder withUnit(String unit) {
+	public QuantityDataBuilder withUnit(String unit) {
 		this.unit = unit;
 		return this;
 	}
 
-	public Quantity build() {
-		Quantity quantity = new Quantity();
-		quantity.setValue(value);
-		quantity.setUnit(unit);
-		return quantity;
+	public QuantityData build() {
+		QuantityData quantityData = new QuantityData();
+		quantityData.setValue(value);
+		quantityData.setUnit(unit);
+		return quantityData;
 	}
 }

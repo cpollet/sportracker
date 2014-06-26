@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.cpollet.sportracker.web.data;
+package net.cpollet.sportracker.web.http;
 
 /**
  * @author Christophe Pollet

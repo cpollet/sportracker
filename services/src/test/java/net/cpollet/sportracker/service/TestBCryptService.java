@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.service;
 
+import net.cpollet.sportracker.service.api.HashingService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

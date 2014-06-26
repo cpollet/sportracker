@@ -16,6 +16,7 @@
 
 package net.cpollet.sportracker.service;
 
+import net.cpollet.sportracker.service.api.HashingService;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**

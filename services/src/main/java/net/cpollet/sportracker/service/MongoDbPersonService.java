@@ -20,6 +20,7 @@ import net.cpollet.sportracker.data.Person;
 import net.cpollet.sportracker.data.User;
 import net.cpollet.sportracker.repository.UserRepository;
 import net.cpollet.sportracker.repository.mongodb.MongoDbSpecification;
+import net.cpollet.sportracker.service.api.PersonService;
 
 /**
  * @author Christophe Pollet

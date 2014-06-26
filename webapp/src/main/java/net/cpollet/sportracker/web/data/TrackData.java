@@ -16,33 +16,26 @@
 
 package net.cpollet.sportracker.web.data;
 
-import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Christophe Pollet
  */
-public class Token {
-	private String token;
-	private Serializable userId;
+public class TrackData {
+	private final String title;
+	private final List<TrackPointData> trackPointDatas;
 
-	public Token(String token, Serializable userId) {
-		this.token = token;
-		this.userId = userId;
+	public TrackData(String title, List<TrackPointData> trackPointDatas) {
+		this.title = title;
+		this.trackPointDatas = Collections.unmodifiableList(trackPointDatas);
 	}
 
-	public String getToken() {
-		return token;
+	public List<TrackPointData> getTrackPointDatas() {
+		return trackPointDatas;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public Serializable getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Serializable userId) {
-		this.userId = userId;
+	public String getTitle() {
+		return title;
 	}
 }

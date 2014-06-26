@@ -21,14 +21,14 @@ import java.util.Date;
 /**
  * @author Christophe Pollet
  */
-public class TrackPoint {
+public class TrackPointData {
 	private final Date timestamp;
 	private final String speed;
 	private final String altitude;
 	private final String latitude;
 	private final String longitude;
 
-	public TrackPoint(Date timestamp, String speed, String altitude, String latitude, String longitude) {
+	public TrackPointData(Date timestamp, String speed, String altitude, String latitude, String longitude) {
 		this.timestamp = timestamp;
 		this.speed = speed;
 		this.altitude = altitude;
