@@ -20,7 +20,9 @@
 		function ($resource, $location, Authentication) {
 			function defaultParams() {
 				return {
-					userId: Authentication.getUserId()
+					userId: function() {
+						return Authentication.getUserId();
+					}
 				};
 			}
 
