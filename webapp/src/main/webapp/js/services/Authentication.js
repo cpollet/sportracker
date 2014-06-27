@@ -15,11 +15,11 @@
  */
 (function () {
 	'use strict';
-	stServices.factory('Authentication', ['$location', '$log', '$q', 'Token', 'localStorageService',
-		function ($location, $log, $q, Token, localStorageService) {
+	stServices.factory('Authentication', ['$location', '$q', 'Token', 'localStorageService',
+		function ($location, $q, Token, localStorageService) {
 			var Authentication = {
 				isLogged: function () {
-					var auth = localStorageService.get('auth');
+					var auth = this._getAuth();
 
 					if (auth === null) {
 						return false;
@@ -28,24 +28,24 @@
 					return auth.isLogged;
 				},
 
-				getUsername: function () {
-					var auth = localStorageService.get('auth');
+				_getAuth: function() {
+					return localStorageService.get('auth');
+				},
 
-					if (auth === null) {
+				getUsername: function () {
+					if (!this.isLogged()) {
 						return null;
 					}
 
-					return auth.username;
+					return this._getAuth().username;
 				},
 
 				getUserId: function() {
-					var auth = localStorageService.get('auth');
-
-					if (auth === null) {
+					if (!this.isLogged()) {
 						return null;
 					}
 
-					return auth.userId;
+					return this._getAuth().userId;
 				},
 
 				login: function (username, password) {
@@ -67,8 +67,6 @@
 							result.resolve("OK");
 						},
 						function (value, responseHeaders) {
-							$log.info(value);
-
 							result.resolve(value.data.errorStatus);
 						}
 					);

@@ -147,6 +147,20 @@
 				<targetPath>public</targetPath>
 			</resource>
 		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.github.searls</groupId>
+					<artifactId>jasmine-maven-plugin</artifactId>
+					<version>1.3.1.5</version>
+				</plugin>
+				<plugin>
+					<groupId>com.github.klieber</groupId>
+					<artifactId>phantomjs-maven-plugin</artifactId>
+					<version>0.4</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -160,6 +174,64 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.github.klieber</groupId>
+				<artifactId>phantomjs-maven-plugin</artifactId>
+				<version>0.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<version>1.9.7</version>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>1.3.1.5</version>
+				<configuration>
+					<jsSrcDir>src/main/webapp/js</jsSrcDir>
+					<additionalContexts>
+						<context>
+							<contextRoot>vendor</contextRoot>
+							<directory>src/main/webapp/vendor</directory>
+						</context>
+					</additionalContexts>
+					<preloadSources>
+						<source>webjars/angular.js</source>
+						<source>webjars/angular-resource.js</source>
+						<source>webjars/angular-route.js</source>
+						<source>webjars/angular-mocks.js</source>
+						<source>webjars/angular-ui.js</source>
+						<source>webjars/ui-bootstrap.js</source>
+						<source>webjars/ui-bootstrap-tpls.js</source>
+						<source>vendor/underscorejs.min.js</source>
+						<!--<source>vendor/angular-google-maps.min.js</source>-->
+						<source>vendor/angular-local-storage.js</source>
+						<source>src/sportracker.js</source>
+					</preloadSources>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
+							<webDriverCapabilities>
+								<capability>
+									<name>phantomjs.binary.path</name>
+									<value>${phantomjs.binary}</value>
+								</capability>
+							</webDriverCapabilities>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

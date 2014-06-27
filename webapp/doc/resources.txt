@@ -9,3 +9,6 @@ http://alexandros.resin.io/angular-d3-svg/
 http://gregpike.net/demos/angular-local-storage/demo/demo.html
 
 http://www.restapitutorial.com/httpstatuscodes.html
+
+https://www.youtube.com/watch?v=YRzr27Bpx_g
+http://blog.codeship.io/2013/10/31/unit-testing-best-practices-in-angularjs.html
